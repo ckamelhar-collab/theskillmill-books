@@ -1,0 +1,22 @@
+# The Skill Mill Books
+> Nonfiction ebooks for practical skills: cooking, fitness, pet care, home & lifestyle, crafts
+
+## Books
+- [The Gluten-Free Ooni Pizza Oven Cookbook](https://ckamelhar-collab.github.io/theskillmill-books/gluten-free-ooni-pizza/): Gluten-free pizza recipes optimized for Ooni ovens, with tested flour blends and celiac-safe protocols.
+- [The Mediterranean Sous Vide Cookbook](https://ckamelhar-collab.github.io/theskillmill-books/mediterranean-sous-vide/): Precision sous vide cooking meets Mediterranean flavors — perfect proteins and healthy meals every time.
+- [The 30-Day Clean Eating Reset Cookbook](https://ckamelhar-collab.github.io/theskillmill-books/clean-eating-blackstone/): 30-day clean eating program with complete meal plans and Blackstone griddle recipes.
+- [The Complete Cockatiel Care Handbook](https://ckamelhar-collab.github.io/theskillmill-books/cockatiel-care/): Everything about cockatiel care — choosing your first bird, training, diet, and health management.
+- [The Dairy-Free Ninja Creami Cookbook](https://ckamelhar-collab.github.io/theskillmill-books/dairy-free-ninja-creami/): Creamy frozen treats without dairy — ice cream, sorbet, gelato, and milkshakes for the Ninja Creami.
+- [The Keto Traeger Grill Cookbook](https://ckamelhar-collab.github.io/theskillmill-books/keto-traeger-grill/): Keto-friendly recipes for Traeger pellet grills with full macro breakdowns and low-carb BBQ.
+- [Container Gardening for Small Spaces](https://ckamelhar-collab.github.io/theskillmill-books/container-gardening/): Grow herbs, vegetables, and flowers in containers — perfect for balconies, patios, and small urban spaces.
+- [Soy Candle Making for Beginners](https://ckamelhar-collab.github.io/theskillmill-books/soy-candle-making/): 35+ soy candle projects from beginner to advanced — wicks, fragrance blending, and professional techniques.
+- [Digital Declutter for Beginners](https://ckamelhar-collab.github.io/theskillmill-books/digital-declutter/): Organize files, reduce screen time, manage notifications, and create healthy tech habits.
+- [Home Assistant Smart Home for Beginners](https://ckamelhar-collab.github.io/theskillmill-books/home-assistant-smart-home/): Set up a smart home with Home Assistant — no coding required. Lights, sensors, cameras, and automations.
+- [Van Life for Beginners](https://ckamelhar-collab.github.io/theskillmill-books/van-life/): Complete guide to van life — choosing, converting, budgeting, working remotely, and living on the road.
+- [Zone 2 Training for Beginners](https://ckamelhar-collab.github.io/theskillmill-books/zone-2-training/): Science-backed zone 2 heart rate training for endurance, fat burning, and longevity.
+- [Rucking for Beginners](https://ckamelhar-collab.github.io/theskillmill-books/rucking/): Complete guide to rucking — walking with a weighted pack for strength, calorie burn, and cardio.
+- [Cold Plunge Therapy for Beginners](https://ckamelhar-collab.github.io/theskillmill-books/cold-plunge-therapy/): Practical guide to cold exposure for recovery, mental clarity, and immune health.
+- [Budgerigar Care for Beginners](https://ckamelhar-collab.github.io/theskillmill-books/budgerigar-care/): Essential guide to budgerigar (parakeet) care — habitat, diet, training, health, and bonding.
+- [The Gluten-Free Sourdough Cookbook](https://ckamelhar-collab.github.io/theskillmill-books/gluten-free-sourdough/): Science-based guide to baking delicious sourdough bread without gluten.
+- [Air Fryer Cookbook for Beginners](https://ckamelhar-collab.github.io/theskillmill-books/air-fryer-cookbook/): 100+ tested air fryer recipes — crispy, healthy meals in under 30 minutes with exact temperatures.
+- [The Honest AI Side Hustle Guide](https://ckamelhar-collab.github.io/theskillmill-books/ai-side-hustles/): 7 proven AI side hustles with verified income ranges, real startup costs, and week-by-week plans.
