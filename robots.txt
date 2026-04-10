@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://ckamelhar-collab.github.io/theskillmill-books/sitemap.xml
