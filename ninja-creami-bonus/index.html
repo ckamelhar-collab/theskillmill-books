@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Dairy-Free Ninja Creami Cookbook — Free Bonus</title>
+  <meta name="description" content="10 Bonus Ninja Creami Recipes — seasonal flavors not in the book, with macros and prep times — exclusive bonus for The Dairy-Free Ninja Creami Cookbook readers.">
+  <meta property="og:title" content="The Dairy-Free Ninja Creami Cookbook — Free Bonus">
+  <meta property="og:description" content="10 Bonus Ninja Creami Recipes — seasonal flavors not in the book, with macros and prep times">
+  <meta property="og:type" content="website">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { --brand: #dc2626; }
+    .brand-bg { background-color: var(--brand); }
+    .brand-text { color: var(--brand); }
+    .brand-border { border-color: var(--brand); }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
+  <main class="max-w-4xl mx-auto px-4 py-10 sm:py-16">
+
+    <header class="text-center mb-10">
+      <p class="text-xs sm:text-sm uppercase tracking-widest text-slate-500 mb-2">Reader Bonus</p>
+      <h1 class="text-3xl sm:text-5xl font-bold leading-tight mb-3">The Dairy-Free Ninja Creami Cookbook</h1>
+      <p class="text-base sm:text-lg text-slate-600">by <strong>Kitchen Precision Press</strong></p>
+    </header>
+
+    <div class="grid md:grid-cols-5 gap-8 items-start bg-white rounded-2xl shadow-lg overflow-hidden">
+
+      <!-- Cover -->
+      <div class="md:col-span-2 bg-slate-100 p-6 sm:p-10 flex items-center justify-center">
+        <img src="https://via.placeholder.com/300x450?text=Book+Cover" alt="The Dairy-Free Ninja Creami Cookbook cover"
+             class="w-48 sm:w-64 rounded-lg shadow-2xl ring-1 ring-slate-200">
+      </div>
+
+      <!-- Bonus details + form -->
+      <div class="md:col-span-3 p-6 sm:p-10">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-4 leading-snug">
+          🎁 10 Bonus Ninja Creami Recipes — seasonal flavors not in the book, with macros and prep times
+        </h2>
+        <p class="text-slate-600 mb-6 leading-relaxed">
+          A free bonus available exclusively to readers. Drop your email below and we'll
+          send it straight to your inbox — no spam, just the bonus and the occasional
+          new release announcement.
+        </p>
+
+        <form action="/.netlify/functions/subscribe" method="POST" class="space-y-4">
+          <input type="hidden" name="book_slug" value="ninja-creami-bonus">
+          <input type="hidden" name="book_title" value="The Dairy-Free Ninja Creami Cookbook">
+          <input type="hidden" name="bonus_url" value="https://theskillmill.gumroad.com/l/creami-bonus-recipes">
+          <input type="hidden" name="source" value="bonus_landing_page">
+
+          <div>
+            <label for="name" class="block text-sm font-medium text-slate-700 mb-1">First name</label>
+            <input id="name" name="name" type="text" required autocomplete="given-name"
+                   class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500"
+                   placeholder="Your first name">
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email address</label>
+            <input id="email" name="email" type="email" required autocomplete="email"
+                   class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500"
+                   placeholder="you@example.com">
+          </div>
+
+          <button type="submit"
+                  class="w-full brand-bg text-white font-bold py-4 rounded-lg text-lg hover:opacity-90 transition shadow-md">
+            Get Your Free Bonus →
+          </button>
+
+          <p class="text-xs text-slate-500 text-center">
+            Single-click unsubscribe in every email. Your address is never sold or shared.
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- QR + share section -->
+    <section class="mt-12 bg-white rounded-2xl shadow p-6 sm:p-10 text-center">
+      <h3 class="text-xl font-bold mb-2">Share this bonus with a friend</h3>
+      <p class="text-slate-600 mb-6 max-w-xl mx-auto">
+        Know someone who would love this book? Send them the QR code below — it links
+        straight back to this page so they can grab the bonus too.
+      </p>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&amp;data=https%3A%2F%2Ftheskillmill.example.com%2Fninja-creami-bonus%2Fbonus" alt="QR code for The Dairy-Free Ninja Creami Cookbook bonus page"
+           class="mx-auto rounded-lg ring-1 ring-slate-200" width="240" height="240">
+      <p class="mt-4 text-xs text-slate-500 break-all">https://theskillmill.example.com/ninja-creami-bonus/bonus</p>
+    </section>
+
+    <footer class="mt-12 text-center text-xs text-slate-400">
+      <p>© 2026 Kitchen Precision Press. All rights reserved.</p>
+      <p class="mt-1">This bonus is provided as a free gift and does not require a purchase or review.</p>
+    </footer>
+
+  </main>
+</body>
+</html>
