@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="p:domain_verify" content="a5ca2e9e15024d129fc23342dbb083ed" />
+  <title>ADHD and Money for Adults — Free Reader Bonus</title>
+  <meta name="description" content="A single-page visual tracker that maps every action from your 90-day reset plan to specific calendar weeks, with dopamine-friendly checkboxes and brain-dump space for obstacles. Turn the roadmap you just learned into scheduled reality in the next 15 minutes.">
+  <meta property="og:title" content="ADHD and Money for Adults — Free Reader Bonus">
+  <meta property="og:description" content="A single-page visual tracker that maps every action from your 90-day reset plan to specific calendar weeks, with dopamine-friendly checkboxes and brain-dump space for obstacles. Turn the roadmap you just learned into scheduled reality in the next 15 minutes.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://theskillmillbooks.com/adhd-money/bonus/">
+  <link rel="canonical" href="https://theskillmillbooks.com/adhd-money/bonus/">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { --brand: #1F2A44; --accent: #D97706; }
+    .brand-bg { background-color: var(--brand); }
+    .accent-bg { background-color: var(--accent); }
+    .accent-text { color: var(--accent); }
+    .accent-border { border-color: var(--accent); }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
+  <main class="max-w-3xl mx-auto px-4 py-10 sm:py-16">
+
+    <header class="text-center mb-8">
+      <p class="text-xs sm:text-sm uppercase tracking-widest accent-text font-semibold mb-2">FREE READER BONUS</p>
+      <h1 class="text-3xl sm:text-5xl font-bold leading-tight mb-3">Your 90-Day ADHD Money Reset Implementation Tracker</h1>
+      <p class="text-base sm:text-lg text-slate-600">From <strong>ADHD and Money for Adults</strong> by Bright Mind Press</p>
+    </header>
+
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden p-8 sm:p-10">
+      <div class="prose max-w-none mb-8">
+        <p class="text-lg text-slate-700 leading-relaxed">A single-page visual tracker that maps every action from your 90-day reset plan to specific calendar weeks, with dopamine-friendly checkboxes and brain-dump space for obstacles. Turn the roadmap you just learned into scheduled reality in the next 15 minutes.</p>
+      </div>
+
+      <div class="border-t border-slate-200 pt-8">
+        <h2 class="text-xl font-bold mb-4">📥 Get instant access</h2>
+
+        <form action="https://api.mailerlite.com/api/v2/groups/adhd-money/subscribers" method="POST" class="space-y-4" data-pdf="/pdfs/adhd-money-90day-reset-tracker.pdf">
+          <input type="hidden" name="book_slug" value="adhd-money">
+          <input type="hidden" name="book_title" value="ADHD and Money for Adults">
+          <input type="hidden" name="source" value="reader_magnet_bonus_page">
+
+          <div>
+            <label for="name" class="block text-sm font-medium text-slate-700 mb-1">First name</label>
+            <input id="name" name="name" type="text" required autocomplete="given-name"
+                   class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-amber-500"
+                   placeholder="Your first name">
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email address</label>
+            <input id="email" name="email" type="email" required autocomplete="email"
+                   class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-amber-500"
+                   placeholder="you@example.com">
+          </div>
+
+          <button type="submit"
+                  class="w-full accent-bg text-white font-bold py-4 rounded-lg text-lg hover:opacity-90 transition shadow-md">
+            Get Your 90-Day Reset Tracker (Free PDF)
+          </button>
+
+          <p class="text-xs text-slate-500 text-center">
+            We'll email the PDF instantly. Single-click unsubscribe in every email. No spam.
+          </p>
+        </form>
+
+        <div class="mt-6 text-center">
+          <a href="/pdfs/adhd-money-90day-reset-tracker.pdf" download
+             class="inline-block text-sm text-slate-500 underline hover:text-amber-700">
+            Or download the PDF directly →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="text-center mt-10">
+      <p class="text-sm text-slate-500">
+        <a href="/adhd-money/" class="underline hover:text-amber-700">← Back to ADHD and Money for Adults</a>
+      </p>
+      <p class="text-xs text-slate-400 mt-3">
+        © The Skill Mill — <a href="/privacy.html" class="underline">Privacy</a>
+      </p>
+    </footer>
+
+  </main>
+
+  <script>
+    // After form submit, redirect to the PDF (so users get the bonus immediately even if email confirmation lags)
+    document.querySelector('form').addEventListener('submit', function (e) {
+      const pdf = e.target.dataset.pdf;
+      // Open PDF in new tab; backend will still email it.
+      setTimeout(() => window.open(pdf, '_blank'), 500);
+    });
+  </script>
+
+</body>
+</html>
