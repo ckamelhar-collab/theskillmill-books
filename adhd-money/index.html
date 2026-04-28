@@ -251,6 +251,33 @@
             .hero-cover { order: -1; }
         }
     </style>
+
+<!-- ML_CAPTURE_CSS_START -->
+<style>
+  .ml-capture-section { padding: 48px 20px; background: linear-gradient(135deg, var(--color-primary, #1E6B52) 0%, var(--color-primary-dark, #0D4F3C) 100%); color: #fff; margin: 40px 0; border-radius: 12px; }
+  .ml-capture-inner { max-width: 560px; margin: 0 auto; text-align: center; }
+  .ml-capture-headline { font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 800; line-height: 1.2; margin: 0 0 12px; color: #fff; }
+  .ml-capture-sub { font-size: 1rem; line-height: 1.55; margin: 0 0 24px; color: rgba(255,255,255,0.92); }
+  .ml-capture-form { display: flex; flex-direction: column; gap: 12px; max-width: 420px; margin: 0 auto; }
+  .ml-capture-form input[type="email"] { width: 100%; padding: 14px 16px; font-size: 16px; border: 2px solid transparent; border-radius: 8px; background: #fff; color: #111; box-sizing: border-box; min-height: 48px; }
+  .ml-capture-form input[type="email"]:focus { outline: none; border-color: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,0.4); }
+  .ml-capture-form input[type="email"]:invalid:not(:placeholder-shown) { border-color: #FCA5A5; }
+  .ml-capture-btn { width: 100%; padding: 14px 20px; font-size: 1rem; font-weight: 700; color: var(--color-primary, #1E6B52); background: #fff; border: none; border-radius: 8px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; min-height: 48px; }
+  .ml-capture-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.18); }
+  .ml-capture-btn:disabled { opacity: 0.65; cursor: wait; }
+  .ml-consent { display: flex; gap: 8px; align-items: flex-start; font-size: 0.85rem; line-height: 1.45; color: rgba(255,255,255,0.92); text-align: left; }
+  .ml-consent input[type="checkbox"] { width: 18px; height: 18px; margin-top: 3px; flex-shrink: 0; accent-color: #fff; }
+  .ml-consent a { color: #fff; text-decoration: underline; }
+  .ml-capture-fineprint { margin-top: 16px; font-size: 0.78rem; color: rgba(255,255,255,0.75); }
+  .ml-capture-message { margin: 0; min-height: 1.2em; font-size: 0.9rem; }
+  .ml-capture-message.success { color: #D1FAE5; font-weight: 600; }
+  .ml-capture-message.error { color: #FECACA; font-weight: 600; }
+  .ml-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (max-width: 600px) {
+    .ml-capture-section { padding: 32px 16px; margin: 24px 0; border-radius: 8px; }
+  }
+</style>
+<!-- ML_CAPTURE_CSS_END -->
 </head>
 <body>
 
@@ -274,6 +301,29 @@
             </div>
         </div>
     </section>
+
+<!-- ML_CAPTURE_FORM_START -->
+<section class="ml-capture-section" id="ml-capture-hero" aria-labelledby="ml-capture-hero-heading">
+  <div class="ml-capture-inner">
+    <h2 id="ml-capture-hero-heading" class="ml-capture-headline">Get a Free Sample Chapter</h2>
+    <p class="ml-capture-sub">Preview the book before you buy. Plus get launch-week discounts, free promos, and new-book alerts from The Skill Mill.</p>
+    <form class="ml-capture-form" data-ml-account="2290040" data-ml-form="185638878013556162" data-ml-placement="hero" action="https://assets.mailerlite.com/jsonp/2290040/forms/185638878013556162/subscribe" method="POST" novalidate>
+      <label class="ml-visually-hidden" for="ml-capture-hero-email">Email address</label>
+      <input id="ml-capture-hero-email" type="email" name="fields[email]" placeholder="your@email.com" required autocomplete="email" inputmode="email" />
+      <!-- Honeypot: bots fill this, humans don't see it -->
+      <input type="text" name="b_ml-trap-hero" id="ml-trap-hero" tabindex="-1" autocomplete="off" style="position:absolute;left:-5000px;width:1px;height:1px;opacity:0;" aria-hidden="true" />
+      <label class="ml-consent">
+        <input type="checkbox" name="consent" required />
+        <span>I agree to receive emails from The Skill Mill and can unsubscribe anytime. <a href="https://theskillmillbooks.com/privacy.html" target="_blank" rel="noopener">Privacy</a>.</span>
+      </label>
+      <button type="submit" class="ml-capture-btn">Send Me The Free Guide</button>
+      <p class="ml-capture-message" role="status" aria-live="polite"></p>
+    </form>
+    <p class="ml-capture-fineprint">No spam. Unsubscribe with one click. Delivered by MailerLite, GDPR-compliant.</p>
+  </div>
+</section>
+<!-- ML_CAPTURE_FORM_END -->
+
 
     <!-- What's Inside -->
     <section class="section text-center">
@@ -371,7 +421,29 @@
 
 
     <!-- Final CTA -->
-    <section class="cta-section">
+    
+<!-- ML_CAPTURE_FORM_START -->
+<section class="ml-capture-section" id="ml-capture-bottom" aria-labelledby="ml-capture-bottom-heading">
+  <div class="ml-capture-inner">
+    <h2 id="ml-capture-bottom-heading" class="ml-capture-headline">Get a Free Sample Chapter</h2>
+    <p class="ml-capture-sub">Preview the book before you buy. Plus get launch-week discounts, free promos, and new-book alerts from The Skill Mill.</p>
+    <form class="ml-capture-form" data-ml-account="2290040" data-ml-form="185638878013556162" data-ml-placement="bottom" action="https://assets.mailerlite.com/jsonp/2290040/forms/185638878013556162/subscribe" method="POST" novalidate>
+      <label class="ml-visually-hidden" for="ml-capture-bottom-email">Email address</label>
+      <input id="ml-capture-bottom-email" type="email" name="fields[email]" placeholder="your@email.com" required autocomplete="email" inputmode="email" />
+      <!-- Honeypot: bots fill this, humans don't see it -->
+      <input type="text" name="b_ml-trap-bottom" id="ml-trap-bottom" tabindex="-1" autocomplete="off" style="position:absolute;left:-5000px;width:1px;height:1px;opacity:0;" aria-hidden="true" />
+      <label class="ml-consent">
+        <input type="checkbox" name="consent" required />
+        <span>I agree to receive emails from The Skill Mill and can unsubscribe anytime. <a href="https://theskillmillbooks.com/privacy.html" target="_blank" rel="noopener">Privacy</a>.</span>
+      </label>
+      <button type="submit" class="ml-capture-btn">Send Me The Free Guide</button>
+      <p class="ml-capture-message" role="status" aria-live="polite"></p>
+    </form>
+    <p class="ml-capture-fineprint">No spam. Unsubscribe with one click. Delivered by MailerLite, GDPR-compliant.</p>
+  </div>
+</section>
+<!-- ML_CAPTURE_FORM_END -->
+<section class="cta-section">
         <div class="container">
             <h2 class="section-heading">Ready to Get Started?</h2>
             <p>Get your copy today and start your journey.</p>
@@ -399,5 +471,46 @@
             if (!active) item.classList.add('active');
         }
     </script>
+
+<!-- ML_CAPTURE_JS_START -->
+<script>
+(function(){
+  document.querySelectorAll('form.ml-capture-form').forEach(function(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var msg = form.querySelector('.ml-capture-message');
+      var btn = form.querySelector('button[type="submit"]');
+      var email = form.querySelector('input[name="fields[email]"]').value.trim();
+      var consent = form.querySelector('input[name="consent"]').checked;
+      var trap = form.querySelector('input[name^="b_ml-trap-"]').value;
+      msg.textContent = ''; msg.className = 'ml-capture-message';
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = 'Please enter a valid email.'; msg.className = 'ml-capture-message error'; return; }
+      if (!consent) { msg.textContent = 'Please tick the consent box.'; msg.className = 'ml-capture-message error'; return; }
+      if (trap) { return; } // honeypot trip, silently drop
+      btn.disabled = true; btn.textContent = 'Sending...';
+      var account = form.getAttribute('data-ml-account');
+      var formId = form.getAttribute('data-ml-form');
+      var body = 'fields[email]=' + encodeURIComponent(email);
+      fetch('https://assets.mailerlite.com/jsonp/' + account + '/forms/' + formId + '/subscribe', {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body
+      }).then(function(){
+        msg.textContent = 'Check your inbox! Confirm your email and the guide is on its way.';
+        msg.className = 'ml-capture-message success';
+        btn.textContent = 'Done - check your email';
+        form.querySelector('input[type="email"]').value = '';
+        if (window.gtag) { window.gtag('event', 'email_capture', { form_id: formId, placement: form.getAttribute('data-ml-placement') }); }
+      }).catch(function(){
+        // mode: no-cors returns opaque response so we treat any non-throw as success. Network error only reaches here on hard offline.
+        msg.textContent = 'Something went wrong. Please try again or email ckamelhar@gmail.com.';
+        msg.className = 'ml-capture-message error';
+        btn.disabled = false; btn.textContent = 'Send Me The Free Guide';
+      });
+    });
+  });
+})();
+</script>
+<!-- ML_CAPTURE_JS_END -->
 </body>
 </html>
