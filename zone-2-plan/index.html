@@ -51,44 +51,14 @@
 
         <section class="form-section" id="signup">
             <p class="micro">Your 5-page training plan + Google Sheets log, in your inbox.</p>
-            <div data-ml-form-embedSubmitScript>
-              <script>
-                function ml_webform_success_1856287022() {
-                  var $ = ml_jQuery || jQuery;
-                  $('.ml-subscribe-form-185628702256662117').fadeOut();
-                  $('.ml-subscribe-form-success').fadeIn();
-                }
-              </script>
-              <script>
-                document.addEventListener('ml_webform_success', function(e) {
-                  if (e.detail.form_id === '185628702256662117') {
-                    ml_webform_success_1856287022();
-                  }
-                });
-              </script>
-            </div>
-            <div class="ml-form-embed" data-account="240892" data-form="185628702256662117"></div>
             <script>
-              (function(m, a, i, l, e, r) {
-                m['MailerLiteObject'] = e;
-                function f() {
-                  var c = { a: arguments, q: [] };
-                  var r = this.push(c);
-                  return typeof r !== 'undefined' ? r : f.bind(c.queue);
-                }
-                f.push = f;
-                f.loaded = !0;
-                f.version = '2.0';
-                f.account_id = a;
-                var g = document.createElement('script');
-                g.async = !0;
-                g.type = 'text/javascript';
-                g.src = 'https://static.mailerlite.com/js/w/' + a + '/web.js';
-                var h = document.getElementsByTagName('head')[0];
-                h.appendChild(g);
-                m[e] = f;
-              })(window, 240892, 0, 0, 'ml', window.ml || function() {});
+                (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+                .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+                n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+                (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+                ml('account', '2290040');
             </script>
+            <div class="ml-embedded" data-form="MZRDUc"></div>
             <p class="privacy">No spam. Unsubscribe anytime. Occasional emails about Zone 2, longevity training, and aerobic capacity. Never sold, never rented.</p>
         </section>
 
