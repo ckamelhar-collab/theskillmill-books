@@ -41,6 +41,13 @@
     .card { border:1px solid var(--line); border-radius:8px; padding:22px; background:#fff; }
     .card h3 { margin:0 0 8px; font-size:1.1rem; }
     .card p { margin:0; color:var(--muted); }
+    .lead-capture { background:#fff; border-bottom:1px solid var(--line); }
+    .capture-box { display:grid; grid-template-columns:minmax(0, 1fr) minmax(280px, 380px); gap:28px; align-items:center; border:1px solid var(--line); border-radius:8px; padding:26px; background:#fbfffc; box-shadow:0 8px 22px rgba(15,23,42,.05); }
+    .capture-box p { margin:0; color:var(--muted); }
+    .capture-form { display:flex; gap:10px; flex-wrap:wrap; }
+    .capture-form input { flex:1 1 210px; min-height:48px; border:1px solid var(--line); border-radius:6px; padding:0 14px; font-size:1rem; }
+    .capture-form button { border:0; cursor:pointer; }
+    .capture-status { flex-basis:100%; min-height:22px; font-size:.92rem; color:var(--muted); }
     .faq { border-top:1px solid var(--line); }
     .faq-item { border-bottom:1px solid var(--line); padding:20px 0; }
     .faq-item strong { display:block; margin-bottom:6px; }
@@ -48,7 +55,7 @@
     .footer-cta p { color:rgba(255,255,255,.86); margin:0 auto 24px; max-width:640px; }
     .footer-cta .cta { background:#fff; color:var(--accent-dark); }
     footer { padding:28px 0; color:var(--muted); text-align:center; font-size:.92rem; }
-    @media (max-width: 780px) { .hero-grid, .grid { grid-template-columns:1fr; } .cover { min-height:280px; } }
+    @media (max-width: 780px) { .hero-grid, .grid, .capture-box { grid-template-columns:1fr; } .cover { min-height:280px; } }
   </style>
 </head>
 <body>
@@ -62,6 +69,22 @@
         </div>
         <div class="cover" aria-label="Quail Raising for Beginners cover placeholder">
           <div><strong>Quail Raising<br>for Beginners</strong><span>Small flock setup, care, eggs, and confidence</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lead-capture" id="free-quail-checklist">
+      <div class="wrap">
+        <div class="capture-box">
+          <div>
+            <h2>Get the free quail setup checklist</h2>
+            <p>Before you buy birds or gear, use the one-page checklist to plan the brooder, cage, feed, water, bedding, and first-week routine.</p>
+          </div>
+          <form class="capture-form" data-growth-form data-business="quail-kdp">
+            <input type="email" name="email" placeholder="Email address" autocomplete="email" required>
+            <button class="cta" type="submit">Send the checklist</button>
+            <div class="capture-status" aria-live="polite"></div>
+          </form>
         </div>
       </div>
     </section>
@@ -96,5 +119,36 @@
     </section>
   </main>
   <footer><div class="wrap">The Skill Mill Books</div></footer>
+  <script>
+    (function () {
+      var endpoint = 'https://theskillmill-bonus.netlify.app/.netlify/functions/growth-subscribe';
+      document.querySelectorAll('[data-growth-form]').forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          var status = form.querySelector('.capture-status');
+          var email = form.querySelector('input[name="email"]').value;
+          status.textContent = 'Sending...';
+          fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: email,
+              business: form.getAttribute('data-business'),
+              utm_source: 'production_page',
+              utm_medium: 'inline_form',
+              utm_campaign: 'growth_capture',
+              utm_content: location.pathname
+            })
+          }).then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })
+            .then(function (result) {
+              if (!result.ok || !result.body.ok) throw new Error(result.body && result.body.error || 'Signup failed');
+              status.textContent = 'Check your inbox. The checklist is on the way.';
+              form.reset();
+            })
+            .catch(function () { status.textContent = 'Could not send it just now. Please try again.'; });
+        });
+      });
+    }());
+  </script>
 </body>
 </html>

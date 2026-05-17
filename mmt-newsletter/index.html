@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Millennial Money Weekly Reset | The Skill Mill Books</title>
+  <meta name="description" content="Get a free weekly money reset checklist built for people who want clearer cash-flow decisions without spreadsheet overwhelm.">
+  <link rel="canonical" href="https://theskillmillbooks.com/mmt-newsletter/">
+  <style>
+    :root { --ink:#172033; --muted:#546179; --line:#d8e0ec; --accent:#1f6feb; --accent-dark:#174ea6; --wash:#eef6ff; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Arial, Helvetica, sans-serif; color:var(--ink); line-height:1.65; background:#fff; }
+    .wrap { max-width:980px; margin:0 auto; padding:0 24px; }
+    .hero { min-height:72vh; display:flex; align-items:center; background:var(--wash); border-bottom:1px solid var(--line); padding:72px 0; }
+    h1 { font-size:clamp(2.25rem, 5vw, 4.25rem); line-height:1.05; margin:0 0 18px; }
+    .lead { font-size:1.15rem; color:var(--muted); max-width:680px; margin:0 0 28px; }
+    .capture-box { max-width:680px; border:1px solid var(--line); border-radius:8px; padding:24px; background:#fff; box-shadow:0 12px 34px rgba(15,23,42,.08); }
+    .capture-form { display:flex; gap:10px; flex-wrap:wrap; }
+    .capture-form input { flex:1 1 240px; min-height:50px; border:1px solid var(--line); border-radius:6px; padding:0 14px; font-size:1rem; }
+    .capture-form button { min-height:50px; border:0; border-radius:6px; padding:0 20px; background:var(--accent); color:#fff; font-weight:700; cursor:pointer; }
+    .capture-form button:hover { background:var(--accent-dark); }
+    .capture-status { flex-basis:100%; min-height:22px; font-size:.92rem; color:var(--muted); }
+    section { padding:56px 0; }
+    .grid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:18px; }
+    .card { border:1px solid var(--line); border-radius:8px; padding:20px; }
+    .card h2 { font-size:1.05rem; margin:0 0 8px; }
+    .card p { color:var(--muted); margin:0; }
+    footer { padding:28px 0; color:var(--muted); text-align:center; font-size:.92rem; }
+    @media (max-width: 760px) { .grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="lead">Free guide</p>
+        <h1>Get the Millennial Money Weekly Reset.</h1>
+        <p class="lead">A simple one-page routine for spotting cash leaks, setting the next money move, and deciding when a deeper tool like MineStock Pro is worth your attention.</p>
+        <div class="capture-box">
+          <form class="capture-form" data-growth-form data-business="mmt-newsletter">
+            <input type="email" name="email" placeholder="Email address" autocomplete="email" required>
+            <button type="submit">Send the reset</button>
+            <div class="capture-status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="wrap grid">
+        <article class="card"><h2>Weekly check-in</h2><p>Look at income, bills, subscriptions, and the one decision that matters this week.</p></article>
+        <article class="card"><h2>No bank login</h2><p>Use the checklist manually; it is designed for people who want control without account linking.</p></article>
+        <article class="card"><h2>Next-step investing</h2><p>When the cash-flow basics are handled, the follow-up sequence points to MineStock Pro education.</p></article>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap">The Skill Mill Books</div></footer>
+  <script>
+    (function () {
+      var endpoint = 'https://theskillmill-bonus.netlify.app/.netlify/functions/growth-subscribe';
+      document.querySelectorAll('[data-growth-form]').forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          var status = form.querySelector('.capture-status');
+          var email = form.querySelector('input[name="email"]').value;
+          status.textContent = 'Sending...';
+          fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: email,
+              business: form.getAttribute('data-business'),
+              utm_source: 'production_page',
+              utm_medium: 'inline_form',
+              utm_campaign: 'growth_capture',
+              utm_content: location.pathname
+            })
+          }).then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })
+            .then(function (result) {
+              if (!result.ok || !result.body.ok) throw new Error(result.body && result.body.error || 'Signup failed');
+              status.textContent = 'Check your inbox. The reset is on the way.';
+              form.reset();
+            })
+            .catch(function () { status.textContent = 'Could not send it just now. Please try again.'; });
+        });
+      });
+    }());
+  </script>
+</body>
+</html>
