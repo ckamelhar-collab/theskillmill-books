@@ -23,17 +23,17 @@
     .nav a { text-decoration: none; font-weight: 650; }
     .hero { background: #f6f7f2; border-bottom: 1px solid #e3e6da; }
     .hero-inner { max-width: 980px; margin: 0 auto; padding: 56px 22px 42px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr); gap: 34px; align-items: start; }
-    .eyebrow { text-transform: uppercase; letter-spacing: 0; font-size: 0.78rem; font-weight: 800; color: #6d755e; margin: 0 0 8px; }
+    .eyebrow { text-transform: uppercase; letter-spacing: 0; font-size: 0.78rem; font-weight: 800; color: #5c6350; margin: 0 0 8px; }
     h1 { font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.08; margin: 0 0 16px; }
     .dek { color: #555a50; font-size: 1.12rem; margin: 0 0 20px; max-width: 660px; }
-    .bookline { color: #606060; font-size: 0.94rem; }
     .capture { background: #fff; border: 1px solid #dfe3d5; border-radius: 8px; padding: 22px; box-shadow: 0 12px 28px rgba(0,0,0,0.06); }
     .capture h2 { margin: 0 0 10px; font-size: 1.25rem; }
     .capture p { margin: 0 0 14px; color: #5a5a5a; }
     .capture form { display: grid; gap: 12px; }
     input[type="email"] { width: 100%; min-height: 48px; border: 1px solid #cfd4c3; border-radius: 6px; padding: 12px 13px; font-size: 1rem; }
     label.consent { display: grid; grid-template-columns: 18px 1fr; gap: 8px; align-items: start; font-size: 0.82rem; color: #666; }
-    button, .print-btn { min-height: 46px; border: 0; border-radius: 6px; padding: 12px 16px; background: #2f6b57; color: #fff; font-weight: 800; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+    button { min-height: 46px; border: 0; border-radius: 6px; padding: 12px 16px; background: #2f6b57; color: #fff; font-weight: 800; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+    .print-btn { min-height: 46px; border: 1px solid #2f6b57; border-radius: 6px; padding: 12px 16px; background: transparent; color: #2f6b57; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
     button:disabled { opacity: 0.65; cursor: wait; }
     .msg { min-height: 1.2em; margin: 0; font-size: 0.9rem; }
     .msg.success { color: #166534; }
@@ -47,7 +47,7 @@
     .text-link { font-weight: 800; }
     .footer { border-top: 1px solid #eee; margin-top: 42px; padding-top: 22px; color: #777; font-size: 0.86rem; }
     @media (max-width: 760px) {
-      .hero-inner { grid-template-columns: 1fr; padding-top: 38px; }
+      .hero-inner { grid-template-columns: 1fr; padding: 24px 22px 28px; }
     }
     @media print {
       .topbar, .capture, .toolbar, .soft-review, .footer { display: none !important; }
@@ -71,12 +71,11 @@
       <div>
         <p class="eyebrow">Reader Bonus</p>
         <h1>Van Life First-Month Budget Worksheet</h1>
-        <p class="dek">A simple planning sheet for fuel, camping, food, repairs, insurance, and emergency buffers.</p>
-        <p class="bookline">Companion resource for <strong>Van Life for Beginners</strong> by Open Road Publishing.</p>
+        <p class="dek">A simple planning sheet for fuel, camping, food, repairs, insurance, and emergency buffers &mdash; companion resource for <strong>Van Life for Beginners</strong> by Open Road Publishing.</p>
       </div>
       <aside class="capture">
-        <h2>Get Reader Updates</h2>
-        <p>The checklist is on this page. Add your email if you want the follow-up notes and future reader resources.</p>
+        <h2>Get the Printable PDF Version</h2>
+        <p>Email yourself a clean, printable PDF of this checklist so you have it even without signal on the road.</p>
         <form class="ml-capture-form" data-ml-account="2290040" data-ml-form="192546747384333482" action="https://assets.mailerlite.com/jsonp/2290040/forms/192546747384333482/subscribe" method="POST" novalidate>
           <input type="hidden" name="fields[utm_source]" value="review_catcher">
           <input type="hidden" name="fields[utm_medium]" value="ebook_bonus">
@@ -89,7 +88,7 @@
             <input type="checkbox" required>
             <span>I agree to receive emails from The Skill Mill and can unsubscribe anytime.</span>
           </label>
-          <button type="submit">Send Me Follow-Up Notes</button>
+          <button type="submit">Email Me The PDF</button>
           <p class="msg" role="status" aria-live="polite"></p>
         </form>
       </aside>
