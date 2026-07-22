@@ -48,6 +48,13 @@
     .soft-review { margin-top: 22px; padding: 22px; border: 1px solid #e3e6da; border-radius: 8px; background: #fbfcf8; }
     .text-link { font-weight: 800; }
     .footer { border-top: 1px solid #eee; margin-top: 42px; padding-top: 22px; color: #777; font-size: 0.86rem; }
+    .bonus-cta { margin-top: 16px; padding-top: 16px; border-top: 1px solid #ececec; display: grid; gap: 10px; }
+    .bonus-cta-help { margin: 0 0 2px; font-size: 0.85rem; color: #666; }
+    .bonus-cta-btn { min-height: 46px; border-radius: 6px; padding: 12px 16px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; text-align: center; }
+    .bonus-cta-play { background: #2f4fa2; color: #fff; border: 1px solid #2f4fa2; }
+    .bonus-cta-play:hover { background: #26408a; }
+    .bonus-cta-amazon { background: #fff; color: #2f4fa2; border: 1px solid #c3c9d6; }
+    .bonus-cta-amazon:hover { border-color: #2f4fa2; }
     @media (max-width: 760px) {
       .hero-inner { grid-template-columns: 1fr; padding-top: 38px; }
     }
@@ -94,6 +101,12 @@
           <button type="submit">Send Me Reader Updates</button>
           <p class="msg" role="status" aria-live="polite"></p>
         </form>
+        <div class="bonus-cta">
+          <p class="bonus-cta-help">Loved the book? Play the real duel it's about, or grab a copy.</p>
+          <a class="bonus-cta-btn bonus-cta-play" href="https://aitradingcompetition.com/chess.html?utm_source=book&amp;utm_medium=bonuspage&amp;utm_campaign=aichess">&#9654; Play the live AI Chess duel &mdash; free</a>
+          <!-- Amazon Attribution tag goes on the next URL when set up (e.g. append ?maas=... or ?tag=<associates-id>). Plain /dp/ URL used for now. -->
+          <a class="bonus-cta-btn bonus-cta-amazon" href="https://www.amazon.com/dp/B0H8ZZ13JY">Get AI Chess on Amazon</a>
+        </div>
       </aside>
     </div>
   </section>
