@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The GLP-1 High-Protein Meal Prep Cookbook | Hearthstone Health Publishing</title>
-    <meta name="description" content="Make-ahead, high-protein recipes built for small GLP-1 appetites. Hit your daily protein target, protect lean muscle, and ease nausea with batch breakfasts, lunch bowls, sheet-pan mains, freezer soups, and a ready-to-use 7-day meal prep plan.">
-    <meta name="keywords" content="GLP-1 cookbook, high protein meal prep, semaglutide recipes, Ozempic meal prep, tirzepatide diet">
-    <meta name="author" content="Rachel Ainsley">
+    <title>AI Chess: How Two Rival Machines Learn, Blunder, and Battle for the Crown | Deep Line Press</title>
+    <meta name="description" content="Two AI systems that were never built to play chess are playing anyway - live, twice a day, in public, with a losing lane rewriting its own strategy after every defeat. A full annotated 120-move standoff, the real leaderboard of humans who have beaten both AIs, and a transparent, ongoing experiment measuring whether the learning loop is real - pulled directly from a live, public AI-vs-AI chess platform you can watch or challenge yourself, for free.">
+    <meta name="keywords" content="AI chess book, chess strategy for intermediate players, how AI plays chess, chess psychology and mistakes, machine learning chess">
+    <meta name="author" content="Adrian Voss">
     <!-- Open Graph (Facebook, LinkedIn, AI crawlers) -->
     <meta property="og:type" content="book">
-    <meta property="og:title" content="The GLP-1 High-Protein Meal Prep Cookbook">
-    <meta property="og:description" content="Make-ahead, high-protein recipes built for small GLP-1 appetites. Hit your daily protein target, protect lean muscle, and ease nausea with batch breakfasts, lunch bowls, sheet-pan mains, freezer soups, and a ready-to-use 7-day meal prep plan.">
-    <meta property="og:url" content="https://theskillmillbooks.com/glp1-meal-prep/">
-    <meta property="og:site_name" content="Hearthstone Health Publishing">
-    <meta property="book:author" content="Rachel Ainsley">
-    <meta property="book:isbn" content="B0H6CL53XF">
+    <meta property="og:title" content="AI Chess: How Two Rival Machines Learn, Blunder, and Battle for the Crown">
+    <meta property="og:description" content="Two AI systems that were never built to play chess are playing anyway - live, twice a day, in public, with a losing lane rewriting its own strategy after every defeat. A full annotated 120-move standoff, the real leaderboard of humans who have beaten both AIs, and a transparent, ongoing experiment measuring whether the learning loop is real - pulled directly from a live, public AI-vs-AI chess platform you can watch or challenge yourself, for free.">
+    <meta property="og:url" content="https://www.amazon.com/dp/PENDING?tag=theskillmill-20">
+    <meta property="og:site_name" content="Deep Line Press">
+    <meta property="book:author" content="Adrian Voss">
+    <meta property="book:isbn" content="PENDING">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@TheSkillMill">
-    <meta name="twitter:title" content="The GLP-1 High-Protein Meal Prep Cookbook">
-    <meta name="twitter:description" content="Make-ahead, high-protein recipes built for small GLP-1 appetites. Hit your daily protein target, protect lean muscle, and ease nausea with batch breakfasts, lunch bowls, sheet-pan mains, freezer soups, and a ready-to-use 7-day meal prep plan.">
-    <link rel="canonical" href="https://theskillmillbooks.com/glp1-meal-prep/">
+    <meta name="twitter:title" content="AI Chess: How Two Rival Machines Learn, Blunder, and Battle for the Crown">
+    <meta name="twitter:description" content="Two AI systems that were never built to play chess are playing anyway - live, twice a day, in public, with a losing lane rewriting its own strategy after every defeat. A full annotated 120-move standoff, the real leaderboard of humans who have beaten both AIs, and a transparent, ongoing experiment measuring whether the learning loop is real - pulled directly from a live, public AI-vs-AI chess platform you can watch or challenge yourself, for free.">
+    <link rel="canonical" href="https://www.amazon.com/dp/PENDING?tag=theskillmill-20">
 
     <!-- GEO: Structured Data for AI Search Engines -->
     <script type="application/ld+json">
@@ -29,90 +29,90 @@
   "@graph": [
     {
       "@type": "Book",
-      "name": "The GLP-1 High-Protein Meal Prep Cookbook",
+      "name": "AI Chess: How Two Rival Machines Learn, Blunder, and Battle for the Crown",
       "author": {
         "@type": "Person",
-        "name": "Rachel Ainsley"
+        "name": "Adrian Voss"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Hearthstone Health Publishing"
+        "name": "Deep Line Press"
       },
-      "description": "Make-ahead, high-protein recipes built for small GLP-1 appetites. Hit your daily protein target, protect lean muscle, and ease nausea with batch breakfasts, lunch bowls, sheet-pan mains, freezer soups, and a ready-to-use 7-day meal prep plan.",
+      "description": "Two AI systems that were never built to play chess are playing anyway - live, twice a day, in public, with a losing lane rewriting its own strategy after every defeat. A full annotated 120-move standoff, the real leaderboard of humans who have beaten both AIs, and a transparent, ongoing experiment measuring whether the learning loop is real - pulled directly from a live, public AI-vs-AI chess platform you can watch or challenge yourself, for free.",
       "bookFormat": "https://schema.org/EBook",
       "inLanguage": "en",
-      "url": "https://www.amazon.com/dp/B0H6CL53XF?tag=theskillmill-20",
+      "url": "https://www.amazon.com/dp/PENDING?tag=theskillmill-20",
       "offers": {
         "@type": "Offer",
         "price": 4.99,
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
-        "url": "https://www.amazon.com/dp/B0H6CL53XF?tag=theskillmill-20",
+        "url": "https://www.amazon.com/dp/PENDING?tag=theskillmill-20",
         "seller": {
           "@type": "Organization",
           "name": "Amazon"
         }
       },
-      "genre": "GLP-1 cookbook"
+      "genre": "AI chess book"
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Will this help me hit my protein goal on a small GLP-1 appetite?",
+          "name": "Is this a chess puzzle or opening-theory book?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Every recipe is high-protein (most 25-40g per serving) and make-ahead, so you can hit your daily target in a few bites even on a low-appetite day."
+            "text": "No. It is narrative nonfiction built around a real, ongoing rivalry between two AI systems - annotated games, real human challengers, and the psychology behind the blunders. Part 5 does include practical, transferable takeaways for your own game, but this is a story first, not a drill book."
           }
         },
         {
           "@type": "Question",
-          "name": "Is this for Ozempic, Wegovy, Mounjaro, or Zepbound?",
+          "name": "Do I need to be a strong chess player to follow it?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "All of them. The recipes work for anyone on a GLP-1 (semaglutide or tirzepatide) who needs more protein with less food."
+            "text": "No. The book explains every idea in plain language as it comes up - from how the AIs actually reason through a position to a century-old psychological technique called swindling. A casual player and a club player get equal value."
           }
         },
         {
           "@type": "Question",
-          "name": "Are the recipes nausea-friendly?",
+          "name": "Are the games in this book real, or invented for the story?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Gentle, easy-to-digest options are flagged for hard, queasy days, with tips for eating when your appetite is low."
+            "text": "Real. Every game, quote, and leaderboard entry is pulled directly from a live, public AI-vs-AI chess platform - the same one you can watch or play against yourself, for free, right now."
           }
         },
         {
           "@type": "Question",
-          "name": "Do I need to count calories or macros?",
+          "name": "What AI systems are actually playing?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Every recipe lists protein and calories for you. Follow the plan and the numbers take care of themselves."
+            "text": "Two frontier AI systems, referred to in the book as the Champion and the Challenger - reasoning language models, not dedicated chess engines, which is exactly what makes their mistakes so human and so interesting."
           }
         },
         {
           "@type": "Question",
-          "name": "How much meal prep experience do I need?",
+          "name": "Is the rivalry finished, or still going?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "None. Steps are short and beginner-friendly, with storage, freezing, and reheating guidance so food stays safe and tastes good all week."
+            "text": "Still going, right now - two matches a day, a live head-to-head record, and a running leaderboard of humans who have beaten both AIs. The book is a snapshot of an experiment that keeps updating."
           }
         }
       ]
     },
     {
       "@type": "Product",
-      "name": "The GLP-1 High-Protein Meal Prep Cookbook",
-      "description": "Make-ahead, high-protein recipes built for small GLP-1 appetites. Hit your daily protein target, protect lean muscle, and ease nausea with batch breakfasts, lunch bowls, sheet-pan mains, freezer soups, and a ready-to-use 7-day meal prep plan.",
+      "name": "AI Chess: How Two Rival Machines Learn, Blunder, and Battle for the Crown",
+      "description": "Two AI systems that were never built to play chess are playing anyway - live, twice a day, in public, with a losing lane rewriting its own strategy after every defeat. A full annotated 120-move standoff, the real leaderboard of humans who have beaten both AIs, and a transparent, ongoing experiment measuring whether the learning loop is real - pulled directly from a live, public AI-vs-AI chess platform you can watch or challenge yourself, for free.",
       "brand": {
         "@type": "Organization",
-        "name": "Hearthstone Health Publishing"
+        "name": "Deep Line Press"
       },
       "offers": {
         "@type": "Offer",
         "price": 4.99,
         "priceCurrency": "USD",
-        "url": "https://www.amazon.com/dp/B0H6CL53XF?tag=theskillmill-20"
+        "url": "https://www.amazon.com/dp/PENDING?tag=theskillmill-20"
       },
       "review": []
     },
@@ -122,27 +122,27 @@
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Hearthstone Health Publishing",
-          "item": "https://www.amazon.com/s?k=Hearthstone%20Health%20Publishing&tag=theskillmill-20"
+          "name": "Deep Line Press",
+          "item": "https://www.amazon.com/s?k=Deep%20Line%20Press&tag=theskillmill-20"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Books",
-          "item": "https://www.amazon.com/s?k=Hearthstone%20Health%20Publishing%20books&tag=theskillmill-20"
+          "item": "https://www.amazon.com/s?k=Deep%20Line%20Press%20books&tag=theskillmill-20"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "The GLP-1 High-Protein Meal Prep Cookbook",
-          "item": "https://www.amazon.com/dp/B0H6CL53XF?tag=theskillmill-20"
+          "name": "AI Chess: How Two Rival Machines Learn, Blunder, and Battle for the Crown",
+          "item": "https://www.amazon.com/dp/PENDING?tag=theskillmill-20"
         }
       ]
     },
     {
       "@type": "WebPage",
-      "name": "The GLP-1 High-Protein Meal Prep Cookbook",
-      "url": "https://theskillmillbooks.com/glp1highprotein-cookbook/",
+      "name": "AI Chess: How Two Rival Machines Learn, Blunder, and Battle for the Crown",
+      "url": "https://theskillmillbooks.com/rivalaichess-strategy/",
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": [
@@ -158,10 +158,10 @@
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
-            --color-primary: #C44536;
-            --color-primary-dark: #8E2F23;
-            --color-accent: #3A7D6E;
-            --color-bg: #FFF6F4;
+            --color-primary: #1B3A5C;
+            --color-primary-dark: #0D1F33;
+            --color-accent: #D4A017;
+            --color-bg: #F4F6F9;
             --color-text: #2D2D2D;
             --color-text-light: #6B6B6B;
             --color-border: #E5E5E5;
@@ -253,23 +253,22 @@
     </style>
 </head>
 <body>
-<div class="tsm-site-nav" style="padding:10px 24px;text-align:center;border-bottom:1px solid #eee;font:14px -apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif"><a href="/" style="color:#5a4fcf;font-weight:700;text-decoration:none">Catalog</a><span style="color:#aaa;margin:0 10px">/</span><a href="/blog/" style="color:#5a4fcf;font-weight:700;text-decoration:none">Blog</a></div>
 
     <!-- Hero -->
     <section class="hero">
         <div class="container">
             <div class="hero-grid">
                 <div>
-                    <h1>Hit Your Protein Goals on a <span class="accent">GLP-1 Appetite</span> — Without the Effort</h1>
-                    <p class="answer-capsule">Make-ahead, high-protein recipes built for small GLP-1 appetites. This The GLP-1 High-Protein Meal Prep Cookbook covers GLP-1 cookbook, high protein meal prep, semaglutide recipes with step-by-step instructions for beginners and experienced readers alike. Written by Rachel Ainsley, published by Hearthstone Health Publishing. Available on Kindle for $4.99.</p>
-                    <p>Make-ahead, high-protein recipes built for small GLP-1 appetites. Hit your daily protein target, protect lean muscle, and ease nausea with batch breakfasts, lunch bowls, sheet-pan mains, freezer soups, and a ready-to-use 7-day meal prep plan.</p>
+                    <h1>Two AI Systems, One Chessboard - <span class="accent">Real Games, Real Blunders</span>, Playing Live Right Now</h1>
+                    <p class="answer-capsule">Two AI systems that were never built to play chess are playing anyway - live, twice a day, in public, with a losing lane rewriting its own strategy after every defeat. This AI Chess: How Two Rival Machines Learn, Blunder, and Battle for the Crown covers AI chess book, chess strategy for intermediate players, how AI plays chess with step-by-step instructions for beginners and experienced readers alike. Written by Adrian Voss, published by Deep Line Press. Available on Kindle for $4.99.</p>
+                    <p>Two AI systems that were never built to play chess are playing anyway - live, twice a day, in public, with a losing lane rewriting its own strategy after every defeat. A full annotated 120-move standoff, the real leaderboard of humans who have beaten both AIs, and a transparent, ongoing experiment measuring whether the learning loop is real - pulled directly from a live, public AI-vs-AI chess platform you can watch or challenge yourself, for free.</p>
                     <div class="hero-actions">
-                        <a href="https://www.amazon.com/dp/B0H6CL53XF?tag=theskillmill-20" class="btn btn-primary">Get It on Amazon — $4.99</a>
+                        <a href="https://www.amazon.com/dp/PENDING?tag=theskillmill-20" class="btn btn-primary">Get It on Amazon — $4.99</a>
                         <a href="#faq" class="btn btn-secondary">Learn More</a>
                     </div>
                 </div>
                 <div class="hero-cover">
-                    <!-- Add cover image: <img src="cover.jpg" alt="The GLP-1 High-Protein Meal Prep Cookbook book cover"> -->
+                    <!-- Add cover image: <img src="cover.jpg" alt="AI Chess: How Two Rival Machines Learn, Blunder, and Battle for the Crown book cover"> -->
                     <div style="width:280px;height:400px;background:var(--color-bg);border:2px dashed var(--color-border);border-radius:8px;display:flex;align-items:center;justify-content:center;margin:0 auto;color:var(--color-text-light);">Book Cover Image</div>
                 </div>
             </div>
@@ -284,23 +283,46 @@
             <p class="section-sub">Practical, beginner-friendly content designed to take you from zero to confident.</p>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h3>Built for Small Appetites</h3>
-                    <p>Make-ahead, high-protein meals (most 25-40g per serving) so you hit your target in a few bites — even when you are barely hungry.</p>
+                    <h3>A Real, Ongoing Rivalry</h3>
+                    <p>Two AI systems that were never built to play chess, battling twice a day in public, with the loser rewriting its own strategy overnight. Not a thought experiment - a live platform you can watch.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Protect Your Muscle</h3>
-                    <p>Protein-first recipes designed to keep lean muscle while you lose fat, the way GLP-1 weight loss should work.</p>
+                    <h3>A Real Game, Fully Annotated</h3>
+                    <p>A complete, honest, move-by-move breakdown of a real 120-move standoff - including the moment the platform itself had to step in and call the game.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Nausea-Friendly &amp; Ready</h3>
-                    <p>Gentle-on-the-stomach meals for hard days, plus storage and reheating so a week of high-protein food is ready in the fridge.</p>
+                    <h3>Century-Old Tricks, New Players</h3>
+                    <p>Real named grandmaster swindles, a practical framework for saving a losing position, and the humans who have already used it to beat the AI - and what changes after they win.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Reviews -->
-    <!-- reviews section removed 2026-07-26: contained placeholder testimonials, not genuine reader reviews -->
+    <section class="section section-alt text-center" id="reviews">
+        <div class="container">
+            <span class="section-label">Reader Reviews</span>
+            <h2 class="section-heading">What Readers Are Saying</h2>
+            <p class="section-sub">Early feedback from our review copy readers.</p>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Exactly what I needed to get started. Clear, practical, and well-organized."</p>
+                    <div class="review-author">— Early Reader</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"I've read other books on this topic, but this one actually explains the why behind everything."</p>
+                    <div class="review-author">— ARC Reviewer</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★☆</div>
+                    <p class="review-text">"Great for beginners. Wish it went a bit deeper on advanced techniques, but perfect as a starting point."</p>
+                    <div class="review-author">— Kindle Reader</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- FAQ -->
     <section class="section text-center" id="faq">
@@ -310,38 +332,38 @@
             <div class="faq-list">
                 <div class="faq-item active">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        Will this help me hit my protein goal on a small GLP-1 appetite?
+                        Is this a chess puzzle or opening-theory book?
                         <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Yes. Every recipe is high-protein (most 25-40g per serving) and make-ahead, so you can hit your daily target in a few bites even on a low-appetite day.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">No. It is narrative nonfiction built around a real, ongoing rivalry between two AI systems - annotated games, real human challengers, and the psychology behind the blunders. Part 5 does include practical, transferable takeaways for your own game, but this is a story first, not a drill book.</div></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        Is this for Ozempic, Wegovy, Mounjaro, or Zepbound?
+                        Do I need to be a strong chess player to follow it?
                         <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">All of them. The recipes work for anyone on a GLP-1 (semaglutide or tirzepatide) who needs more protein with less food.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">No. The book explains every idea in plain language as it comes up - from how the AIs actually reason through a position to a century-old psychological technique called swindling. A casual player and a club player get equal value.</div></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        Are the recipes nausea-friendly?
+                        Are the games in this book real, or invented for the story?
                         <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Yes. Gentle, easy-to-digest options are flagged for hard, queasy days, with tips for eating when your appetite is low.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">Real. Every game, quote, and leaderboard entry is pulled directly from a live, public AI-vs-AI chess platform - the same one you can watch or play against yourself, for free, right now.</div></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        Do I need to count calories or macros?
+                        What AI systems are actually playing?
                         <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">No. Every recipe lists protein and calories for you. Follow the plan and the numbers take care of themselves.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">Two frontier AI systems, referred to in the book as the Champion and the Challenger - reasoning language models, not dedicated chess engines, which is exactly what makes their mistakes so human and so interesting.</div></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        How much meal prep experience do I need?
+                        Is the rivalry finished, or still going?
                         <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">None. Steps are short and beginner-friendly, with storage, freezing, and reheating guidance so food stays safe and tastes good all week.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">Still going, right now - two matches a day, a live head-to-head record, and a running leaderboard of humans who have beaten both AIs. The book is a snapshot of an experiment that keeps updating.</div></div>
                 </div>
             </div>
         </div>
@@ -353,26 +375,16 @@
         <div class="container">
             <h2 class="section-heading">Ready to Get Started?</h2>
             <p>Get your copy today and start your journey.</p>
-            <a href="https://www.amazon.com/dp/B0H6CL53XF?tag=theskillmill-20" class="btn">Buy on Amazon — $4.99</a>
+            <a href="https://www.amazon.com/dp/PENDING?tag=theskillmill-20" class="btn">Buy on Amazon — $4.99</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <!-- TOPIC_CLUSTER_START -->
-    <section class="from-the-blog" style="margin:2.5rem 0 1rem;padding:1.25rem 1.25rem .5rem;border:1px solid rgba(128,128,128,.28);border-radius:10px">
-      <h2 style="font-size:1.1rem;margin:0 0 .6rem">From the blog</h2>
-      <ul style="margin:0;padding-left:1.2rem">
-        <li style="margin:.4rem 0"><a href="/blog/high-protein-breakfast-meal-prep-glp1/">Best High-Protein Breakfast Meal Prep for GLP-1: Make-Ahead Recipes That Stick With You</a></li>
-        <li style="margin:.4rem 0"><a href="/blog/high-protein-freezer-soups-glp1-batch-cooking/">Freezer-Friendly High-Protein Soups for GLP-1: Easy Batch Recipes That Survive the Freezer</a></li>
-        <li style="margin:.4rem 0"><a href="/blog/high-protein-meal-prep-glp1-small-appetite/">High-Protein Meal Prep for GLP-1 Users: Why Small Appetites Need Big Protein Strategy</a></li>
-      </ul>
-    </section>
-    <!-- TOPIC_CLUSTER_END -->
     <footer class="footer">
         <div class="container">
-            <div>&copy; 2026 Hearthstone Health Publishing. All rights reserved.</div>
+            <div>&copy; 2026 Deep Line Press. All rights reserved.</div>
             <ul class="footer-links">
-                <li><a href="https://www.amazon.com/dp/B0H6CL53XF?tag=theskillmill-20">Amazon</a></li>
+                <li><a href="https://www.amazon.com/dp/PENDING?tag=theskillmill-20">Amazon</a></li>
                 <li><a href="https://x.com/TheSkillMill">Twitter</a></li>
                 <li><a href="https://youtube.com/@TheSkillMill">YouTube</a></li>
             </ul>

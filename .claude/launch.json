@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "impeccable-critique-static",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/ckame/.claude/skills/impeccable/scripts/live-server.mjs"],
+      "port": 8400
+    }
+  ]
+}

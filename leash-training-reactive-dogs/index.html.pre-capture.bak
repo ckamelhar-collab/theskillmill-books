@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The GLP-1 High-Protein Meal Prep Cookbook | Hearthstone Health Publishing</title>
-    <meta name="description" content="Make-ahead, high-protein recipes built for small GLP-1 appetites. Hit your daily protein target, protect lean muscle, and ease nausea with batch breakfasts, lunch bowls, sheet-pan mains, freezer soups, and a ready-to-use 7-day meal prep plan.">
-    <meta name="keywords" content="GLP-1 cookbook, high protein meal prep, semaglutide recipes, Ozempic meal prep, tirzepatide diet">
-    <meta name="author" content="Rachel Ainsley">
+    <title>Leash Training for Reactive Dogs | Steady Paws Press</title>
+    <meta name="description" content="Walks shouldn&#39;t feel like a fight. If your dog barks, lunges, or drags you down the street the moment another dog appears, &quot;just socialize them more&quot; was never going to work. Reactivity isn&#39;t disobedience — it&#39;s a dog over their emotional threshold. This is the step-by-step plan for that dog: find your dog&#39;s trigger distance, build the five foundation behaviors at home, apply counterconditioning without the timing mistakes that quietly poison it, and work through an 8-week plan built on named, force-free methods.">
+    <meta name="keywords" content="reactive dog training book, dog leash training, stop dog pulling on leash, leash reactivity in dogs, dog lunging and barking on leash, force free dog training book, fearful dog training help">
+    <meta name="author" content="Jordan Wells">
     <!-- Open Graph (Facebook, LinkedIn, AI crawlers) -->
     <meta property="og:type" content="book">
-    <meta property="og:title" content="The GLP-1 High-Protein Meal Prep Cookbook">
-    <meta property="og:description" content="Make-ahead, high-protein recipes built for small GLP-1 appetites. Hit your daily protein target, protect lean muscle, and ease nausea with batch breakfasts, lunch bowls, sheet-pan mains, freezer soups, and a ready-to-use 7-day meal prep plan.">
-    <meta property="og:url" content="https://theskillmillbooks.com/glp1-meal-prep/">
-    <meta property="og:site_name" content="Hearthstone Health Publishing">
-    <meta property="book:author" content="Rachel Ainsley">
-    <meta property="book:isbn" content="B0H6CL53XF">
+    <meta property="og:title" content="Leash Training for Reactive Dogs">
+    <meta property="og:description" content="Walks shouldn&#39;t feel like a fight. If your dog barks, lunges, or drags you down the street the moment another dog appears, &quot;just socialize them more&quot; was never going to work. Reactivity isn&#39;t disobedience — it&#39;s a dog over their emotional threshold. This is the step-by-step plan for that dog: find your dog&#39;s trigger distance, build the five foundation behaviors at home, apply counterconditioning without the timing mistakes that quietly poison it, and work through an 8-week plan built on named, force-free methods.">
+    <meta property="og:url" content="https://theskillmillbooks.com/leash-training-reactive-dogs/">
+    <meta property="og:site_name" content="Steady Paws Press">
+    <meta property="book:author" content="Jordan Wells">
+    <meta property="book:isbn" content="B0HBFT24ZK">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@TheSkillMill">
-    <meta name="twitter:title" content="The GLP-1 High-Protein Meal Prep Cookbook">
-    <meta name="twitter:description" content="Make-ahead, high-protein recipes built for small GLP-1 appetites. Hit your daily protein target, protect lean muscle, and ease nausea with batch breakfasts, lunch bowls, sheet-pan mains, freezer soups, and a ready-to-use 7-day meal prep plan.">
-    <link rel="canonical" href="https://theskillmillbooks.com/glp1-meal-prep/">
+    <meta name="twitter:title" content="Leash Training for Reactive Dogs">
+    <meta name="twitter:description" content="Walks shouldn&#39;t feel like a fight. If your dog barks, lunges, or drags you down the street the moment another dog appears, &quot;just socialize them more&quot; was never going to work. Reactivity isn&#39;t disobedience — it&#39;s a dog over their emotional threshold. This is the step-by-step plan for that dog: find your dog&#39;s trigger distance, build the five foundation behaviors at home, apply counterconditioning without the timing mistakes that quietly poison it, and work through an 8-week plan built on named, force-free methods.">
+    <link rel="canonical" href="https://theskillmillbooks.com/leash-training-reactive-dogs/">
 
     <!-- GEO: Structured Data for AI Search Engines -->
     <script type="application/ld+json">
@@ -29,90 +29,90 @@
   "@graph": [
     {
       "@type": "Book",
-      "name": "The GLP-1 High-Protein Meal Prep Cookbook",
+      "name": "Leash Training for Reactive Dogs",
       "author": {
         "@type": "Person",
-        "name": "Rachel Ainsley"
+        "name": "Jordan Wells"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Hearthstone Health Publishing"
+        "name": "Steady Paws Press"
       },
-      "description": "Make-ahead, high-protein recipes built for small GLP-1 appetites. Hit your daily protein target, protect lean muscle, and ease nausea with batch breakfasts, lunch bowls, sheet-pan mains, freezer soups, and a ready-to-use 7-day meal prep plan.",
+      "description": "Walks shouldn't feel like a fight. If your dog barks, lunges, or drags you down the street the moment another dog appears, \"just socialize them more\" was never going to work. Reactivity isn't disobedience — it's a dog over their emotional threshold. This is the step-by-step plan for that dog: find your dog's trigger distance, build the five foundation behaviors at home, apply counterconditioning without the timing mistakes that quietly poison it, and work through an 8-week plan built on named, force-free methods.",
       "bookFormat": "https://schema.org/EBook",
       "inLanguage": "en",
-      "url": "https://www.amazon.com/dp/B0H6CL53XF?tag=theskillmill-20",
+      "url": "https://www.amazon.com/dp/B0HBFT24ZK?tag=theskillmill-20",
       "offers": {
         "@type": "Offer",
-        "price": 4.99,
+        "price": 6.99,
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
-        "url": "https://www.amazon.com/dp/B0H6CL53XF?tag=theskillmill-20",
+        "url": "https://www.amazon.com/dp/B0HBFT24ZK?tag=theskillmill-20",
         "seller": {
           "@type": "Organization",
           "name": "Amazon"
         }
       },
-      "genre": "GLP-1 cookbook"
+      "genre": "reactive dog training book"
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Will this help me hit my protein goal on a small GLP-1 appetite?",
+          "name": "What is leash reactivity, and is it the same as aggression?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Every recipe is high-protein (most 25-40g per serving) and make-ahead, so you can hit your daily target in a few bites even on a low-appetite day."
+            "text": "Reactivity is an over-threshold emotional response — a dog whose stress response has taken over, not a dog choosing to misbehave. It often looks alarming (barking, lunging) without any intent to do harm. Aggression with a bite history is a different problem, and the book is explicit that those cases belong with a certified behaviorist or your vet, not a book."
           }
         },
         {
           "@type": "Question",
-          "name": "Is this for Ozempic, Wegovy, Mounjaro, or Zepbound?",
+          "name": "What methods does the book actually use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "All of them. The recipes work for anyone on a GLP-1 (semaglutide or tirzepatide) who needs more protein with less food."
+            "text": "Named, force-free methods: working under threshold using trigger distance, counterconditioning and desensitization, the LAT (\"Look At That\") game, and BAT-style setups. Each gets its own chapter with the common timing mistakes spelled out, because bad timing is what quietly ruins counterconditioning."
           }
         },
         {
           "@type": "Question",
-          "name": "Are the recipes nausea-friendly?",
+          "name": "Do I need special equipment?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Gentle, easy-to-digest options are flagged for hard, queasy days, with tips for eating when your appetite is low."
+            "text": "No. There is a chapter on gear that helps and gear that hurts — a well-fitted harness and a standard leash are enough to start. The book does not recommend aversive tools such as prong, choke, or e-collars."
           }
         },
         {
           "@type": "Question",
-          "name": "Do I need to count calories or macros?",
+          "name": "How long does it take to see progress?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Every recipe lists protein and calories for you. Follow the plan and the numbers take care of themselves."
+            "text": "The book is built around an 8-week plan, and many owners notice the first changes in the foundation-behaviour weeks before any trigger work happens. Progress is not linear — there is a full chapter on setbacks and what to do when a walk goes wrong."
           }
         },
         {
           "@type": "Question",
-          "name": "How much meal prep experience do I need?",
+          "name": "Is the author a veterinarian or certified trainer?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "None. Steps are short and beginner-friendly, with storage, freezing, and reheating guidance so food stays safe and tastes good all week."
+            "text": "No. Jordan Wells writes practical guides, and the book says so plainly. It teaches established, publicly documented force-free methods and repeatedly points readers toward a certified behaviorist or veterinarian for bite history, escalating aggression, or self-injury."
           }
         }
       ]
     },
     {
       "@type": "Product",
-      "name": "The GLP-1 High-Protein Meal Prep Cookbook",
-      "description": "Make-ahead, high-protein recipes built for small GLP-1 appetites. Hit your daily protein target, protect lean muscle, and ease nausea with batch breakfasts, lunch bowls, sheet-pan mains, freezer soups, and a ready-to-use 7-day meal prep plan.",
+      "name": "Leash Training for Reactive Dogs",
+      "description": "Walks shouldn't feel like a fight. If your dog barks, lunges, or drags you down the street the moment another dog appears, \"just socialize them more\" was never going to work. Reactivity isn't disobedience — it's a dog over their emotional threshold. This is the step-by-step plan for that dog: find your dog's trigger distance, build the five foundation behaviors at home, apply counterconditioning without the timing mistakes that quietly poison it, and work through an 8-week plan built on named, force-free methods.",
       "brand": {
         "@type": "Organization",
-        "name": "Hearthstone Health Publishing"
+        "name": "Steady Paws Press"
       },
       "offers": {
         "@type": "Offer",
-        "price": 4.99,
+        "price": 6.99,
         "priceCurrency": "USD",
-        "url": "https://www.amazon.com/dp/B0H6CL53XF?tag=theskillmill-20"
+        "url": "https://www.amazon.com/dp/B0HBFT24ZK?tag=theskillmill-20"
       },
       "review": []
     },
@@ -122,27 +122,27 @@
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Hearthstone Health Publishing",
-          "item": "https://www.amazon.com/s?k=Hearthstone%20Health%20Publishing&tag=theskillmill-20"
+          "name": "Steady Paws Press",
+          "item": "https://www.amazon.com/s?k=Steady%20Paws%20Press&tag=theskillmill-20"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Books",
-          "item": "https://www.amazon.com/s?k=Hearthstone%20Health%20Publishing%20books&tag=theskillmill-20"
+          "item": "https://www.amazon.com/s?k=Steady%20Paws%20Press%20books&tag=theskillmill-20"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "The GLP-1 High-Protein Meal Prep Cookbook",
-          "item": "https://www.amazon.com/dp/B0H6CL53XF?tag=theskillmill-20"
+          "name": "Leash Training for Reactive Dogs",
+          "item": "https://www.amazon.com/dp/B0HBFT24ZK?tag=theskillmill-20"
         }
       ]
     },
     {
       "@type": "WebPage",
-      "name": "The GLP-1 High-Protein Meal Prep Cookbook",
-      "url": "https://theskillmillbooks.com/glp1highprotein-cookbook/",
+      "name": "Leash Training for Reactive Dogs",
+      "url": "https://theskillmillbooks.com/reactivedog-difficultdog1/",
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": [
@@ -158,10 +158,10 @@
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
-            --color-primary: #C44536;
-            --color-primary-dark: #8E2F23;
-            --color-accent: #3A7D6E;
-            --color-bg: #FFF6F4;
+            --color-primary: #0F766E;
+            --color-primary-dark: #115E59;
+            --color-accent: #5EEAD4;
+            --color-bg: #F0FDFA;
             --color-text: #2D2D2D;
             --color-text-light: #6B6B6B;
             --color-border: #E5E5E5;
@@ -253,23 +253,22 @@
     </style>
 </head>
 <body>
-<div class="tsm-site-nav" style="padding:10px 24px;text-align:center;border-bottom:1px solid #eee;font:14px -apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif"><a href="/" style="color:#5a4fcf;font-weight:700;text-decoration:none">Catalog</a><span style="color:#aaa;margin:0 10px">/</span><a href="/blog/" style="color:#5a4fcf;font-weight:700;text-decoration:none">Blog</a></div>
 
     <!-- Hero -->
     <section class="hero">
         <div class="container">
             <div class="hero-grid">
                 <div>
-                    <h1>Hit Your Protein Goals on a <span class="accent">GLP-1 Appetite</span> — Without the Effort</h1>
-                    <p class="answer-capsule">Make-ahead, high-protein recipes built for small GLP-1 appetites. This The GLP-1 High-Protein Meal Prep Cookbook covers GLP-1 cookbook, high protein meal prep, semaglutide recipes with step-by-step instructions for beginners and experienced readers alike. Written by Rachel Ainsley, published by Hearthstone Health Publishing. Available on Kindle for $4.99.</p>
-                    <p>Make-ahead, high-protein recipes built for small GLP-1 appetites. Hit your daily protein target, protect lean muscle, and ease nausea with batch breakfasts, lunch bowls, sheet-pan mains, freezer soups, and a ready-to-use 7-day meal prep plan.</p>
+                    <h1>Your Dog Isn't Being Bad — They're <span class="accent">Over Threshold</span></h1>
+                    <p class="answer-capsule">Walks shouldn't feel like a fight. This Leash Training for Reactive Dogs covers reactive dog training book, dog leash training, stop dog pulling on leash with step-by-step instructions for beginners and experienced readers alike. Written by Jordan Wells, published by Steady Paws Press. Available on Kindle for $6.99.</p>
+                    <p>Walks shouldn't feel like a fight. If your dog barks, lunges, or drags you down the street the moment another dog appears, &quot;just socialize them more&quot; was never going to work. Reactivity isn't disobedience — it's a dog over their emotional threshold. This is the step-by-step plan for that dog: find your dog's trigger distance, build the five foundation behaviors at home, apply counterconditioning without the timing mistakes that quietly poison it, and work through an 8-week plan built on named, force-free methods.</p>
                     <div class="hero-actions">
-                        <a href="https://www.amazon.com/dp/B0H6CL53XF?tag=theskillmill-20" class="btn btn-primary">Get It on Amazon — $4.99</a>
+                        <a href="https://www.amazon.com/dp/B0HBFT24ZK?tag=theskillmill-20" class="btn btn-primary">Get It on Amazon — $6.99</a>
                         <a href="#faq" class="btn btn-secondary">Learn More</a>
                     </div>
                 </div>
                 <div class="hero-cover">
-                    <!-- Add cover image: <img src="cover.jpg" alt="The GLP-1 High-Protein Meal Prep Cookbook book cover"> -->
+                    <!-- Add cover image: <img src="cover.jpg" alt="Leash Training for Reactive Dogs book cover"> -->
                     <div style="width:280px;height:400px;background:var(--color-bg);border:2px dashed var(--color-border);border-radius:8px;display:flex;align-items:center;justify-content:center;margin:0 auto;color:var(--color-text-light);">Book Cover Image</div>
                 </div>
             </div>
@@ -284,23 +283,46 @@
             <p class="section-sub">Practical, beginner-friendly content designed to take you from zero to confident.</p>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h3>Built for Small Appetites</h3>
-                    <p>Make-ahead, high-protein meals (most 25-40g per serving) so you hit your target in a few bites — even when you are barely hungry.</p>
+                    <h3>Find Your Dog's Trigger Distance</h3>
+                    <p>Reactive dogs cannot learn while they are panicking. Chapter 3 shows you how to find the distance at which your dog can still think, and how to build every walk around staying inside it.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Protect Your Muscle</h3>
-                    <p>Protein-first recipes designed to keep lean muscle while you lose fat, the way GLP-1 weight loss should work.</p>
+                    <h3>The LAT Game and BAT Basics</h3>
+                    <p>Two named, force-free methods with a chapter each — what they are, how to run them correctly, and the specific timing errors that make counterconditioning backfire instead of working.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Nausea-Friendly &amp; Ready</h3>
-                    <p>Gentle-on-the-stomach meals for hard days, plus storage and reheating so a week of high-protein food is ready in the fridge.</p>
+                    <h3>The 8-Week Plan</h3>
+                    <p>A week-by-week structure that starts with five foundation behaviours at home, then rebuilds the daily walk. Includes what to do when it goes wrong, and clear signs that it is time to bring in a professional.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Reviews -->
-    <!-- reviews section removed 2026-07-26: contained placeholder testimonials, not genuine reader reviews -->
+    <section class="section section-alt text-center" id="reviews">
+        <div class="container">
+            <span class="section-label">Reader Reviews</span>
+            <h2 class="section-heading">What Readers Are Saying</h2>
+            <p class="section-sub">Early feedback from our review copy readers.</p>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Exactly what I needed to get started. Clear, practical, and well-organized."</p>
+                    <div class="review-author">— Early Reader</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"I've read other books on this topic, but this one actually explains the why behind everything."</p>
+                    <div class="review-author">— ARC Reviewer</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★☆</div>
+                    <p class="review-text">"Great for beginners. Wish it went a bit deeper on advanced techniques, but perfect as a starting point."</p>
+                    <div class="review-author">— Kindle Reader</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- FAQ -->
     <section class="section text-center" id="faq">
@@ -310,38 +332,38 @@
             <div class="faq-list">
                 <div class="faq-item active">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        Will this help me hit my protein goal on a small GLP-1 appetite?
+                        What is leash reactivity, and is it the same as aggression?
                         <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Yes. Every recipe is high-protein (most 25-40g per serving) and make-ahead, so you can hit your daily target in a few bites even on a low-appetite day.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">Reactivity is an over-threshold emotional response — a dog whose stress response has taken over, not a dog choosing to misbehave. It often looks alarming (barking, lunging) without any intent to do harm. Aggression with a bite history is a different problem, and the book is explicit that those cases belong with a certified behaviorist or your vet, not a book.</div></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        Is this for Ozempic, Wegovy, Mounjaro, or Zepbound?
+                        What methods does the book actually use?
                         <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">All of them. The recipes work for anyone on a GLP-1 (semaglutide or tirzepatide) who needs more protein with less food.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">Named, force-free methods: working under threshold using trigger distance, counterconditioning and desensitization, the LAT (&quot;Look At That&quot;) game, and BAT-style setups. Each gets its own chapter with the common timing mistakes spelled out, because bad timing is what quietly ruins counterconditioning.</div></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        Are the recipes nausea-friendly?
+                        Do I need special equipment?
                         <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Yes. Gentle, easy-to-digest options are flagged for hard, queasy days, with tips for eating when your appetite is low.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">No. There is a chapter on gear that helps and gear that hurts — a well-fitted harness and a standard leash are enough to start. The book does not recommend aversive tools such as prong, choke, or e-collars.</div></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        Do I need to count calories or macros?
+                        How long does it take to see progress?
                         <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">No. Every recipe lists protein and calories for you. Follow the plan and the numbers take care of themselves.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">The book is built around an 8-week plan, and many owners notice the first changes in the foundation-behaviour weeks before any trigger work happens. Progress is not linear — there is a full chapter on setbacks and what to do when a walk goes wrong.</div></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        How much meal prep experience do I need?
+                        Is the author a veterinarian or certified trainer?
                         <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">None. Steps are short and beginner-friendly, with storage, freezing, and reheating guidance so food stays safe and tastes good all week.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">No. Jordan Wells writes practical guides, and the book says so plainly. It teaches established, publicly documented force-free methods and repeatedly points readers toward a certified behaviorist or veterinarian for bite history, escalating aggression, or self-injury.</div></div>
                 </div>
             </div>
         </div>
@@ -353,26 +375,16 @@
         <div class="container">
             <h2 class="section-heading">Ready to Get Started?</h2>
             <p>Get your copy today and start your journey.</p>
-            <a href="https://www.amazon.com/dp/B0H6CL53XF?tag=theskillmill-20" class="btn">Buy on Amazon — $4.99</a>
+            <a href="https://www.amazon.com/dp/B0HBFT24ZK?tag=theskillmill-20" class="btn">Buy on Amazon — $6.99</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <!-- TOPIC_CLUSTER_START -->
-    <section class="from-the-blog" style="margin:2.5rem 0 1rem;padding:1.25rem 1.25rem .5rem;border:1px solid rgba(128,128,128,.28);border-radius:10px">
-      <h2 style="font-size:1.1rem;margin:0 0 .6rem">From the blog</h2>
-      <ul style="margin:0;padding-left:1.2rem">
-        <li style="margin:.4rem 0"><a href="/blog/high-protein-breakfast-meal-prep-glp1/">Best High-Protein Breakfast Meal Prep for GLP-1: Make-Ahead Recipes That Stick With You</a></li>
-        <li style="margin:.4rem 0"><a href="/blog/high-protein-freezer-soups-glp1-batch-cooking/">Freezer-Friendly High-Protein Soups for GLP-1: Easy Batch Recipes That Survive the Freezer</a></li>
-        <li style="margin:.4rem 0"><a href="/blog/high-protein-meal-prep-glp1-small-appetite/">High-Protein Meal Prep for GLP-1 Users: Why Small Appetites Need Big Protein Strategy</a></li>
-      </ul>
-    </section>
-    <!-- TOPIC_CLUSTER_END -->
     <footer class="footer">
         <div class="container">
-            <div>&copy; 2026 Hearthstone Health Publishing. All rights reserved.</div>
+            <div>&copy; 2026 Steady Paws Press. All rights reserved.</div>
             <ul class="footer-links">
-                <li><a href="https://www.amazon.com/dp/B0H6CL53XF?tag=theskillmill-20">Amazon</a></li>
+                <li><a href="https://www.amazon.com/dp/B0HBFT24ZK?tag=theskillmill-20">Amazon</a></li>
                 <li><a href="https://x.com/TheSkillMill">Twitter</a></li>
                 <li><a href="https://youtube.com/@TheSkillMill">YouTube</a></li>
             </ul>
