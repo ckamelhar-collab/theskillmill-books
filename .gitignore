@@ -1,8 +1,17 @@
 # Backup files written by retrofit/generator scripts. GitHub Pages serves every
-# file in this repo, so a committed .bak is a publicly reachable near-duplicate
+# file in this repo, so a committed backup is a publicly reachable near-duplicate
 # of the page next to it — exactly the duplicate content we are trying to avoid.
+#
+# `*.bak` only matches names ENDING in .bak. Two files named
+# `index.html.bak-trafficloop` slipped past it and were served live at
+# theskillmillbooks.com until 2026-08-03. Any suffix after .bak must match too,
+# so keep the `*.bak*` form below rather than reverting to a bare `*.bak`.
 *.bak
+*.bak.*
+*.bak-*
 *.pre-capture.bak
+*.orig
+*~
 
 # Local editor/agent config — contains local filesystem paths, not site content.
 .claude/
