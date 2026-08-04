@@ -35,7 +35,6 @@
         .footer a { color: #6A5ACD; }
         a { text-decoration: none; color: inherit; }
     </style>
-  <link rel="canonical" href="https://theskillmillbooks.com/">
 </head>
 <body>
 <div class="tsm-site-nav" style="padding:10px 24px;text-align:center;border-bottom:1px solid #eee;font:14px -apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif"><a href="/" style="color:#5a4fcf;font-weight:700;text-decoration:none">Catalog</a><span style="color:#aaa;margin:0 10px">/</span><a href="/blog/" style="color:#5a4fcf;font-weight:700;text-decoration:none">Blog</a></div>
@@ -176,6 +175,18 @@
         </div>
     </div>
 
+    <!--
+      AMZN_DISCLOSURE — MANDATORY, DO NOT REMOVE.
+      The Associates Operating Agreement requires this verbatim statement to be displayed
+      "clearly and prominently" on any site carrying affiliate-tagged links. This page emits
+      one tagged link per book, so it must carry the disclosure.
+
+      This lives in the TEMPLATE on purpose: on 2026-07-31 the disclosure was injected into
+      index.html by scripts/ensure_affiliate_disclosure.js (commit 0a2a80c), and the very next
+      catalog rebuild (aeb06d3) regenerated this file from the template and silently wiped it.
+      A hand-edit to index.html cannot survive a rebuild — the fix has to be here.
+      The sentinel comment also makes ensure_affiliate_disclosure.js treat the page as done.
+    -->
     <!-- AMZN_DISCLOSURE -->
     <div class="container">
       <p style="margin:1.25rem 0;padding:.75rem 1rem;border-top:1px solid rgba(128,128,128,.25);font-size:.85rem;line-height:1.5;opacity:.85">
