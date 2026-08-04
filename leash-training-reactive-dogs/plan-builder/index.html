@@ -34,6 +34,8 @@
     .dek em { color: #fff; }
     .hero-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 14px 28px; background: #3a8a54; color: #fff; font-weight: 800; font-size: 1.06rem; border-radius: 7px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.25); }
     .hero-note { color: #cfd6cf; font-size: 0.88rem; margin: 12px 0 0; }
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0 0; }
+    .chip { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.28); color: #eef2ec; font-size: 0.78rem; font-weight: 700; padding: 6px 12px; border-radius: 999px; backdrop-filter: blur(2px); }
 
     /* floating 3D book mockup */
     .mockup-wrap { display: flex; justify-content: center; }
@@ -51,26 +53,44 @@
     .amazon-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 11px 22px; background: #23262b; color: #fff; font-weight: 800; border-radius: 6px; text-decoration: none; font-size: 0.96rem; }
     .amazon-btn:hover { background: #05070a; }
 
-    /* ---- PROBLEM ---- */
-    .problem { max-width: 720px; margin: 0 auto; padding: 50px 22px 10px; }
+    /* ---- PROBLEM: photo of the tense dog beside the reader's own words ---- */
+    .problem { max-width: 980px; margin: 0 auto; padding: 54px 22px 46px; display: grid; grid-template-columns: 300px 1fr; gap: 38px; align-items: start; }
+    .problem-photo { border-radius: 12px; box-shadow: 0 16px 36px rgba(0,0,0,.18); overflow: hidden; }
+    .problem-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .problem-cap { font-size: 0.8rem; color: #8a8f85; margin: 8px 2px 0; }
     .problem h2 { font-size: 1.55rem; margin: 0 0 16px; line-height: 1.2; }
     .problem ul { margin: 0 0 18px; padding-left: 22px; }
     .problem li { margin: 9px 0; color: #3d423a; }
     .turn { background: #fbfcf8; border-left: 3px solid #2d7d46; padding: 14px 18px; margin: 22px 0 0; }
     .turn p { margin: 0; color: #333; }
 
-    /* ---- MECHANISM ---- */
-    .mech { max-width: 720px; margin: 0 auto; padding: 34px 22px 10px; }
+    /* ---- PULL-QUOTE BAND: dark, magazine-style, reuses the hero image ---- */
+    .quote-band { position: relative; background: #141b17 center 62%/cover no-repeat url('img/hero-sixam.jpg'); }
+    .quote-band::before { content: ""; position: absolute; inset: 0; background: rgba(10,15,12,.82); }
+    .quote-inner { position: relative; max-width: 860px; margin: 0 auto; padding: 58px 22px; text-align: center; }
+    .quote-inner p { margin: 0; color: #fff; font-size: clamp(1.35rem, 3.2vw, 2rem); font-weight: 800; line-height: 1.3; letter-spacing: -0.01em; }
+    .quote-inner span { display: block; margin-top: 12px; color: #a9b8ac; font-size: 0.9rem; font-weight: 600; }
+
+    /* ---- MECHANISM: sage band + icon cards ---- */
+    .mech-wrap { background: #f6f7f2; border-top: 1px solid #e3e6da; border-bottom: 1px solid #e3e6da; }
+    .mech { max-width: 780px; margin: 0 auto; padding: 48px 22px 54px; }
     .mech h2 { font-size: 1.55rem; margin: 0 0 8px; }
-    .mech .sub { color: #6b7065; margin: 0 0 20px; }
+    .mech .sub { color: #6b7065; margin: 0 0 22px; }
     .mech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .mech-card { border: 1px solid #e3e6da; border-radius: 9px; padding: 16px 18px; background: #fff; }
+    .mech-card { border: 1px solid #e0e4d6; border-radius: 11px; padding: 18px; background: #fff; box-shadow: 0 6px 16px rgba(31,61,43,.06); }
+    .mech-icon { width: 38px; height: 38px; border-radius: 9px; background: #e7efe6; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .mech-icon svg { width: 21px; height: 21px; stroke: #2d7d46; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .mech-card h3 { margin: 0 0 6px; font-size: 1rem; }
     .mech-card p { margin: 0; font-size: 0.92rem; color: #555a50; }
 
     /* ---- FORM ---- */
     .container { max-width: 640px; margin: 0 auto; padding: 40px 22px 20px; }
-    .card { background: #fff; border: 1px solid #e3e6da; border-radius: 10px; padding: 26px; box-shadow: 0 12px 28px rgba(0,0,0,0.05); }
+    .card { background: #fff; border: 1px solid #e3e6da; border-radius: 12px; padding: 26px; box-shadow: 0 16px 36px rgba(0,0,0,0.08); }
+    #plan-form { padding: 0; overflow: hidden; }
+    .form-hero { position: relative; height: 150px; background: #1b2420 center 42%/cover no-repeat url('img/trust-checkin.jpg'); }
+    .form-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,18,14,.25), rgba(12,18,14,.66)); }
+    .form-hero h2 { position: absolute; left: 24px; bottom: 14px; margin: 0; color: #fff; font-size: 1.35rem; text-shadow: 0 2px 10px rgba(0,0,0,.5); }
+    .form-body { padding: 20px 26px 26px; }
     .card-head { margin: 0 0 4px; font-size: 1.3rem; }
     .card-sub { margin: 0 0 22px; color: #6b7065; font-size: 0.94rem; }
     label { display: block; font-weight: 700; margin: 0 0 6px; font-size: 0.94rem; }
@@ -117,6 +137,10 @@
       .dek { max-width: none; margin-left: auto; margin-right: auto; }
       .mockup { transform: perspective(900px) rotateY(0deg); width: 190px; }
       .promo-inner { grid-template-columns: 96px 1fr; padding: 30px 18px; gap: 16px; }
+      .problem { grid-template-columns: 1fr; gap: 20px; }
+      .problem-photo { max-height: 300px; }
+      .form-hero h2 { font-size: 1.15rem; left: 18px; }
+      .form-body { padding: 18px; }
       .next-step { grid-template-columns: 1fr; }
       .next-step img { max-height: 160px; }
     }
@@ -144,6 +168,11 @@
         <p class="dek">Most reactive-dog advice fails because it's given at the wrong distance. Answer five questions and get a starting plan built on the threshold-zone system from <em>Leash Training for Reactive Dogs</em> &mdash; specific to your dog, your trigger, your street.</p>
         <a class="hero-cta" href="#build">Build my dog's plan &#8594;</a>
         <p class="hero-note">Free. No payment. Unsubscribe any time.</p>
+        <div class="chips">
+          <span class="chip">Force-free methods only</span>
+          <span class="chip">Named protocols: LAT &amp; BAT</span>
+          <span class="chip">Routes bite cases to professionals</span>
+        </div>
       </div>
       <div class="mockup-wrap">
         <img class="mockup" src="img/book-cover.jpg" alt="Leash Training for Reactive Dogs — book cover" width="230" height="368">
@@ -166,8 +195,13 @@
     </div>
   </section>
 
-  <!-- PROBLEM / AGITATION -->
+  <!-- PROBLEM / AGITATION: the tense dog IS the reader's dog -->
   <section class="problem">
+    <div>
+      <div class="problem-photo"><img src="img/problem-tension.jpg" alt="A dog braced low and pulling hard against a taut leash on a suburban sidewalk" loading="lazy"></div>
+      <p class="problem-cap">The moment every reactive-dog owner knows.</p>
+    </div>
+    <div>
     <h2>If you're here, you probably already know this feeling</h2>
     <ul>
       <li>You walk at 6am so you don't meet anyone.</li>
@@ -179,35 +213,51 @@
     <div class="turn">
       <p><strong>Here's the part almost nobody tells you:</strong> most of that advice isn't wrong, it's just being run at the wrong distance. A dog over its threshold physically cannot learn &mdash; it can't take food, it can't hear you. Every rep at that distance teaches nothing. Find the distance where your dog can still think, and the same techniques suddenly start working.</p>
     </div>
+    </div>
+  </section>
+
+  <!-- PULL-QUOTE BAND -->
+  <section class="quote-band">
+    <div class="quote-inner">
+      <p>&ldquo;A dog over its threshold physically cannot learn. Every rep at that distance teaches nothing.&rdquo;</p>
+      <span>The core idea behind the threshold-zone system</span>
+    </div>
   </section>
 
   <!-- MECHANISM: honest differentiation from a general chatbot -->
+  <div class="mech-wrap">
   <section class="mech">
     <h2>Why not just ask a chatbot?</h2>
     <p class="sub">You can. Here's the honest difference.</p>
     <div class="mech-grid">
       <div class="mech-card">
+        <div class="mech-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
         <h3>One system, not five contradicting ones</h3>
         <p>Search "dog pulling" and you'll get prong-collar people, e-collar people and force-free people in the same breath. This answers from one coherent, force-free system &mdash; the one in the book.</p>
       </div>
       <div class="mech-card">
+        <div class="mech-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
         <h3>Named methods, credited</h3>
         <p>LAT (Leslie McDevitt) and BAT (Grisha Stewart) are real, documented protocols with real names attached &mdash; not anonymous internet tips.</p>
       </div>
       <div class="mech-card">
+        <div class="mech-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div>
         <h3>It asks the right questions</h3>
         <p>A blank chat box needs you to already know what matters. Five fields do that work for you &mdash; trigger, reaction, distance, what failed.</p>
       </div>
       <div class="mech-card">
+        <div class="mech-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <h3>It knows when to stop</h3>
         <p>If there's a bite history, it won't hand you a DIY plan. It routes you to a qualified professional, because that's the honest answer.</p>
       </div>
     </div>
   </section>
+  </div>
 
   <main class="container" id="build">
     <form id="plan-form" class="card">
-      <h2 class="card-head">Build your dog's starting plan</h2>
+      <div class="form-hero"><h2>Build your dog's starting plan</h2></div>
+      <div class="form-body">
       <p class="card-sub">Five questions. Takes about a minute.</p>
       <div class="field">
         <label for="dogName">Your dog's name</label>
@@ -255,6 +305,7 @@
       <button class="submit" type="submit" id="submit-btn">Build My Dog's Plan &#8594;</button>
       <p class="risk">Free &middot; no card &middot; your plan appears on this page in seconds</p>
       <p class="msg" id="form-msg" role="status" aria-live="polite"></p>
+      </div>
     </form>
 
     <div class="card" id="result-card">
