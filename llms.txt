@@ -3,11 +3,7 @@
 
 ## Books
 - [The Gluten-Free Ooni Pizza Oven Cookbook](https://theskillmillbooks.com/gluten-free-ooni-pizza/): Gluten-free pizza recipes optimized for Ooni ovens, with tested flour blends and celiac-safe protocols.
-- [The Mediterranean Sous Vide Cookbook](https://theskillmillbooks.com/mediterranean-sous-vide/): Precision sous vide cooking meets Mediterranean flavors — perfect proteins and healthy meals every time.
-- [The 30-Day Clean Eating Reset Cookbook](https://theskillmillbooks.com/clean-eating-blackstone/): 30-day clean eating program with complete meal plans and Blackstone griddle recipes.
 - [The Complete Cockatiel Care Handbook](https://theskillmillbooks.com/cockatiel-care/): Everything about cockatiel care — choosing your first bird, training, diet, and health management.
-- [The Dairy-Free Ninja Creami Cookbook](https://theskillmillbooks.com/dairy-free-ninja-creami/): Creamy frozen treats without dairy — ice cream, sorbet, gelato, and milkshakes for the Ninja Creami.
-- [The Keto Traeger Grill Cookbook](https://theskillmillbooks.com/keto-traeger-grill/): Keto-friendly recipes for Traeger pellet grills with full macro breakdowns and low-carb BBQ.
 - [Container Gardening for Small Spaces](https://theskillmillbooks.com/container-gardening/): Grow herbs, vegetables, and flowers in containers — perfect for balconies, patios, and small urban spaces.
 - [Soy Candle Making for Beginners](https://theskillmillbooks.com/soy-candle-making/): 35+ soy candle projects from beginner to advanced — wicks, fragrance blending, and professional techniques.
 - [Digital Declutter for Beginners](https://theskillmillbooks.com/digital-declutter/): Organize files, reduce screen time, manage notifications, and create healthy tech habits.
@@ -17,7 +13,5 @@
 - [Rucking for Beginners](https://theskillmillbooks.com/rucking/): Complete guide to rucking — walking with a weighted pack for strength, calorie burn, and cardio.
 - [Cold Plunge Therapy for Beginners](https://theskillmillbooks.com/cold-plunge-therapy/): Practical guide to cold exposure for recovery, mental clarity, and immune health.
 - [Budgerigar Care for Beginners](https://theskillmillbooks.com/budgerigar-care/): Essential guide to budgerigar (parakeet) care — habitat, diet, training, health, and bonding.
-- [The Gluten-Free Sourdough Cookbook](https://theskillmillbooks.com/gluten-free-sourdough/): Science-based guide to baking delicious sourdough bread without gluten.
-- [Air Fryer Cookbook for Beginners](https://theskillmillbooks.com/air-fryer-cookbook/): 100+ tested air fryer recipes — crispy, healthy meals in under 30 minutes with exact temperatures.
 - [The Honest AI Side Hustle Guide](https://theskillmillbooks.com/ai-side-hustles/): 7 proven AI side hustles with verified income ranges, real startup costs, and week-by-week plans.
 - [Leash Training for Reactive Dogs](https://theskillmillbooks.com/leash-training-reactive-dogs/): Step-by-step force-free plan for dogs that bark and lunge on leash — trigger distance, counterconditioning, the LAT game, BAT basics, and an 8-week plan.
