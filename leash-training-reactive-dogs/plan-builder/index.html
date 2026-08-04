@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Calm Walks Plan | The Skill Mill</title>
-  <meta name="description" content="Answer five quick questions about your dog and get a starting plan built on the exact threshold-zone, LAT and BAT system from Leash Training for Reactive Dogs.">
+  <title>Build Your Dog's Calm-Walk Plan in 60 Seconds | The Skill Mill</title>
+  <meta name="description" content="Answer five questions about your reactive dog and get a starting plan built on the threshold-zone, LAT and BAT system from Leash Training for Reactive Dogs. Free, no card.">
   <meta name="kdp-book-folder" content="44_ReactiveDog_DifficultDog1">
   <meta name="kdp-asin" content="B0HBFT24ZK">
   <link rel="canonical" href="https://theskillmillbooks.com/leash-training-reactive-dogs/plan-builder/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Your Calm Walks Plan">
-  <meta property="og:description" content="A starting plan for your specific dog, built on the book's threshold-zone system - not generic internet advice.">
+  <meta property="og:title" content="Build Your Dog's Calm-Walk Plan in 60 Seconds">
+  <meta property="og:description" content="Five questions. One plan built on the book's actual system — not generic internet advice.">
   <meta property="og:url" content="https://theskillmillbooks.com/leash-training-reactive-dogs/plan-builder/">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
@@ -21,15 +21,38 @@
     .brand { font-weight: 800; color: #24242a; text-decoration: none; }
     .nav { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.92rem; }
     .nav a { text-decoration: none; font-weight: 650; }
+
+    /* ---- HERO: specific outcome + timeframe, then the problem in their words ---- */
     .hero { background: #f6f7f2; border-bottom: 1px solid #e3e6da; }
-    .hero-inner { max-width: 760px; margin: 0 auto; padding: 56px 22px 42px; }
-    .eyebrow { text-transform: uppercase; letter-spacing: 0; font-size: 0.78rem; font-weight: 800; color: #6d755e; margin: 0 0 8px; }
-    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.08; margin: 0 0 16px; }
-    .dek { color: #555a50; font-size: 1.1rem; margin: 0 0 8px; max-width: 620px; }
-    .bookline { color: #606060; font-size: 0.94rem; }
-    .container { max-width: 640px; margin: 0 auto; padding: 42px 22px 80px; }
+    .hero-inner { max-width: 720px; margin: 0 auto; padding: 54px 22px 40px; }
+    .eyebrow { text-transform: uppercase; font-size: 0.76rem; font-weight: 800; color: #6d755e; margin: 0 0 10px; letter-spacing: .04em; }
+    h1 { font-size: clamp(2rem, 5.4vw, 3.1rem); line-height: 1.06; margin: 0 0 18px; letter-spacing: -0.02em; }
+    .dek { color: #454a41; font-size: 1.14rem; margin: 0 0 22px; }
+    .hero-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 14px 28px; background: #2d7d46; color: #fff; font-weight: 800; font-size: 1.06rem; border-radius: 7px; text-decoration: none; }
+    .hero-note { color: #6b7065; font-size: 0.88rem; margin: 12px 0 0; }
+
+    /* ---- PROBLEM: the reader recognises themselves ---- */
+    .problem { max-width: 720px; margin: 0 auto; padding: 46px 22px 10px; }
+    .problem h2 { font-size: 1.55rem; margin: 0 0 16px; line-height: 1.2; }
+    .problem ul { margin: 0 0 18px; padding-left: 22px; }
+    .problem li { margin: 9px 0; color: #3d423a; }
+    .turn { background: #fbfcf8; border-left: 3px solid #2d7d46; padding: 14px 18px; margin: 22px 0 0; }
+    .turn p { margin: 0; color: #333; }
+
+    /* ---- MECHANISM: why this is different from a chatbot / random advice ---- */
+    .mech { max-width: 720px; margin: 0 auto; padding: 34px 22px 10px; }
+    .mech h2 { font-size: 1.55rem; margin: 0 0 8px; }
+    .mech .sub { color: #6b7065; margin: 0 0 20px; }
+    .mech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .mech-card { border: 1px solid #e3e6da; border-radius: 9px; padding: 16px 18px; background: #fff; }
+    .mech-card h3 { margin: 0 0 6px; font-size: 1rem; }
+    .mech-card p { margin: 0; font-size: 0.92rem; color: #555a50; }
+
+    /* ---- FORM ---- */
+    .container { max-width: 640px; margin: 0 auto; padding: 40px 22px 70px; }
     .card { background: #fff; border: 1px solid #e3e6da; border-radius: 10px; padding: 26px; box-shadow: 0 12px 28px rgba(0,0,0,0.05); }
-    .card + .card { margin-top: 20px; }
+    .card-head { margin: 0 0 4px; font-size: 1.3rem; }
+    .card-sub { margin: 0 0 22px; color: #6b7065; font-size: 0.94rem; }
     label { display: block; font-weight: 700; margin: 0 0 6px; font-size: 0.94rem; }
     .field { margin-bottom: 18px; }
     input[type="text"], input[type="email"], select, textarea {
@@ -40,10 +63,12 @@
     .radio-row label { display: flex; align-items: center; gap: 6px; font-weight: 600; margin: 0; }
     .hint { color: #777; font-size: 0.85rem; margin: 4px 0 0; }
     label.consent { display: grid; grid-template-columns: 18px 1fr; gap: 8px; align-items: start; font-size: 0.82rem; color: #666; font-weight: 400; margin-top: 4px; }
-    button.submit { width: 100%; min-height: 50px; border: 0; border-radius: 6px; padding: 12px 16px; background: #2d7d46; color: #fff; font-weight: 800; font-size: 1.05rem; cursor: pointer; margin-top: 6px; }
+    button.submit { width: 100%; min-height: 54px; border: 0; border-radius: 6px; padding: 12px 16px; background: #2d7d46; color: #fff; font-weight: 800; font-size: 1.08rem; cursor: pointer; margin-top: 6px; }
     button.submit:disabled { opacity: 0.6; cursor: wait; }
+    .risk { text-align: center; color: #6b7065; font-size: 0.86rem; margin: 12px 0 0; }
     .msg { min-height: 1.2em; margin: 10px 0 0; font-size: 0.9rem; }
     .msg.error { color: #991b1b; }
+
     #result-card { display: none; }
     #result-card h2 { margin: 0 0 14px; font-size: 1.3rem; }
     #plan-text p { margin: 0 0 12px; }
@@ -51,13 +76,20 @@
     #plan-text li { margin: 4px 0; }
     #plan-text strong { color: #1f3d2b; }
     .professional-flag { background: #fbeceb; border: 1px solid #f3c9c6; border-radius: 8px; padding: 12px 14px; margin-bottom: 14px; font-size: 0.9rem; color: #7a2622; }
-    .cta-row { margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .next-step { margin-top: 22px; padding: 18px; border: 1px solid #e3e6da; border-radius: 9px; background: #fbfcf8; }
+    .next-step h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .next-step p { margin: 0 0 12px; font-size: 0.94rem; color: #4a4f45; }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
     .cta-row a { font-weight: 800; }
+
     .disclaimer { color: #888; font-size: 0.82rem; margin-top: 26px; }
     .footer { border-top: 1px solid #eee; margin-top: 42px; padding-top: 22px; color: #777; font-size: 0.86rem; }
-    @media (max-width: 600px) { .hero-inner, .container { padding-left: 16px; padding-right: 16px; } }
     .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.5); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; vertical-align: -3px; margin-right: 8px; }
     @keyframes spin { to { transform: rotate(360deg); } }
+    @media (max-width: 640px) {
+      .mech-grid { grid-template-columns: 1fr; }
+      .hero-inner, .problem, .mech, .container { padding-left: 16px; padding-right: 16px; }
+    }
   </style>
   <script src="/analytics.js" defer></script>
 </head>
@@ -69,17 +101,60 @@
     </div>
   </header>
 
+  <!-- ATTENTION: concrete outcome, not a vague benefit -->
   <section class="hero">
     <div class="hero-inner">
-      <p class="eyebrow">Reader Tool</p>
-      <h1>Your Calm Walks Plan</h1>
-      <p class="dek">Answer five quick questions about your dog. You'll get a starting plan built on the exact threshold-zone, LAT and BAT system from the book &#8212; not generic internet advice blended from every training philosophy at once.</p>
-      <p class="bookline">Companion tool for <strong>Leash Training for Reactive Dogs</strong> by Jordan Wells. Jordan is an owner who read the clinical literature, not a certified trainer &#8212; and neither is this tool. See the disclaimer below.</p>
+      <p class="eyebrow">Free Tool &middot; No Card &middot; 60 Seconds</p>
+      <h1>Find the exact distance where your dog can actually learn.</h1>
+      <p class="dek">Most reactive-dog advice fails because it's given at the wrong distance. Answer five questions and get a starting plan built on the threshold-zone system from <em>Leash Training for Reactive Dogs</em> &mdash; specific to your dog, your trigger, your street.</p>
+      <a class="hero-cta" href="#build">Build my dog's plan &#8594;</a>
+      <p class="hero-note">Free. No payment. Unsubscribe any time.</p>
     </div>
   </section>
 
-  <main class="container">
+  <!-- PROBLEM / AGITATION: their own words, from real owner language -->
+  <section class="problem">
+    <h2>If you're here, you probably already know this feeling</h2>
+    <ul>
+      <li>You walk at 6am so you don't meet anyone.</li>
+      <li>You've crossed the street so many times it's just your route now.</li>
+      <li>Your hand tightens on the leash before your dog even sees the other dog.</li>
+      <li>You've been told to "socialise them more" by someone whose dog has never lunged at anything.</li>
+      <li>You've tried treats, harnesses, stopping every time they pull &mdash; and nothing held.</li>
+    </ul>
+    <div class="turn">
+      <p><strong>Here's the part almost nobody tells you:</strong> most of that advice isn't wrong, it's just being run at the wrong distance. A dog over its threshold physically cannot learn &mdash; it can't take food, it can't hear you. Every rep at that distance teaches nothing. Find the distance where your dog can still think, and the same techniques suddenly start working.</p>
+    </div>
+  </section>
+
+  <!-- MECHANISM: why this beats asking a general chatbot. Honest framing, no capability claims. -->
+  <section class="mech">
+    <h2>Why not just ask a chatbot?</h2>
+    <p class="sub">You can. Here's the honest difference.</p>
+    <div class="mech-grid">
+      <div class="mech-card">
+        <h3>One system, not five contradicting ones</h3>
+        <p>Search "dog pulling" and you'll get prong-collar people, e-collar people and force-free people in the same breath. This answers from one coherent, force-free system &mdash; the one in the book.</p>
+      </div>
+      <div class="mech-card">
+        <h3>Named methods, credited</h3>
+        <p>LAT (Leslie McDevitt) and BAT (Grisha Stewart) are real, documented protocols with real names attached &mdash; not anonymous internet tips.</p>
+      </div>
+      <div class="mech-card">
+        <h3>It asks the right questions</h3>
+        <p>A blank chat box needs you to already know what matters. Five fields do that work for you &mdash; trigger, reaction, distance, what failed.</p>
+      </div>
+      <div class="mech-card">
+        <h3>It knows when to stop</h3>
+        <p>If there's a bite history, it won't hand you a DIY plan. It routes you to a qualified professional, because that's the honest answer.</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="container" id="build">
     <form id="plan-form" class="card">
+      <h2 class="card-head">Build your dog's starting plan</h2>
+      <p class="card-sub">Five questions. Takes about a minute.</p>
       <div class="field">
         <label for="dogName">Your dog's name</label>
         <input type="text" id="dogName" maxlength="60" placeholder="e.g. Rex">
@@ -111,11 +186,11 @@
           <label><input type="radio" name="biteHistory" value="no" checked> No</label>
           <label><input type="radio" name="biteHistory" value="yes"> Yes</label>
         </div>
-        <p class="hint">This changes the answer you get &#8212; see why below.</p>
+        <p class="hint">Answer honestly &mdash; it changes what you get back, for your dog's safety and everyone else's.</p>
       </div>
 
       <div class="field" style="margin-top:26px;border-top:1px solid #eee;padding-top:20px;">
-        <label for="email">Email address</label>
+        <label for="email">Where should we send follow-up notes?</label>
         <input type="email" id="email" required autocomplete="email" placeholder="you@example.com">
         <label class="consent">
           <input type="checkbox" id="consent" required>
@@ -123,20 +198,25 @@
         </label>
       </div>
 
-      <button class="submit" type="submit" id="submit-btn">Build My Dog's Plan</button>
+      <button class="submit" type="submit" id="submit-btn">Build My Dog's Plan &#8594;</button>
+      <p class="risk">Free &middot; no card &middot; your plan appears on this page in seconds</p>
       <p class="msg" id="form-msg" role="status" aria-live="polite"></p>
     </form>
 
     <div class="card" id="result-card">
       <h2 id="result-heading">Your Starting Plan</h2>
       <div id="plan-text"></div>
-      <div class="cta-row">
-        <a href="https://theskillmillbooks.com/leash-training-reactive-dogs/bonus/">Get the printable worksheets &#8594;</a>
-        <a href="https://www.amazon.com/dp/B0HBFT24ZK">Read the full 8-week plan &#8594;</a>
+      <div class="next-step" id="next-step">
+        <h3>Your next step</h3>
+        <p>This is the starting point. The full 8-week structure &mdash; how to close distance safely, what to do on a bad day, and the printable trackers &mdash; is in the book and the worksheet pack.</p>
+        <div class="cta-row">
+          <a href="https://theskillmillbooks.com/leash-training-reactive-dogs/bonus/">Get the free printable worksheets &#8594;</a>
+          <a href="https://www.amazon.com/dp/B0HBFT24ZK">Read the full 8-week plan &#8594;</a>
+        </div>
       </div>
     </div>
 
-    <p class="disclaimer">This tool generates a starting point using AI, grounded in the methods taught in the book &#8212; it is not a substitute for the book's full context, and it is not veterinary or behavioral advice from a licensed professional. If your dog has a bite history or you are ever unsure about safety, please consult a certified trainer or veterinary behaviorist directly.</p>
+    <p class="disclaimer">This tool generates a starting point using AI, grounded in the methods taught in the book. It is not a substitute for the book's full context, and it is not veterinary or behavioural advice from a licensed professional. If your dog has a bite history, or you are ever unsure about safety, please consult a certified trainer or veterinary behaviourist directly.</p>
 
     <footer class="footer">
       <p>This tool is free and does not require a purchase or review.</p>
@@ -149,8 +229,6 @@
     var ML_ACTION = 'https://assets.mailerlite.com/jsonp/2290040/forms/194741617912972509/subscribe';
 
     // Minimal, SAFE markdown -> HTML: escape first, then convert only **bold** and "* " bullets.
-    // The model's output alternates between plain prose and light markdown (see build notes) -
-    // this renders either correctly instead of showing literal asterisks.
     function escapeHtml(s) {
       return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
@@ -200,7 +278,6 @@
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner"></span>Building your plan&hellip;';
 
-      // Fire the email capture the same way the worksheet page does - fire-and-forget, no-cors.
       var mlData = new FormData();
       mlData.append('fields[email]', email);
       mlData.append('fields[utm_source]', 'review_catcher');
@@ -226,6 +303,8 @@
             flag.className = 'professional-flag';
             flag.textContent = 'This situation needs an in-person professional, not a DIY plan.';
             planText.appendChild(flag);
+            // Selling a self-study book to someone who just disclosed a bite is the wrong move.
+            document.getElementById('next-step').style.display = 'none';
           } else {
             heading.textContent = 'Your Starting Plan';
           }
@@ -238,7 +317,7 @@
           msg.textContent = 'Something went wrong building your plan. Please try again in a moment.';
           msg.className = 'msg error';
           btn.disabled = false;
-          btn.textContent = 'Build My Dog’s Plan';
+          btn.textContent = 'Build My Dog’s Plan →';
         });
     });
   </script>
