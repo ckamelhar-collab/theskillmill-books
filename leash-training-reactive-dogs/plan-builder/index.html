@@ -359,9 +359,27 @@
       return html;
     }
 
+    function track(name, params) {
+      try { if (window.gtag) window.gtag('event', name, params || {}); } catch (e) {}
+    }
+
+    document.querySelectorAll('.hero-cta').forEach(function (el) {
+      el.addEventListener('click', function () { track('plan_builder_hero_cta_click'); });
+    });
+    document.querySelectorAll('a[href*="amazon.com/dp/B0HBFT24ZK"]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        track('amazon_link_click', { link_location: el.closest('#next-step') ? 'post_plan' : 'top_promo' });
+      });
+    });
+    document.querySelectorAll('a[href*="/bonus/"]').forEach(function (el) {
+      el.addEventListener('click', function () { track('worksheets_link_click'); });
+    });
+
     var form = document.getElementById('plan-form');
+    form.addEventListener('input', function () { track('plan_form_started'); }, { once: true });
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      track('plan_form_submitted');
       var msg = document.getElementById('form-msg');
       var btn = document.getElementById('submit-btn');
       msg.textContent = ''; msg.className = 'msg';
@@ -406,6 +424,7 @@
           var planText = document.getElementById('plan-text');
           var heading = document.getElementById('result-heading');
           planText.innerHTML = '';
+          track('plan_form_completed', { routed_to_professional: !!data.routedToProfessional });
           if (data.routedToProfessional) {
             heading.textContent = 'Please Talk to a Professional First';
             var flag = document.createElement('div');
@@ -423,6 +442,7 @@
           resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
         })
         .catch(function (err) {
+          track('plan_form_error', { message: String((err && err.message) || err) });
           msg.textContent = 'Something went wrong building your plan. Please try again in a moment.';
           msg.className = 'msg error';
           btn.disabled = false;
