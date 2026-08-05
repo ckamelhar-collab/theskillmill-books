@@ -359,9 +359,28 @@
       return html;
     }
 
+    var TRACK_FN = 'https://reactive-dog-plan-builder.netlify.app/.netlify/functions/track';
+    function beacon(name, extra) {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        var qs = new URLSearchParams({
+          event: name,
+          extra: extra || '',
+          path: window.location.pathname,
+          utm_source: p.get('utm_source') || '',
+          utm_medium: p.get('utm_medium') || '',
+          utm_campaign: p.get('utm_campaign') || '',
+          ref: document.referrer || ''
+        });
+        fetch(TRACK_FN + '?' + qs.toString(), { mode: 'no-cors' }).catch(function () {});
+      } catch (e) {}
+    }
     function track(name, params) {
       try { if (window.gtag) window.gtag('event', name, params || {}); } catch (e) {}
+      var extra = params && (params.link_location || (params.routed_to_professional !== undefined ? ('professional=' + params.routed_to_professional) : ''));
+      beacon(name, extra);
     }
+    beacon('pageview');
 
     document.querySelectorAll('.hero-cta').forEach(function (el) {
       el.addEventListener('click', function () { track('plan_builder_hero_cta_click'); });
