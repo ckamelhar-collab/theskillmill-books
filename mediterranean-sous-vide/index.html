@@ -283,6 +283,76 @@
 <!-- ML_CAPTURE_CSS_END -->
   <script src="/analytics.js" defer></script>
     <meta name="robots" content="noindex,follow">
+
+<!-- ATTRIBUTION_START — first-touch source capture (2026-08-09). Persisted because visitors usually
+     land on one page and subscribe on another; reading location.search at submit time loses it. -->
+<script>
+(function(){
+  var KEY = 'tsm_attr';
+  function classifyReferrer(r){
+    if(!r) return null;
+    try{ var h = new URL(r).hostname.replace(/^www\./,''); }catch(e){ return null; }
+    if(/theskillmillbooks\.com$/.test(h)) return null;           // internal nav — not a new source
+    if(/pinterest\./.test(h)) return 'pinterest';
+    if(/tiktok\./.test(h)) return 'tiktok';
+    if(/instagram\./.test(h)) return 'instagram';
+    if(/facebook\.|fb\./.test(h)) return 'facebook';
+    if(/youtube\.|youtu\.be/.test(h)) return 'youtube';
+    if(/google\./.test(h)) return 'google';
+    if(/bing\./.test(h)) return 'bing';
+    if(/reddit\./.test(h)) return 'reddit';
+    if(/amazon\./.test(h)) return 'amazon';
+    return h.slice(0,40);
+  }
+  try{
+    var existing = null;
+    try{ existing = JSON.parse(localStorage.getItem(KEY) || 'null'); }catch(e){}
+    if(existing && existing.source) return;                       // FIRST TOUCH WINS
+    var q = new URLSearchParams(location.search);
+    var src = q.get('utm_source') || q.get('src');
+    var camp = q.get('utm_campaign') || null;
+    var med = q.get('utm_medium') || null;
+    if(!src) src = classifyReferrer(document.referrer);
+    if(!src) return;                                              // truly direct — record nothing
+    localStorage.setItem(KEY, JSON.stringify({
+      source: String(src).slice(0,40),
+      medium: med ? String(med).slice(0,40) : null,
+      campaign: camp ? String(camp).slice(0,60) : null,
+      landing: location.pathname.slice(0,120),
+      at: new Date().toISOString()
+    }));
+  }catch(e){ /* attribution must never break the page */ }
+})();
+
+// Stamp the source into the form itself, in the CAPTURE phase so it lands before any of the
+// page's own submit handlers read the form. Two capture mechanisms exist on this site:
+// landing pages hand-build a body string (patched separately), while bonus pages use
+// new FormData(form) — which picks these hidden inputs up automatically. Doing it here covers
+// both, and is harmless where the body is built by hand.
+(function(){
+  function stamp(form){
+    try{
+      var a = JSON.parse(localStorage.getItem('tsm_attr') || 'null');
+      if(!a || !a.source) return;
+      [['fields[source]', a.source], ['fields[campaign]', a.campaign]].forEach(function(pair){
+        if(!pair[1]) return;
+        var el = form.querySelector('input[name="' + pair[0] + '"]');
+        if(!el){
+          el = document.createElement('input');
+          el.type = 'hidden'; el.name = pair[0];
+          form.appendChild(el);
+        }
+        el.value = pair[1];
+      });
+    }catch(e){}
+  }
+  document.addEventListener('submit', function(e){
+    var f = e.target;
+    if(f && f.classList && f.classList.contains('ml-capture-form')) stamp(f);
+  }, true); // capture phase — runs before the page's own bubbling handler
+})();
+</script>
+<!-- ATTRIBUTION_END -->
 </head>
 <body>
     <div style="background:#fef2f2;border-bottom:3px solid #dc2626;padding:14px 18px;text-align:center;font-size:.95rem;color:#7f1d1d;">
@@ -496,6 +566,15 @@
       var account = form.getAttribute('data-ml-account');
       var formId = form.getAttribute('data-ml-form');
       var body = 'fields[email]=' + encodeURIComponent(email);
+      try {
+        // Attach first-touch attribution so every subscriber carries their origin. Without
+        // this the MailerLite record has only an address and the channel is unknowable.
+        var _a = JSON.parse(localStorage.getItem('tsm_attr') || 'null');
+        if (_a && _a.source) {
+          body += '&fields[source]=' + encodeURIComponent(_a.source);
+          if (_a.campaign) body += '&fields[campaign]=' + encodeURIComponent(_a.campaign);
+        }
+      } catch (e) { /* never block a signup on attribution */ }
       fetch('https://assets.mailerlite.com/jsonp/' + account + '/forms/' + formId + '/subscribe', {
         method: 'POST', mode: 'no-cors',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

@@ -13,6 +13,76 @@ hr{border:0;border-top:1px solid #eee;margin:22px 0}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:8px 0}.card{border:1px solid #e3e6da;border-radius:8px;padding:16px;background:#fbfcf8}.card h3{margin:0 0 6px;font-size:1.08rem}.card p{margin:0 0 10px;color:#555a50;font-size:.92rem}.card a{font-weight:800;text-decoration:none}
 .soft-review{margin-top:28px;padding:20px;border:1px solid #e3e6da;border-radius:8px;background:#fbfcf8}.footer{border-top:1px solid #eee;margin-top:40px;padding-top:20px;color:#777;font-size:.86rem}
 @media print{.topbar,.toolbar,.capture,.soft-review,.footer,.nav{display:none!important}.hero{border:0;background:#fff}.hero-inner,.container{padding:0;max-width:none}body{font-size:11pt}pre.ascii{background:#fff;color:#000;border:1px solid #999}}</style>    <script src="/analytics.js" defer></script>
+
+<!-- ATTRIBUTION_START — first-touch source capture (2026-08-09). Persisted because visitors usually
+     land on one page and subscribe on another; reading location.search at submit time loses it. -->
+<script>
+(function(){
+  var KEY = 'tsm_attr';
+  function classifyReferrer(r){
+    if(!r) return null;
+    try{ var h = new URL(r).hostname.replace(/^www\./,''); }catch(e){ return null; }
+    if(/theskillmillbooks\.com$/.test(h)) return null;           // internal nav — not a new source
+    if(/pinterest\./.test(h)) return 'pinterest';
+    if(/tiktok\./.test(h)) return 'tiktok';
+    if(/instagram\./.test(h)) return 'instagram';
+    if(/facebook\.|fb\./.test(h)) return 'facebook';
+    if(/youtube\.|youtu\.be/.test(h)) return 'youtube';
+    if(/google\./.test(h)) return 'google';
+    if(/bing\./.test(h)) return 'bing';
+    if(/reddit\./.test(h)) return 'reddit';
+    if(/amazon\./.test(h)) return 'amazon';
+    return h.slice(0,40);
+  }
+  try{
+    var existing = null;
+    try{ existing = JSON.parse(localStorage.getItem(KEY) || 'null'); }catch(e){}
+    if(existing && existing.source) return;                       // FIRST TOUCH WINS
+    var q = new URLSearchParams(location.search);
+    var src = q.get('utm_source') || q.get('src');
+    var camp = q.get('utm_campaign') || null;
+    var med = q.get('utm_medium') || null;
+    if(!src) src = classifyReferrer(document.referrer);
+    if(!src) return;                                              // truly direct — record nothing
+    localStorage.setItem(KEY, JSON.stringify({
+      source: String(src).slice(0,40),
+      medium: med ? String(med).slice(0,40) : null,
+      campaign: camp ? String(camp).slice(0,60) : null,
+      landing: location.pathname.slice(0,120),
+      at: new Date().toISOString()
+    }));
+  }catch(e){ /* attribution must never break the page */ }
+})();
+
+// Stamp the source into the form itself, in the CAPTURE phase so it lands before any of the
+// page's own submit handlers read the form. Two capture mechanisms exist on this site:
+// landing pages hand-build a body string (patched separately), while bonus pages use
+// new FormData(form) — which picks these hidden inputs up automatically. Doing it here covers
+// both, and is harmless where the body is built by hand.
+(function(){
+  function stamp(form){
+    try{
+      var a = JSON.parse(localStorage.getItem('tsm_attr') || 'null');
+      if(!a || !a.source) return;
+      [['fields[source]', a.source], ['fields[campaign]', a.campaign]].forEach(function(pair){
+        if(!pair[1]) return;
+        var el = form.querySelector('input[name="' + pair[0] + '"]');
+        if(!el){
+          el = document.createElement('input');
+          el.type = 'hidden'; el.name = pair[0];
+          form.appendChild(el);
+        }
+        el.value = pair[1];
+      });
+    }catch(e){}
+  }
+  document.addEventListener('submit', function(e){
+    var f = e.target;
+    if(f && f.classList && f.classList.contains('ml-capture-form')) stamp(f);
+  }, true); // capture phase — runs before the page's own bubbling handler
+})();
+</script>
+<!-- ATTRIBUTION_END -->
 </head><body>
 <header class="topbar"><div class="topbar-inner"><a class="brand" href="/">The Skill Mill</a><nav class="nav"><a href="/">Catalog</a><a href="/blog/">Blog</a><a href="https://theskillmillbooks.com/van-life/">Book Page</a></nav></div></header>
 <section class="hero"><div class="hero-inner"><p class="eyebrow">Free Reader Toolkit</p><h1>The Van Life Conversion Toolkit</h1><p class="dek">Everything the "just watch YouTube" answers skip — wiring diagrams, real build costs, safe-and-legal parking, and the honest reality — bundled for readers of <strong>Van Life for Beginners</strong>. Free, printable, no purchase required.</p></div></section>
