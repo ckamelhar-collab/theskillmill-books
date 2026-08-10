@@ -335,7 +335,7 @@
     try{
       var a = JSON.parse(localStorage.getItem('tsm_attr') || 'null');
       if(!a || !a.source) return;
-      [['fields[source]', a.source], ['fields[campaign]', a.campaign]].forEach(function(pair){
+      [['fields[utm_source]', a.source], ['fields[utm_medium]', a.medium], ['fields[utm_campaign]', a.campaign]].forEach(function(pair){
         if(!pair[1]) return;
         var el = form.querySelector('input[name="' + pair[0] + '"]');
         if(!el){
@@ -557,8 +557,8 @@
         // this the MailerLite record has only an address and the channel is unknowable.
         var _a = JSON.parse(localStorage.getItem('tsm_attr') || 'null');
         if (_a && _a.source) {
-          body += '&fields[source]=' + encodeURIComponent(_a.source);
-          if (_a.campaign) body += '&fields[campaign]=' + encodeURIComponent(_a.campaign);
+          body += '&fields[utm_source]=' + encodeURIComponent(_a.source);
+          if (_a.campaign) body += '&fields[utm_campaign]=' + encodeURIComponent(_a.campaign);
         }
       } catch (e) { /* never block a signup on attribution */ }
       fetch('https://assets.mailerlite.com/jsonp/' + account + '/forms/' + formId + '/subscribe', {

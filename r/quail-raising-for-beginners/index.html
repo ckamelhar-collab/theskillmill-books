@@ -62,7 +62,7 @@
     try{
       var a = JSON.parse(localStorage.getItem('tsm_attr') || 'null');
       if(!a || !a.source) return;
-      [['fields[source]', a.source], ['fields[campaign]', a.campaign]].forEach(function(pair){
+      [['fields[utm_source]', a.source], ['fields[utm_medium]', a.medium], ['fields[utm_campaign]', a.campaign]].forEach(function(pair){
         if(!pair[1]) return;
         var el = form.querySelector('input[name="' + pair[0] + '"]');
         if(!el){
