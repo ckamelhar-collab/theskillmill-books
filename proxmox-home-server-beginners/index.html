@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proxmox Home Server for Beginners | The Skill Mill Press</title>
+<meta name="description" content="Build your own private cloud on hardware you already own. A step-by-step Proxmox VE guide for beginners: storage, containers and virtual machines, backups that actually restore, and a six-check diagnostic sequence.">
+<link rel="canonical" href="https://theskillmillbooks.com/proxmox-home-server-beginners">
+<meta property="og:type" content="book">
+<meta property="og:title" content="Proxmox Home Server for Beginners">
+<meta property="og:description" content="The zero-experience 12V system: size your battery bank, wire your solar, and power full-time van life safely.">
+<meta property="og:url" content="https://theskillmillbooks.com/proxmox-home-server-beginners">
+<meta property="og:image" content="https://theskillmillbooks.com/proxmox-home-server-beginners/cover.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "Proxmox Home Server for Beginners",
+  "alternateName": "Proxmox Home Server for Beginners: The Zero-Experience 12V System",
+  "author": { "@type": "Organization", "name": "The Skill Mill Press" },
+  "publisher": { "@type": "Organization", "name": "The Skill Mill Press" },
+  "bookFormat": "https://schema.org/EBook",
+  "inLanguage": "en",
+  "numberOfPages": 160,
+  "url": "https://theskillmillbooks.com/proxmox-home-server-beginners",
+  "image": "https://theskillmillbooks.com/proxmox-home-server-beginners/cover.jpg",
+  "description": "A step-by-step Proxmox VE home server guide for beginners with no system administration experience. Covers installation choices that cannot be undone, ZFS versus LVM-thin storage, containers versus virtual machines, running Home Assistant and Docker and media services, remote access without exposing the server, hardware passthrough, tested backups, and fault diagnosis.",
+  "genre": "Computers & Technology"
+}
+</script>
+<style>
+  :root{
+    --ink:#16202b; --muted:#5b6b7c; --line:#e2e8ee; --bg:#ffffff; --panel:#f6f8fa;
+    --gold:#b8860b; --deep:#1d2833; --accent:#2d7d46;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:17px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px}
+  header{background:var(--deep);color:#fff;padding:44px 0 40px}
+  header .wrap{display:flex;gap:32px;align-items:center;flex-wrap:wrap}
+  header img{width:190px;max-width:44vw;height:auto;border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+  .eyebrow{color:#f0c674;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px;margin:0 0 8px}
+  header h1{margin:0 0 10px;font-size:clamp(26px,4.4vw,38px);line-height:1.15}
+  header p.sub{margin:0;color:#c8d4e0;font-size:17px}
+  .hdr-txt{flex:1 1 320px;min-width:0}
+  h2{font-size:clamp(21px,3vw,26px);margin:38px 0 12px;line-height:1.25}
+  h3{font-size:18px;margin:24px 0 6px}
+  ul{padding-left:20px} li{margin:7px 0}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px;margin:22px 0}
+  .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;
+       padding:14px 26px;border-radius:7px;font-size:17px}
+  .btn.amz{background:#ff9900;color:#111}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .note{color:var(--muted);font-size:15px}
+  form.cap{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
+  form.cap input[type=email]{flex:1 1 260px;min-width:0;padding:13px 14px;border:1px solid #c6d0da;border-radius:7px;font-size:16px}
+  form.cap button{padding:13px 24px;border:0;border-radius:7px;background:var(--accent);color:#fff;font-weight:700;font-size:16px;cursor:pointer}
+  .trap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .ok{display:none;background:#e8f5ec;border:1px solid #b6dfc4;color:#1d6b36;padding:12px 14px;border-radius:7px;margin-top:10px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:26px 0 46px;color:var(--muted);font-size:15px}
+  a{color:#1a5fb4}
+  table{border-collapse:collapse;width:100%;font-size:16px}
+  td,th{border:1px solid var(--line);padding:9px 11px;text-align:left}
+  .status{background:#fff8e6;border:1px solid #f0d99a;border-radius:10px;padding:16px 18px;margin:22px 0}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img src="cover.jpg" alt="Proxmox Home Server for Beginners book cover">
+    <div class="hdr-txt">
+      <p class="eyebrow">Self-hosting &middot; The Skill Mill Press</p>
+      <h1>Proxmox Home Server for Beginners</h1>
+      <p class="sub">Build your own private cloud on hardware you already own &mdash; even if you have never run a server.</p>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="status" id="buy">
+    <strong>Launching now.</strong> The Kindle edition is in Amazon review and the buy link appears here the moment it is live.
+    Drop your email below and I will send you the wiring diagram pack today, plus a note when the book goes live.
+  </div>
+
+  <h2>The part where everyone stalls</h2>
+  <p>You have an old computer in a cupboard and nine browser tabs that contradict each other. One says ZFS
+  or nothing. The next says ZFS will destroy your SSD. So the machine sits there, and the subscriptions
+  keep going out every month.</p>
+  <p>Proxmox is a professional tool given away free, and it shows. The menus assume knowledge, the errors
+  assume knowledge, and the documentation is written by people who already know the answer. That is exactly
+  why a guided path is worth having.</p>
+
+  <div class="panel">
+    <h3>Chapter 1 gets you a working virtual machine tonight</h3>
+    <p>Not a plan for one. An actual Linux desktop running on that old box, about an hour after the
+    installer finishes, before you have made a single decision that is hard to undo.</p>
+  </div>
+
+  <h2>What is inside</h2>
+  <ul>
+    <li><strong>Install without the choices that hurt later</strong> &mdash; the settings that cannot be changed without reinstalling</li>
+    <li><strong>ZFS or LVM-thin, decided on your hardware</strong> &mdash; including the case where ZFS is the wrong answer</li>
+    <li><strong>Containers or virtual machines</strong> &mdash; when each one is right, and why it decides how many services you can run</li>
+    <li><strong>The services people actually build these for</strong> &mdash; Home Assistant, Docker, media, file shares, an ad blocker for the whole house</li>
+    <li><strong>Reach it from anywhere without exposing it</strong> &mdash; and why you must never forward a port to the admin panel</li>
+    <li><strong>GPU and USB passthrough</strong> &mdash; how it works, and when not to bother</li>
+    <li><strong>Backups you have actually restored</strong> &mdash; because an untested backup is a hope</li>
+    <li><strong>A six-check diagnostic sequence</strong> &mdash; instead of searching error messages</li>
+  </ul>
+
+  <h2>Honest about where it bites</h2>
+  <div class="panel">
+    <p>ZFS will take up to half your RAM for cache. Consumer SSDs wear out faster in a hypervisor than
+    their ratings suggest, because the system writes constantly and most cheap drives lack power-loss
+    protection. And the subscription notice on every login looks like a paywall but is not &mdash;
+    the free version is the full software.</p>
+    <p>All three are in the book, with the numbers, because finding them out later is worse.</p>
+  </div>
+
+  <h2 id="bonus">Free: the wiring diagram pack</h2>
+  <div class="panel">
+    <p><strong>The Home Server Starter Kit.</strong>The hardware sizing worksheet from Chapter 3, the container-versus-virtual-machine decision table from Chapter 6, the backup tier checklist from Chapter 10, and the six-check diagnostic card from Chapter 12. Printable, for the desk next to the machine.</p>
+    <form class="cap" id="cap-form" novalidate>
+      <label for="cap-email" class="trap">Email address</label>
+      <input id="cap-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+      <div class="trap"><label for="cap-hp">Leave blank</label><input id="cap-hp" type="text" name="website" tabindex="-1" autocomplete="off"></div>
+      <button type="submit">Send me the diagrams</button>
+    </form>
+    <p class="note">One email with the pack, and a note when the book goes live. Unsubscribe any time. No spam, ever.</p>
+    <div class="ok" id="cap-ok">Thanks. Check your inbox for the diagram pack.</div>
+  </div>
+
+  <h2 id="review">Leave a review</h2>
+  <p>If the book helped you get your system wired, a short review genuinely changes what happens to an independent
+  title. One or two honest sentences is plenty, and it is the single most useful thing a reader can do for us.</p>
+  <p id="review-cta">
+    <span class="note">The review link goes live here as soon as Amazon assigns the book its page. If you are reading
+    the book now and want to review it today, search Amazon for <strong>Proxmox Home Server for Beginners</strong>
+    and use the review button on the listing.</span>
+  </p>
+
+  <h2 id="arc">Advance readers</h2>
+  <p>We send free advance copies to a small group of readers who are actually converting a van, in exchange for an
+  honest review when the book comes out. If that is you, use the form above and mention your build.</p>
+
+  <h2>Start with book 1</h2>
+  <table>
+    <tr><th>Related</th><td><a href="https://www.amazon.com/dp/B0GH15PC62">Home Assistant Smart Home
+      for Beginners</a> &mdash; the same reader, and the service most people run first. Many people run Home
+      Assistant <em>on</em> Proxmox, so the two books genuinely fit together.</td></tr>
+    <tr><th>This book</th><td>The machine underneath it: the server that hosts Home Assistant and everything else.</td></tr>
+  </table>
+
+  <footer>
+    <p>The Skill Mill Press &middot; part of <a href="/">The Skill Mill</a> &middot;
+    <a href="/privacy.html">Privacy</a></p>
+    <p class="note">Electrical work in a vehicle carries real risk. This book teaches widely accepted practice and
+    cites its sources, but it is not a substitute for a qualified electrician where local rules require one.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var f=document.getElementById('cap-form');
+  if(!f) return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var hp=document.getElementById('cap-hp');
+    if(hp && hp.value) return;                 // honeypot: silent drop
+    var em=document.getElementById('cap-email');
+    if(!em.value || em.value.indexOf('@')<1){ em.focus(); return; }
+    try{
+      var k='vle_signups';
+      var prior=JSON.parse(localStorage.getItem(k)||'[]');
+      prior.push({e:em.value,t:Date.now()});
+      localStorage.setItem(k,JSON.stringify(prior));
+    }catch(_){}
+    document.getElementById('cap-ok').style.display='block';
+    f.style.display='none';
+  });
+  // ?arc=1 deep link from the book's back matter jumps to the ARC section
+  if(location.search.indexOf('arc=1')>-1){
+    var a=document.getElementById('arc');
+    if(a) a.scrollIntoView();
+  }
+})();
+</script>
+</body>
+</html>
