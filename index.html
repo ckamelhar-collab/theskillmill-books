@@ -34,6 +34,15 @@
         .footer { padding: 40px 0; border-top: 1px solid #E5E5E5; text-align: center; color: #999; font-size: 0.85rem; }
         .footer a { color: #6A5ACD; }
         a { text-decoration: none; color: inherit; }
+        .capture { background: #6A5ACD; color: #fff; padding: 44px 0; }
+        .capture h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
+        .capture p { opacity: 0.92; margin-bottom: 20px; font-size: 0.98rem; }
+        .capture form { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; max-width: 520px; margin: 0 auto; }
+        .capture input[type=email] { flex: 1 1 260px; padding: 13px 15px; border: 0; border-radius: 6px; font-size: 1rem; font-family: inherit; }
+        .capture button { padding: 13px 24px; border: 0; border-radius: 6px; background: #2D2D2D; color: #fff; font-weight: 700; font-size: 1rem; cursor: pointer; font-family: inherit; }
+        .capture button:hover { background: #1a1a1a; }
+        .capture .fine { font-size: 0.8rem; opacity: 0.75; margin: 14px 0 0; }
+        .capture .msg { margin-top: 14px; font-weight: 700; min-height: 1.2em; }
     </style>
 </head>
 <body>
@@ -42,6 +51,28 @@
         <div class="container">
             <h1>The Skill Mill</h1>
             <p>Practical guides for beginners - pets, home, lifestyle, fitness, crafts, and money. Available on Kindle.</p>
+        </div>
+    </section>
+
+    <section class="capture">
+        <div class="container">
+            <h2>Get the free bonus pack</h2>
+            <p>Checklists, cheat sheets and printables that go with the books - plus an email when a new guide is out.</p>
+            <!--
+              THE FORM POSTS TO AN ABSOLUTE URL ON PURPOSE.
+              This page is served by GITHUB PAGES (theskillmillbooks.com). The handler lives on
+              NETLIFY. A relative "/.netlify/functions/subscribe" is a dead route here - that is
+              exactly the bug that swallowed every signup between April and 2026-08-28.
+            -->
+            <form id="tsm-capture" action="https://theskillmill-bonus.netlify.app/.netlify/functions/subscribe" method="POST">
+                <input type="hidden" name="source" value="catalog_home">
+                <input type="hidden" name="book" value="catalog">
+                <label for="tsm-email" style="position:absolute;left:-9999px">Email address</label>
+                <input id="tsm-email" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+                <button type="submit">Send it to me</button>
+            </form>
+            <p class="msg" id="tsm-msg" role="status" aria-live="polite"></p>
+            <p class="fine">No spam. Unsubscribe any time.</p>
         </div>
     </section>
 
@@ -217,5 +248,40 @@
             </div>
         </div>
     </footer>
+<script>
+(function () {
+  var f = document.getElementById('tsm-capture');
+  var m = document.getElementById('tsm-msg');
+  if (!f || !window.fetch) return;
+  f.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var btn = f.querySelector('button');
+    btn.disabled = true;
+    m.textContent = 'Sending...';
+    var body = new URLSearchParams(new FormData(f));
+    body.set('fmt', 'json');
+    fetch(f.action, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' },
+      body: body.toString()
+    })
+      .then(function (r) { return r.json().catch(function () { return { ok: r.ok }; }); })
+      .then(function (d) {
+        // The handler answers ok:false when MailerLite refused. Saying "you are in" there is
+        // the lie this whole fix exists to remove.
+        if (d && d.ok) {
+          m.textContent = d.alreadyExists ? 'You were already on the list.' : 'Done - check your inbox.';
+          f.reset();
+        } else {
+          m.textContent = 'That did not go through. Email hello@theskillmillbooks.com and we will add you.';
+        }
+      })
+      .catch(function () {
+        m.textContent = 'That did not go through. Email hello@theskillmillbooks.com and we will add you.';
+      })
+      .then(function () { btn.disabled = false; });
+  });
+})();
+</script>
 </body>
 </html>
