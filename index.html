@@ -67,6 +67,8 @@
             <form id="tsm-capture" action="https://theskillmill-bonus.netlify.app/.netlify/functions/subscribe" method="POST">
                 <input type="hidden" name="source" value="catalog_home">
                 <input type="hidden" name="book" value="catalog">
+                <input type="hidden" name="redirect" value="https://theskillmillbooks.com/bonus/">
+                <input type="hidden" name="cta_label" value="Open the bonus pack">
                 <label for="tsm-email" style="position:absolute;left:-9999px">Email address</label>
                 <input id="tsm-email" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
                 <button type="submit">Send it to me</button>
@@ -270,7 +272,8 @@
         // The handler answers ok:false when MailerLite refused. Saying "you are in" there is
         // the lie this whole fix exists to remove.
         if (d && d.ok) {
-          m.textContent = d.alreadyExists ? 'You were already on the list.' : 'Done - check your inbox.';
+          m.innerHTML = (d.alreadyExists ? 'You were already on the list. ' : 'You are in. ')
+            + '<a href="/bonus/" style="color:#fff;text-decoration:underline">Open your bonus pack &rarr;</a>';
           f.reset();
         } else {
           m.textContent = 'That did not go through. Email hello@theskillmillbooks.com and we will add you.';
