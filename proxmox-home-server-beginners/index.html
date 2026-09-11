@@ -120,31 +120,36 @@
     <p>All three are in the book, with the numbers, because finding them out later is worse.</p>
   </div>
 
-  <h2 id="bonus">Free: the wiring diagram pack</h2>
+  <h2 id="bonus">Free: the Home Server Starter Kit</h2>
   <div class="panel">
     <p><strong>The Home Server Starter Kit.</strong>The hardware sizing worksheet from Chapter 3, the container-versus-virtual-machine decision table from Chapter 6, the backup tier checklist from Chapter 10, and the six-check diagnostic card from Chapter 12. Printable, for the desk next to the machine.</p>
-    <form class="cap" id="cap-form" novalidate>
-      <label for="cap-email" class="trap">Email address</label>
-      <input id="cap-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
-      <div class="trap"><label for="cap-hp">Leave blank</label><input id="cap-hp" type="text" name="website" tabindex="-1" autocomplete="off"></div>
-      <button type="submit">Send me the diagrams</button>
+    <form class="ml-capture-form" data-ml-account="2290040" data-ml-form="192547532509807694" action="https://assets.mailerlite.com/jsonp/2290040/forms/192547532509807694/subscribe" method="POST" novalidate>
+      <input type="hidden" name="fields[utm_source]" value="landing_page">
+      <input type="hidden" name="fields[utm_medium]" value="ebook_bonus">
+      <input type="hidden" name="fields[utm_campaign]" value="landing-proxmox-home-server">
+      <input type="hidden" name="fields[utm_content]" value="46_Proxmox_HomeServer_Beginners">
+      <input type="hidden" name="fields[utm_term]" value="B0HFYGS5GC">
+      <label for="cap-email" style="font-weight:700">Email address</label>
+      <input id="cap-email" type="email" name="fields[email]" placeholder="you@example.com" autocomplete="email" required>
+      <label class="consent" style="display:grid;grid-template-columns:18px 1fr;gap:8px;align-items:start;font-size:.85rem">
+        <input type="checkbox" required>
+        <span>I agree to receive emails from The Skill Mill and can unsubscribe anytime.</span>
+      </label>
+      <button type="submit">Send me follow-up notes</button>
+      <p class="msg" role="status" aria-live="polite"></p>
     </form>
-    <p class="note">One email with the pack, and a note when the book goes live. Unsubscribe any time. No spam, ever.</p>
-    <div class="ok" id="cap-ok">Thanks. Check your inbox for the diagram pack.</div>
+    <p class="note"><a class="btn" href="https://theskillmillbooks.com/bonus/proxmox-home-server/">Open the Starter Kit</a> &nbsp; It is free and does not require a purchase or a review.</p>
   </div>
 
   <h2 id="review">Leave a review</h2>
-  <p>If the book helped you get your system wired, a short review genuinely changes what happens to an independent
+  <p>If the book helped you get your server running, a short review genuinely changes what happens to an independent
   title. One or two honest sentences is plenty, and it is the single most useful thing a reader can do for us.</p>
-  <p id="review-cta">
-    <span class="note">The review link goes live here as soon as Amazon assigns the book its page. If you are reading
-    the book now and want to review it today, search Amazon for <strong>Proxmox Home Server for Beginners</strong>
-    and use the review button on the listing.</span>
-  </p>
+  <p id="review-cta"><a class="btn" href="https://www.amazon.com/review/create-review?asin=B0HFYGS5GC" rel="nofollow">Leave a review of Proxmox Home Server for Beginners on Amazon</a></p>
+  <p class="note">Takes about a minute. One or two honest sentences is plenty.</p>
 
   <h2 id="arc">Advance readers</h2>
-  <p>We send free advance copies to a small group of readers who are actually converting a van, in exchange for an
-  honest review when the book comes out. If that is you, use the form above and mention your build.</p>
+  <p>We send free advance copies to a small group of readers who are actually running a home server, in exchange for an
+  honest review when the book comes out. If that is you, use the form above and mention your setup.</p>
 
   <h2>Start with book 1</h2>
   <table>
@@ -164,28 +169,27 @@
 
 <script>
 (function(){
-  var f=document.getElementById('cap-form');
-  if(!f) return;
-  f.addEventListener('submit',function(e){
-    e.preventDefault();
-    var hp=document.getElementById('cap-hp');
-    if(hp && hp.value) return;                 // honeypot: silent drop
-    var em=document.getElementById('cap-email');
-    if(!em.value || em.value.indexOf('@')<1){ em.focus(); return; }
-    try{
-      var k='vle_signups';
-      var prior=JSON.parse(localStorage.getItem(k)||'[]');
-      prior.push({e:em.value,t:Date.now()});
-      localStorage.setItem(k,JSON.stringify(prior));
-    }catch(_){}
-    document.getElementById('cap-ok').style.display='block';
-    f.style.display='none';
+  // 2026-09-10: the previous handler wrote the address to localStorage and showed "check your
+  // inbox" — nothing was ever sent or captured. This is the proven toolkit-page pattern: the
+  // MailerLite hosted form (no-cors), and the bonus itself is delivered ON THE PAGE it links to,
+  // so a reader never depends on an email arriving.
+  document.querySelectorAll('form.ml-capture-form').forEach(function(form){
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var msg=form.querySelector('.msg'), btn=form.querySelector('button[type=submit]');
+      var email=(form.querySelector('input[type=email]').value||'').trim();
+      var consent=form.querySelector('input[type=checkbox]').checked;
+      msg.textContent='';
+      if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent='Please enter a valid email.';return;}
+      if(!consent){msg.textContent='Please tick the consent box.';return;}
+      btn.disabled=true;
+      fetch(form.action,{method:'POST',body:new FormData(form),mode:'no-cors'})
+        .then(function(){msg.textContent='You are on the reader list. The kit itself is on the page linked above.';form.reset();})
+        .catch(function(){msg.textContent='Something did not submit. Please try again.';})
+        .finally(function(){btn.disabled=false;});
+    });
   });
-  // ?arc=1 deep link from the book's back matter jumps to the ARC section
-  if(location.search.indexOf('arc=1')>-1){
-    var a=document.getElementById('arc');
-    if(a) a.scrollIntoView();
-  }
+  if(location.search.indexOf('arc=1')>-1){var a=document.getElementById('arc');if(a)a.scrollIntoView();}
 })();
 </script>
 </body>
