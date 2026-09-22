@@ -108,32 +108,45 @@
       <div class="border-t border-slate-200 pt-8">
         <h2 class="text-xl font-bold mb-4">📥 Get instant access</h2>
 
-        <form action="https://api.mailerlite.com/api/v2/groups/grandmacore-crafting/subscribers" method="POST" class="space-y-4" data-pdf="/pdfs/grandmacore-30day-screen-free-tracker.pdf">
-          <input type="hidden" name="book_slug" value="grandmacore-crafting">
-          <input type="hidden" name="book_title" value="The Grandmacore Crafting Guide">
-          <input type="hidden" name="source" value="reader_magnet_bonus_page">
+        <!-- 2026-09-22: this form used to POST to api.mailerlite.com/api/v2/groups/grandmacore-crafting/subscribers —
+             an authenticated server API a browser cannot call, so no reader ever reached the list. Now the
+             jsonp pattern every working bonus page uses: form 199335631113946661 → group "Grandmacore Crafting",
+             single opt-in. -->
+        <form class="ml-capture-form space-y-4" data-ml-account="2290040" data-ml-form="199335631113946661" action="https://assets.mailerlite.com/jsonp/2290040/forms/199335631113946661/subscribe" method="POST" novalidate data-pdf="/pdfs/grandmacore-30day-screen-free-tracker.pdf">
+          <input type="hidden" name="fields[utm_source]" value="ebook">
+          <input type="hidden" name="fields[utm_medium]" value="ebook_bonus">
+          <input type="hidden" name="fields[utm_campaign]" value="grandmacore-bonus">
+          <input type="hidden" name="fields[utm_content]" value="23_Grandmacore_Crafting_Guide">
+          <input type="hidden" name="fields[utm_term]" value="B0D9P7BBWG">
 
           <div>
             <label for="name" class="block text-sm font-medium text-slate-700 mb-1">First name</label>
-            <input id="name" name="name" type="text" required autocomplete="given-name"
+            <input id="name" name="fields[name]" type="text" autocomplete="given-name"
                    class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-amber-500"
                    placeholder="Your first name">
           </div>
 
           <div>
             <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email address</label>
-            <input id="email" name="email" type="email" required autocomplete="email"
+            <input id="email" name="fields[email]" type="email" required autocomplete="email"
                    class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-amber-500"
                    placeholder="you@example.com">
           </div>
+
+          <label class="flex items-start gap-2 text-sm text-slate-600">
+            <input type="checkbox" required class="mt-1">
+            <span>I agree to receive emails from The Skill Mill and can unsubscribe anytime.</span>
+          </label>
 
           <button type="submit"
                   class="w-full accent-bg text-white font-bold py-4 rounded-lg text-lg hover:opacity-90 transition shadow-md">
             Get Your 30-Day Screen-Free Crafting Tracker
           </button>
 
+          <p class="msg text-sm text-center" role="status" aria-live="polite"></p>
+
           <p class="text-xs text-slate-500 text-center">
-            We'll email the PDF instantly. Single-click unsubscribe in every email. No spam.
+            The tracker unlocks right here. Single-click unsubscribe in every email. No spam.
           </p>
         </form>
 
@@ -158,11 +171,42 @@
   </main>
 
   <script>
-    // After form submit, redirect to the PDF (so users get the bonus immediately even if email confirmation lags)
-    document.querySelector('form').addEventListener('submit', function (e) {
-      const pdf = e.target.dataset.pdf;
-      // Open PDF in new tab; backend will still email it.
-      setTimeout(() => window.open(pdf, '_blank'), 500);
+    // Same capture pattern as the working bonus pages: validate, POST to the MailerLite jsonp
+    // endpoint (no-cors — opaque response, so success = the request left the browser), then hand
+    // the reader the tracker on this page with a revealed link (a timed window.open gets popup-blocked).
+    document.querySelectorAll('form.ml-capture-form').forEach(function (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var msg = form.querySelector('.msg');
+        var btn = form.querySelector('button[type="submit"]');
+        var email = form.querySelector('input[type="email"]').value.trim();
+        var consent = form.querySelector('input[type="checkbox"]').checked;
+        msg.textContent = '';
+        msg.className = 'msg text-sm text-center';
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          msg.textContent = 'Please enter a valid email.';
+          msg.className = 'msg text-sm text-center text-red-700';
+          return;
+        }
+        if (!consent) {
+          msg.textContent = 'Please tick the consent box.';
+          msg.className = 'msg text-sm text-center text-red-700';
+          return;
+        }
+        btn.disabled = true;
+        fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' })
+          .then(function () {
+            var pdf = form.dataset.pdf;
+            msg.innerHTML = 'You are on the reader list. <a href="' + pdf + '" download class="underline font-semibold text-amber-700">Download your tracker (PDF)</a>';
+            msg.className = 'msg text-sm text-center text-green-800';
+            form.reset();
+          })
+          .catch(function () {
+            msg.textContent = 'Something did not submit. Please try again.';
+            msg.className = 'msg text-sm text-center text-red-700';
+          })
+          .finally(function () { btn.disabled = false; });
+      });
     });
   </script>
 
