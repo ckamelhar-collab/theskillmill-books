@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>25 Ready-to-Import Home Assistant Automations — The Skill Mill</title>
+  <meta name="description" content="25 ready-to-import Home Assistant automations for readers of Home Assistant Smart Home for Beginners (2nd Edition), organized around the book's Layer Method.">
+  <meta name="kdp-book-folder" content="10_HomeAssistant_SmartHome">
+  <meta name="kdp-asin" content="B0GH15PC62">
+  <link rel="canonical" href="https://theskillmillbooks.com/bonus/home-assistant-smart-home/automations/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="25 Ready-to-Import Home Assistant Automations">
+  <meta property="og:description" content="25 ready-to-import Home Assistant automations, organized around the book's Layer Method.">
+  <meta property="og:url" content="https://theskillmillbooks.com/bonus/home-assistant-smart-home/automations/">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; color: #24242a; background: #fff; line-height: 1.65; }
+    a { color: #5a4fcf; }
+    .topbar { border-bottom: 1px solid #eee; background: #fff; }
+    .topbar-inner { max-width: 980px; margin: 0 auto; padding: 14px 22px; display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+    .brand { font-weight: 800; color: #24242a; text-decoration: none; }
+    .nav { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.92rem; }
+    .nav a { text-decoration: none; font-weight: 650; }
+    .hero { background: #f6f7f2; border-bottom: 1px solid #e3e6da; }
+    .hero-inner { max-width: 980px; margin: 0 auto; padding: 56px 22px 42px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr); gap: 34px; align-items: start; }
+    .hero-inner.single { grid-template-columns: 1fr; }
+    .eyebrow { text-transform: uppercase; letter-spacing: 0; font-size: 0.78rem; font-weight: 800; color: #6d755e; margin: 0 0 8px; }
+    h1 { font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.08; margin: 0 0 16px; }
+    .dek { color: #555a50; font-size: 1.12rem; margin: 0 0 20px; max-width: 660px; }
+    .bookline { color: #606060; font-size: 0.94rem; }
+    .capture { background: #fff; border: 1px solid #dfe3d5; border-radius: 8px; padding: 22px; box-shadow: 0 12px 28px rgba(0,0,0,0.06); }
+    .capture h2 { margin: 0 0 10px; font-size: 1.25rem; }
+    .capture p { margin: 0 0 14px; color: #5a5a5a; }
+    .capture form { display: grid; gap: 12px; }
+    input[type="email"] { width: 100%; min-height: 48px; border: 1px solid #cfd4c3; border-radius: 6px; padding: 12px 13px; font-size: 1rem; }
+    label.consent { display: grid; grid-template-columns: 18px 1fr; gap: 8px; align-items: start; font-size: 0.82rem; color: #666; }
+    button, .print-btn { min-height: 46px; border: 0; border-radius: 6px; padding: 12px 16px; background: #2f6b57; color: #fff; font-weight: 800; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+    button:disabled { opacity: 0.65; cursor: wait; }
+    .msg { min-height: 1.2em; margin: 0; font-size: 0.9rem; }
+    .msg.success { color: #166534; }
+    .msg.error { color: #991b1b; }
+    .container { max-width: 900px; margin: 0 auto; padding: 42px 22px 80px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 0 0 26px; }
+    .resource-section { border-top: 1px solid #eee; padding: 26px 0; }
+    .resource-section h2, .soft-review h2 { margin: 0 0 12px; font-size: 1.35rem; }
+    li { margin: 8px 0; }
+    .soft-review { margin-top: 30px; padding: 22px; border: 1px solid #e3e6da; border-radius: 8px; background: #fbfcf8; }
+    .text-link { font-weight: 800; }
+    .footer { border-top: 1px solid #eee; margin-top: 42px; padding-top: 22px; color: #777; font-size: 0.86rem; }
+    @media (max-width: 760px) {
+      .hero-inner { grid-template-columns: 1fr; padding-top: 38px; }
+    }
+    @media print {
+      .topbar, .capture, .toolbar, .soft-review, .footer { display: none !important; }
+      .hero { border: 0; background: #fff; }
+      .hero-inner, .container { padding: 0; max-width: none; }
+      body { font-size: 12pt; }
+    }
+
+    /* --- Added for the 25-automations reader bonus page --- */
+    .intro-note { max-width: 760px; }
+    .method-callout { margin-top: 18px; padding: 16px 18px; border: 1px solid #dfe3d5; border-radius: 8px; background: #fff; font-size: 0.98rem; }
+    .method-callout strong { color: #2f6b57; }
+    .toc { border: 1px solid #e3e6da; border-radius: 8px; padding: 20px 22px; background: #fbfcf8; margin: 0 0 34px; }
+    .toc h2 { margin: 0 0 14px; font-size: 1.2rem; }
+    .toc-layer { margin: 0 0 14px; }
+    .toc-layer:last-child { margin-bottom: 0; }
+    .toc-layer h3 { margin: 0 0 6px; font-size: 0.92rem; text-transform: uppercase; letter-spacing: 0.02em; color: #6d755e; }
+    .toc-layer ol { margin: 0; padding-left: 20px; }
+    .toc-layer li { margin: 3px 0; font-size: 0.94rem; }
+    .layer-heading { margin: 46px 0 6px; padding-top: 10px; border-top: 3px solid #2f6b57; }
+    .layer-heading h2 { margin: 0 0 4px; font-size: 1.55rem; }
+    .layer-heading .layer-count { color: #6d755e; font-size: 0.88rem; font-weight: 650; }
+    .recipe { border: 1px solid #eee; border-radius: 8px; padding: 22px 24px; margin: 18px 0; }
+    .recipe h3 { margin: 0 0 10px; font-size: 1.18rem; }
+    .recipe .what { margin: 0 0 12px; }
+    .recipe .method-note { margin: 0 0 14px; padding: 12px 14px; border-left: 4px solid #2f6b57; background: #f6f7f2; font-size: 0.94rem; }
+    .recipe .method-note strong { display: block; margin-bottom: 4px; color: #2f6b57; }
+    .placeholders { margin: 0 0 12px; font-size: 0.92rem; }
+    .placeholders code, .sources code { background: #f1f1ec; border-radius: 4px; padding: 1px 6px; font-size: 0.87em; }
+    .placeholders .none { color: #777; font-style: italic; }
+    .code-wrap { position: relative; margin: 0 0 12px; }
+    .copy-btn { position: absolute; top: 10px; right: 10px; min-height: 32px; padding: 6px 12px; font-size: 0.82rem; font-weight: 700; background: #2f6b57; opacity: 0.92; }
+    .copy-btn:hover { opacity: 1; }
+    .copy-btn.copied { background: #166534; }
+    pre { margin: 0; background: #1e1e24; color: #e7e7ea; border-radius: 8px; padding: 18px 16px; overflow-x: auto; font-size: 0.86rem; line-height: 1.55; }
+    pre code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; white-space: pre; }
+    .sources { font-size: 0.86rem; color: #555; word-break: break-word; }
+    .sources a { word-break: break-all; }
+    .download-all { margin: 0 0 30px; }
+    @media print {
+      .copy-btn, .toolbar, .download-all { display: none !important; }
+    }
+  </style>
+  <script src="/analytics.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/">The Skill Mill</a>
+      <nav class="nav"><a href="/">Catalog</a><a href="/blog/">Blog</a><a href="https://theskillmillbooks.com/home-assistant-smart-home/">Book Page</a></nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner single">
+      <div>
+        <p class="eyebrow">Reader Bonus</p>
+        <h1>25 Ready-to-Import Home Assistant Automations</h1>
+        <p class="dek intro-note">Every trigger, condition, and action below is copied from the current official Home Assistant docs (Core 2026.9) — plural <code>triggers:</code>/<code>conditions:</code>/<code>actions:</code>, never the old <code>platform:</code>/<code>service:</code> keys. Every YAML block below has been parsed and schema-checked before publishing.</p>
+        <p class="bookline">Companion resource for <strong>Home Assistant Smart Home for Beginners (2nd Edition)</strong> by Digital Basics Press.</p>
+        <div class="method-callout"><strong>The Layer Method:</strong> build one automation, live with it for about a week, then add the next one — one layer at a time, always. That's the book's own rule (Chapter 12), and it's how the 25 automations below are grouped and ordered.</div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <div class="toolbar">
+      <a class="print-btn download-all" href="home-assistant-automations-pack.yaml" download>Download all 25 as one .yaml</a>
+      <a class="text-link" href="../index.html">Back to the Setup Audit Sheet</a>
+      <a class="text-link" href="https://theskillmillbooks.com/home-assistant-smart-home/">Read more in the book</a>
+      <a class="text-link" href="https://www.amazon.com/dp/B0GH15PC62?tag=theskillmill-20">Buy on Amazon</a>
+    </div>
+
+    <nav class="toc" aria-label="Table of contents">
+      <h2>Contents — 25 automations in 7 layers</h2>
+      <div class="toc-layer">
+        <h3>Lighting (4)</h3>
+        <ol>
+          <li><a href="#hallway-motion-light-off-delay">Hallway light follows motion, with a 2-minute off-delay</a></li>
+          <li><a href="#sunset-porch-lights">Turn on the porch and living room lights at sunset</a></li>
+          <li><a href="#closet-light-no-flicker">Closet light turns off only after motion is truly gone</a></li>
+          <li><a href="#motion-light-brightness-day-night">Office motion light: bright by day, dim after dark</a></li>
+        </ol>
+      </div>
+      <div class="toc-layer">
+        <h3>Presence (3)</h3>
+        <ol>
+          <li><a href="#welcome-home-after-dark">Welcome-home lights, but only after dark</a></li>
+          <li><a href="#everyone-left-lights-off-eco-mode">Everyone left: lights off and Eco Mode on</a></li>
+          <li><a href="#door-open-when-everyone-left">Notify if a door is still open after everyone leaves</a></li>
+        </ol>
+      </div>
+      <div class="toc-layer">
+        <h3>Security (4)</h3>
+        <ol>
+          <li><a href="#door-open-too-long">Remind me when the back door stays open</a></li>
+          <li><a href="#leak-sensor-phone-alert">Leak sensor sends an urgent phone alert</a></li>
+          <li><a href="#night-camera-motion-alert">Night-time backyard motion sends a photo alert</a></li>
+          <li><a href="#nightly-open-door-check">Nightly check: is any door still open at 11 PM</a></li>
+        </ol>
+      </div>
+      <div class="toc-layer">
+        <h3>Climate (2)</h3>
+        <ol>
+          <li><a href="#comfort-schedule-space-heater">Space heater follows a comfort schedule</a></li>
+          <li><a href="#window-open-heater-pause">Pause the heater while a window is open</a></li>
+        </ol>
+      </div>
+      <div class="toc-layer">
+        <h3>Energy (3)</h3>
+        <ol>
+          <li><a href="#high-power-usage-alert">Alert me when whole-home power draw spikes</a></li>
+          <li><a href="#appliance-finished-notification">Notify when the washer (or EV charger) finishes</a></li>
+          <li><a href="#standby-power-reminder">Reminder: the entertainment center has been idling for hours</a></li>
+        </ol>
+      </div>
+      <div class="toc-layer">
+        <h3>Notifications &amp; Voice (5)</h3>
+        <ol>
+          <li><a href="#actionable-garage-door-notification">Garage door left open: notification with a Close button</a></li>
+          <li><a href="#evening-winddown-tts">Evening wind-down announcement</a></li>
+          <li><a href="#morning-briefing-weather-calendar">Morning briefing: weather now, and calendar reminders as they start</a></li>
+          <li><a href="#sunrise-wakeup-light-blueprint">Sunrise wake-up light (simple version) — or import the full blueprint</a></li>
+          <li><a href="#voice-goodnight-command">Voice command: &#x27;good night&#x27; turns off the lights</a></li>
+        </ol>
+      </div>
+      <div class="toc-layer">
+        <h3>Reliability (4)</h3>
+        <ol>
+          <li><a href="#ha-restart-notice">Notice when Home Assistant finishes starting up</a></li>
+          <li><a href="#low-battery-report">Remind me when the door lock battery stays low</a></li>
+          <li><a href="#goodnight-routine-failure-notice">Goodnight routine: notice if a door is still open</a></li>
+          <li><a href="#sensor-stopped-updating-alert">Notify me when the power sensor stops updating</a></li>
+        </ol>
+      </div>
+    </nav>
+
+    <div class="layer-heading">
+      <h2>Lighting layer</h2>
+      <p class="layer-count">4 automations</p>
+    </div>
+    <section class="recipe" id="hallway-motion-light-off-delay">
+      <h3>1. Hallway light follows motion, with a 2-minute off-delay</h3>
+      <p class="what"><strong>What it does:</strong> Turns the hallway light on the instant motion is seen, and off automatically once the hallway has been clear of motion for 2 minutes.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Lighting. This is a good first automation to build, full stop. Live with it for about a week before you touch anything else — watch whether 2 minutes is too short (the light keeps snapping off while you&#x27;re still in the hallway) or too long (it stays on a while after you&#x27;ve left), and adjust the for: value before you add the next lighting automation.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>binary_sensor.hallway_motion</code>, <code>light.hallway</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-hallway-motion-light-off-delay">Copy</button>
+        <pre><code id="yaml-hallway-motion-light-off-delay">alias: &quot;Hallway light follows motion, with a 2-minute off-delay&quot;
+id: hallway_motion_light_off_delay
+description: &quot;Turns the hallway light on for motion and off 2 minutes after motion clears.&quot;
+mode: restart
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.hallway_motion
+    to: &quot;on&quot;
+    id: motion_on
+  - trigger: state
+    entity_id: binary_sensor.hallway_motion
+    to: &quot;off&quot;
+    for:
+      minutes: 2
+    id: motion_off
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: motion_on
+        sequence:
+          - action: light.turn_on
+            target:
+              entity_id: light.hallway
+      - conditions:
+          - condition: trigger
+            id: motion_off
+        sequence:
+          - action: light.turn_off
+            target:
+              entity_id: light.hallway</code></pre>
+      </div>
+      <p class="sources">Source: State trigger, to:/for:/id: — <a href="https://www.home-assistant.io/triggers/state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/state/</a><br>Source: Cross-cutting trigger mechanics, trigger id: — <a href="https://www.home-assistant.io/docs/automation/trigger/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/automation/trigger/</a><br>Source: Triggered by condition (condition: trigger, id:) — <a href="https://www.home-assistant.io/docs/scripts/conditions/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/conditions/</a><br>Source: choose action — <a href="https://www.home-assistant.io/docs/scripts/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/</a><br>Source: light.turn_on / light.turn_off with target: — <a href="https://www.home-assistant.io/docs/automation/action/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/automation/action/</a></p>
+    </section>
+    <section class="recipe" id="sunset-porch-lights">
+      <h3>2. Turn on the porch and living room lights at sunset</h3>
+      <p class="what"><strong>What it does:</strong> Turns on two lights 30 minutes before sunset every day, using Home Assistant&#x27;s own sunset calculation for your location — no fixed clock time to update with the seasons.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Lighting. Add this only after the motion-light layer above has been running quietly for about a week. Live with the -30 minute offset for a week and see if it feels early or late before adding a third lighting automation.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>light.porch</code>, <code>light.living_room</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-sunset-porch-lights">Copy</button>
+        <pre><code id="yaml-sunset-porch-lights">alias: &quot;Turn on the porch and living room lights at sunset&quot;
+id: sunset_porch_living_room_lights
+description: &quot;Turns on the porch and living room lights 30 minutes before sunset.&quot;
+mode: single
+triggers:
+  - trigger: sun
+    event: sunset
+    offset: &quot;-00:30:00&quot;
+actions:
+  - action: light.turn_on
+    target:
+      entity_id:
+        - light.porch
+        - light.living_room
+    data:
+      brightness: 180</code></pre>
+      </div>
+      <p class="sources">Source: Sun trigger (event: sunset, offset:) — <a href="https://www.home-assistant.io/docs/automation/trigger/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/automation/trigger/</a><br>Source: light.turn_on with target: (list) + data.brightness — <a href="https://www.home-assistant.io/docs/automation/action/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/automation/action/</a></p>
+    </section>
+    <section class="recipe" id="closet-light-no-flicker">
+      <h3>3. Closet light turns off only after motion is truly gone</h3>
+      <p class="what"><strong>What it does:</strong> Turns the closet light off 5 minutes after motion clears, instead of the instant the sensor blips clear — the fix for a light that flickers off while you&#x27;re still standing there.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Lighting. This one exists to teach a single idea: for: is what stops a light from flickering off. Live with it for a week in one room, confirm the flicker is gone, then reuse the same for: pattern anywhere else you saw the same problem — don&#x27;t add it everywhere on day one.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>binary_sensor.closet_motion</code>, <code>light.closet</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-closet-light-no-flicker">Copy</button>
+        <pre><code id="yaml-closet-light-no-flicker">alias: &quot;Closet light turns off only after motion is truly gone&quot;
+id: closet_light_no_flicker_off_delay
+description: &quot;Turns the closet light off 5 minutes after motion clears, to stop it flickering off.&quot;
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.closet_motion
+    to: &quot;off&quot;
+    for:
+      minutes: 5
+actions:
+  - action: light.turn_off
+    target:
+      entity_id: light.closet</code></pre>
+      </div>
+      <p class="sources">Source: State trigger for: field — <a href="https://www.home-assistant.io/triggers/state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/state/</a><br>Source: for: misuse and why a for: delay prevents premature firing — <a href="https://www.home-assistant.io/docs/automation/trigger/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/automation/trigger/</a><br>Source: light.turn_off with target: — <a href="https://www.home-assistant.io/docs/automation/action/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/automation/action/</a></p>
+    </section>
+    <section class="recipe" id="motion-light-brightness-day-night">
+      <h3>4. Office motion light: bright by day, dim after dark</h3>
+      <p class="what"><strong>What it does:</strong> One motion sensor, two behaviors: full brightness during the day, a low dim glow once the sun is down, so the light never blinds you at night.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Lighting. This is a step up from a plain motion light — it adds a condition branch. Only build this once you&#x27;re completely comfortable with the simple motion-light pattern above; live with the two brightness levels for a week and adjust the dim value before adding more branches to any automation.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>binary_sensor.office_motion</code>, <code>light.office</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-motion-light-brightness-day-night">Copy</button>
+        <pre><code id="yaml-motion-light-brightness-day-night">alias: &quot;Office motion light: bright by day, dim after dark&quot;
+id: office_motion_light_day_night_brightness
+description: &quot;Motion turns the office light on at full brightness by day, dim after dark.&quot;
+mode: restart
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.office_motion
+    to: &quot;on&quot;
+actions:
+  - if:
+      - condition: sun
+        after: sunset
+        before: sunrise
+    then:
+      - action: light.turn_on
+        target:
+          entity_id: light.office
+        data:
+          brightness: 40
+    else:
+      - action: light.turn_on
+        target:
+          entity_id: light.office
+        data:
+          brightness: 255</code></pre>
+      </div>
+      <p class="sources">Source: State trigger to: &quot;on&quot; — <a href="https://www.home-assistant.io/triggers/state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/state/</a><br>Source: Sunset/sunrise condition (&quot;When dark&quot;) — <a href="https://www.home-assistant.io/docs/scripts/conditions/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/conditions/</a><br>Source: if/then/else; light.turn_on data.brightness — <a href="https://www.home-assistant.io/docs/scripts/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/</a></p>
+    </section>
+    <div class="layer-heading">
+      <h2>Presence layer</h2>
+      <p class="layer-count">3 automations</p>
+    </div>
+    <section class="recipe" id="welcome-home-after-dark">
+      <h3>5. Welcome-home lights, but only after dark</h3>
+      <p class="what"><strong>What it does:</strong> When a household member&#x27;s presence changes to home, turns on the entryway and living room lights — but only if it&#x27;s already dark outside, so it stays quiet on a summer evening.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Presence. Build this as its own single automation before adding any other presence-based automations. Live with it for a week and check it doesn&#x27;t fire on a false presence blip (a phone reconnecting to Wi-Fi from the driveway, for example) before you add the next presence layer below.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>person.family_member</code>, <code>light.entryway</code>, <code>light.living_room</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-welcome-home-after-dark">Copy</button>
+        <pre><code id="yaml-welcome-home-after-dark">alias: &quot;Welcome-home lights, but only after dark&quot;
+id: welcome_home_lights_after_dark
+description: &quot;Turns on the entryway and living room lights when someone arrives home after dark.&quot;
+mode: single
+triggers:
+  - trigger: state
+    entity_id: person.family_member
+    to: &quot;home&quot;
+conditions:
+  - condition: sun
+    after: sunset
+    before: sunrise
+actions:
+  - action: light.turn_on
+    target:
+      entity_id:
+        - light.entryway
+        - light.living_room
+    data:
+      brightness: 200</code></pre>
+      </div>
+      <p class="sources">Source: State trigger to: &quot;home&quot; — <a href="https://www.home-assistant.io/triggers/state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/state/</a><br>Source: Sunset/sunrise condition (&quot;When dark&quot;) — <a href="https://www.home-assistant.io/docs/scripts/conditions/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/conditions/</a><br>Source: light.turn_on, multiple entity_id + data.brightness — <a href="https://www.home-assistant.io/docs/automation/action/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/automation/action/</a></p>
+    </section>
+    <section class="recipe" id="everyone-left-lights-off-eco-mode">
+      <h3>6. Everyone left: lights off and Eco Mode on</h3>
+      <p class="what"><strong>What it does:</strong> When the home zone&#x27;s tracked-person count drops to zero, turns off every light and flips on an Eco Mode helper that your own thermostat automation, or your thermostat&#x27;s own schedule, can watch for.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Presence. Note on scope: this pack does not document a specific climate.* service call, so this recipe deliberately hands off to an Eco Mode helper rather than guessing your thermostat integration&#x27;s exact action — wire that helper into your own thermostat automation once this layer has run cleanly for about a week.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>input_boolean.eco_mode</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-everyone-left-lights-off-eco-mode">Copy</button>
+        <pre><code id="yaml-everyone-left-lights-off-eco-mode">alias: &quot;Everyone left: lights off and Eco Mode on&quot;
+id: everyone_left_lights_off_eco_mode
+description: &quot;When nobody is left in the home zone, turns off all lights and enables Eco Mode.&quot;
+mode: single
+triggers:
+  - trigger: numeric_state
+    entity_id: zone.home
+    below: 1
+actions:
+  - action: light.turn_off
+    target:
+      entity_id: all
+  - action: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.eco_mode</code></pre>
+      </div>
+      <p class="sources">Source: Numeric state trigger (below:) — <a href="https://www.home-assistant.io/triggers/numeric_state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/numeric_state/</a><br>Source: zone state = number of tracked persons currently inside — <a href="https://www.home-assistant.io/integrations/zone/" target="_blank" rel="noopener">https://www.home-assistant.io/integrations/zone/</a><br>Source: light.turn_off target: entity_id: all — <a href="https://www.home-assistant.io/docs/automation/yaml/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/automation/yaml/</a><br>Source: input_boolean.turn_on — <a href="https://www.home-assistant.io/integrations/input_boolean/" target="_blank" rel="noopener">https://www.home-assistant.io/integrations/input_boolean/</a></p>
+    </section>
+    <section class="recipe" id="door-open-when-everyone-left">
+      <h3>7. Notify if a door is still open after everyone leaves</h3>
+      <p class="what"><strong>What it does:</strong> A second, independent layer on top of the &#x27;everyone left&#x27; automation above: if the front door is still reading open once the home is empty, sends a phone notification.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Presence (second layer). This is the book&#x27;s method in miniature: it reacts to the exact same trigger as &#x27;Everyone left: lights off and Eco Mode on&#x27;, but is its own automation, added only after that first one had a clean week. Keep them separate rather than merging them into one automation.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>binary_sensor.front_door</code>, <code>notify.mobile_app_your_phone</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-door-open-when-everyone-left">Copy</button>
+        <pre><code id="yaml-door-open-when-everyone-left">alias: &quot;Notify if a door is still open after everyone leaves&quot;
+id: door_open_when_everyone_left
+description: &quot;Notifies you if the front door is still open once the home zone is empty.&quot;
+mode: single
+triggers:
+  - trigger: numeric_state
+    entity_id: zone.home
+    below: 1
+conditions:
+  - condition: state
+    entity_id: binary_sensor.front_door
+    state: &quot;on&quot;
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      message: &quot;Everyone left, but the front door is still open.&quot;</code></pre>
+      </div>
+      <p class="sources">Source: Numeric state trigger — <a href="https://www.home-assistant.io/triggers/numeric_state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/numeric_state/</a><br>Source: State condition — <a href="https://www.home-assistant.io/docs/scripts/conditions/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/conditions/</a><br>Source: notify.mobile_app_&lt;device_id&gt; — <a href="https://companion.home-assistant.io/docs/notifications/notifications-basic/" target="_blank" rel="noopener">https://companion.home-assistant.io/docs/notifications/notifications-basic/</a></p>
+    </section>
+    <div class="layer-heading">
+      <h2>Security layer</h2>
+      <p class="layer-count">4 automations</p>
+    </div>
+    <section class="recipe" id="door-open-too-long">
+      <h3>8. Remind me when the back door stays open</h3>
+      <p class="what"><strong>What it does:</strong> Sends a phone notification if the back door has been open for 5 minutes straight.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Security. A clean, single-purpose starter for this layer. Live with the 5-minute window for about a week — if you get notified every time you take the trash out, lengthen it — before adding the next security automation.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>binary_sensor.back_door</code>, <code>notify.my_device</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-door-open-too-long">Copy</button>
+        <pre><code id="yaml-door-open-too-long">alias: &quot;Remind me when the back door stays open&quot;
+id: back_door_open_too_long
+description: &quot;Notifies you if the back door has been open for 5 minutes.&quot;
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.back_door
+    to: &quot;on&quot;
+    for: &quot;00:05:00&quot;
+actions:
+  - action: notify.send_message
+    target:
+      entity_id: notify.my_device
+    data:
+      message: &quot;The back door has been open for 5 minutes.&quot;</code></pre>
+      </div>
+      <p class="sources">Source: State trigger to:+for: (verbatim &quot;Remind me when the back door stays open&quot; example) — <a href="https://www.home-assistant.io/triggers/state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/state/</a><br>Source: notify.send_message with target: entity_id: — <a href="https://www.home-assistant.io/integrations/notify/" target="_blank" rel="noopener">https://www.home-assistant.io/integrations/notify/</a></p>
+    </section>
+    <section class="recipe" id="leak-sensor-phone-alert">
+      <h3>9. Leak sensor sends an urgent phone alert</h3>
+      <p class="what"><strong>What it does:</strong> The instant a water leak sensor trips, sends a phone notification so you can shut off the water before it spreads.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Security. Build this alone first. Live with it for a week to confirm the sensor doesn&#x27;t false-trigger on condensation or a damp mop, before you add any more leak sensors or automations in this layer.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>binary_sensor.basement_leak</code>, <code>notify.mobile_app_your_phone</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-leak-sensor-phone-alert">Copy</button>
+        <pre><code id="yaml-leak-sensor-phone-alert">alias: &quot;Leak sensor sends an urgent phone alert&quot;
+id: leak_sensor_phone_alert
+description: &quot;Sends an urgent phone notification the instant the basement leak sensor trips.&quot;
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.basement_leak
+    to: &quot;on&quot;
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      title: &quot;Water leak detected&quot;
+      message: &quot;The basement leak sensor just tripped. Check it now.&quot;</code></pre>
+      </div>
+      <p class="sources">Source: State trigger to: &quot;on&quot; — <a href="https://www.home-assistant.io/triggers/state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/state/</a><br>Source: notify.mobile_app_&lt;device_id&gt;, title+message — <a href="https://companion.home-assistant.io/docs/notifications/notifications-basic/" target="_blank" rel="noopener">https://companion.home-assistant.io/docs/notifications/notifications-basic/</a></p>
+    </section>
+    <section class="recipe" id="night-camera-motion-alert">
+      <h3>10. Night-time backyard motion sends a photo alert</h3>
+      <p class="what"><strong>What it does:</strong> Between sunset and sunrise, if the backyard camera&#x27;s motion sensor trips, sends a phone notification with a live snapshot attached.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Security. Cameras and motion alerts are exactly the kind of automation the book warns you not to stack all at once. Live with this one camera for a week, check the snapshot actually attaches on your phone, before wiring up a second camera the same way.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>binary_sensor.backyard_camera_motion</code>, <code>camera.backyard</code>, <code>notify.mobile_app_your_phone</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-night-camera-motion-alert">Copy</button>
+        <pre><code id="yaml-night-camera-motion-alert">alias: &quot;Night-time backyard motion sends a photo alert&quot;
+id: night_camera_motion_alert
+description: &quot;Sends a phone notification with a snapshot if backyard motion fires after dark.&quot;
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.backyard_camera_motion
+    to: &quot;on&quot;
+conditions:
+  - condition: sun
+    after: sunset
+    before: sunrise
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      message: &quot;Motion detected in the backyard.&quot;
+      data:
+        image: &quot;/api/camera_proxy/camera.backyard&quot;</code></pre>
+      </div>
+      <p class="sources">Source: State trigger to: &quot;on&quot; — <a href="https://www.home-assistant.io/triggers/state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/state/</a><br>Source: Sunset/sunrise condition — <a href="https://www.home-assistant.io/docs/scripts/conditions/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/conditions/</a><br>Source: notification attachment via /api/camera_proxy/camera.NAME — <a href="https://companion.home-assistant.io/docs/notifications/notification-attachments/" target="_blank" rel="noopener">https://companion.home-assistant.io/docs/notifications/notification-attachments/</a></p>
+    </section>
+    <section class="recipe" id="nightly-open-door-check">
+      <h3>11. Nightly check: is any door still open at 11 PM</h3>
+      <p class="what"><strong>What it does:</strong> Every night at 11 PM, checks the front, back, and garage door sensors together and sends one notification if any of them is still open.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Security. This is a scheduled audit rather than a real-time alert — a different skill from the trigger-based ones above. Live with it for a week before combining it with any other nightly checks into the same automation.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>binary_sensor.front_door</code>, <code>binary_sensor.back_door</code>, <code>binary_sensor.garage_door</code>, <code>notify.mobile_app_your_phone</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-nightly-open-door-check">Copy</button>
+        <pre><code id="yaml-nightly-open-door-check">alias: &quot;Nightly check: is any door still open at 11 PM&quot;
+id: nightly_open_door_check
+description: &quot;At 11 PM, checks the main doors and notifies you if any is still open.&quot;
+mode: single
+triggers:
+  - trigger: time
+    at: &quot;23:00:00&quot;
+conditions:
+  - condition: state
+    entity_id:
+      - binary_sensor.front_door
+      - binary_sensor.back_door
+      - binary_sensor.garage_door
+    match: any
+    state: &quot;on&quot;
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      message: &quot;At least one door is still open at 11 PM. Check the app for which one.&quot;</code></pre>
+      </div>
+      <p class="sources">Source: Time trigger at: — <a href="https://www.home-assistant.io/triggers/time/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/time/</a><br>Source: State condition, multiple entities, match: any — <a href="https://www.home-assistant.io/docs/scripts/conditions/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/conditions/</a><br>Source: notify.mobile_app_&lt;device_id&gt; — <a href="https://companion.home-assistant.io/docs/notifications/notifications-basic/" target="_blank" rel="noopener">https://companion.home-assistant.io/docs/notifications/notifications-basic/</a></p>
+    </section>
+    <div class="layer-heading">
+      <h2>Climate layer</h2>
+      <p class="layer-count">2 automations</p>
+    </div>
+    <section class="recipe" id="comfort-schedule-space-heater">
+      <h3>12. Space heater follows a comfort schedule</h3>
+      <p class="what"><strong>What it does:</strong> Uses a Schedule helper to turn a smart-plug space heater on during your defined comfort hours and off outside them — handy if your heater isn&#x27;t a built-in Home Assistant climate device.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Climate. Note on scope: this pack documents the switch.turn_on action verbatim and the on/off pairing by convention (the same pairing the pack shows for light and input_boolean); it does not document a climate.* service, so this recipe controls the heater as a smart-plug switch instead. Live with the schedule for a week before you add the window-open pause below.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>schedule.heating_comfort_hours</code>, <code>switch.living_room_heater</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-comfort-schedule-space-heater">Copy</button>
+        <pre><code id="yaml-comfort-schedule-space-heater">alias: &quot;Space heater follows a comfort schedule&quot;
+id: comfort_schedule_space_heater
+description: &quot;Turns the living room heater switch on and off with a Schedule helper.&quot;
+mode: single
+triggers:
+  - trigger: state
+    entity_id: schedule.heating_comfort_hours
+    to: &quot;on&quot;
+    id: schedule_on
+  - trigger: state
+    entity_id: schedule.heating_comfort_hours
+    to: &quot;off&quot;
+    id: schedule_off
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: schedule_on
+        sequence:
+          - action: switch.turn_on
+            target:
+              entity_id: switch.living_room_heater
+      - conditions:
+          - condition: trigger
+            id: schedule_off
+        sequence:
+          - action: switch.turn_off
+            target:
+              entity_id: switch.living_room_heater</code></pre>
+      </div>
+      <p class="sources">Source: schedule helper (on while inside a block, off otherwise) — <a href="https://www.home-assistant.io/integrations/schedule/" target="_blank" rel="noopener">https://www.home-assistant.io/integrations/schedule/</a><br>Source: State trigger to: &quot;on&quot;/&quot;off&quot;, id: — <a href="https://www.home-assistant.io/triggers/state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/state/</a><br>Source: Triggered by condition — <a href="https://www.home-assistant.io/docs/scripts/conditions/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/conditions/</a><br>Source: choose — <a href="https://www.home-assistant.io/docs/scripts/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/</a><br>Source: switch.turn_on (verbatim); switch.turn_off inferred from the turn_on/turn_off pairing shown for light (01/05) and input_boolean (04) — <a href="https://www.home-assistant.io/docs/automation/trigger/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/automation/trigger/</a></p>
+    </section>
+    <section class="recipe" id="window-open-heater-pause">
+      <h3>13. Pause the heater while a window is open</h3>
+      <p class="what"><strong>What it does:</strong> If the living room window opens while the heater is running, switches it off; switches it back on when the window closes. Saves energy and avoids heating the outdoors.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Climate (second layer). Add this only after the comfort-schedule automation above has run for about a week. Known simplification: this always turns the heater back on when the window shuts, even if it had been off for another reason — live with that for a week and decide if you need a guard for it before adding more climate layers.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>binary_sensor.living_room_window</code>, <code>switch.living_room_heater</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-window-open-heater-pause">Copy</button>
+        <pre><code id="yaml-window-open-heater-pause">alias: &quot;Pause the heater while a window is open&quot;
+id: window_open_heater_pause
+description: &quot;Turns the heater off while the living room window is open, back on when it shuts.&quot;
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.living_room_window
+    to: &quot;on&quot;
+    for:
+      minutes: 1
+    id: window_open
+  - trigger: state
+    entity_id: binary_sensor.living_room_window
+    to: &quot;off&quot;
+    id: window_closed
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: window_open
+        sequence:
+          - action: switch.turn_off
+            target:
+              entity_id: switch.living_room_heater
+      - conditions:
+          - condition: trigger
+            id: window_closed
+        sequence:
+          - action: switch.turn_on
+            target:
+              entity_id: switch.living_room_heater</code></pre>
+      </div>
+      <p class="sources">Source: State trigger to:+for:, id: — <a href="https://www.home-assistant.io/triggers/state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/state/</a><br>Source: Triggered by condition — <a href="https://www.home-assistant.io/docs/scripts/conditions/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/conditions/</a><br>Source: choose — <a href="https://www.home-assistant.io/docs/scripts/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/</a><br>Source: switch.turn_on (verbatim); switch.turn_off inferred by the same convention as above — <a href="https://www.home-assistant.io/docs/automation/trigger/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/automation/trigger/</a></p>
+    </section>
+    <div class="layer-heading">
+      <h2>Energy layer</h2>
+      <p class="layer-count">3 automations</p>
+    </div>
+    <section class="recipe" id="high-power-usage-alert">
+      <h3>14. Alert me when whole-home power draw spikes</h3>
+      <p class="what"><strong>What it does:</strong> Sends a notification the moment your home&#x27;s total power draw crosses a high threshold — useful for catching a stuck appliance or an unexpected space heater.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Energy. Live with this threshold for a week before tightening or loosening it — a 5000 W trip point is a starting guess, not a measured fact about your home.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>sensor.home_power</code>, <code>notify.mobile_app_your_phone</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-high-power-usage-alert">Copy</button>
+        <pre><code id="yaml-high-power-usage-alert">alias: &quot;Alert me when whole-home power draw spikes&quot;
+id: high_power_usage_alert
+description: &quot;Notifies you when whole-home power draw crosses 5000 W.&quot;
+mode: single
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.home_power
+    above: 5000
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      message: &gt;
+        Whole-home power draw just crossed 5000 W ({{ states(&#x27;sensor.home_power&#x27;) }} W now).</code></pre>
+      </div>
+      <p class="sources">Source: Numeric state trigger (above:) — <a href="https://www.home-assistant.io/triggers/numeric_state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/numeric_state/</a><br>Source: states() function used inside a message template — <a href="https://www.home-assistant.io/template-functions/states/" target="_blank" rel="noopener">https://www.home-assistant.io/template-functions/states/</a><br>Source: notify.mobile_app_&lt;device_id&gt; — <a href="https://companion.home-assistant.io/docs/notifications/notifications-basic/" target="_blank" rel="noopener">https://companion.home-assistant.io/docs/notifications/notifications-basic/</a></p>
+    </section>
+    <section class="recipe" id="appliance-finished-notification">
+      <h3>15. Notify when the washer (or EV charger) finishes</h3>
+      <p class="what"><strong>What it does:</strong> Watches a plug&#x27;s power sensor for the classic &#x27;running, then stopped&#x27; pattern and notifies you once the appliance has been idle for 2 minutes — the same pattern works for an EV charger&#x27;s power sensor, just point it at a different entity.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Energy. This hand-written recipe mirrors the idea behind the community &quot;appliance finished&quot; blueprint (see the blueprint-based recipe later in this pack) but keeps to one sensor. Live with the 2-minute window for a week; a washer&#x27;s rinse-cycle pause can be longer than that on some machines.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>sensor.washer_power</code>, <code>notify.mobile_app_your_phone</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-appliance-finished-notification">Copy</button>
+        <pre><code id="yaml-appliance-finished-notification">alias: &quot;Notify when the washer (or EV charger) finishes&quot;
+id: appliance_finished_notification
+description: &quot;Notifies you once the washer&#x27;s power draw has stayed low for 2 minutes.&quot;
+mode: single
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.washer_power
+    below: 5
+    for:
+      minutes: 2
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      message: &quot;The washer has finished its cycle.&quot;</code></pre>
+      </div>
+      <p class="sources">Source: Numeric state trigger below:+for: — <a href="https://www.home-assistant.io/triggers/numeric_state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/numeric_state/</a><br>Source: &quot;Notify or do something when an appliance finishes&quot; pattern (context only) — <a href="https://community.home-assistant.io/t/notify-or-do-something-when-an-appliance-like-a-dishwasher-or-washing-machine-finishes/254841" target="_blank" rel="noopener">https://community.home-assistant.io/t/notify-or-do-something-when-an-appliance-like-a-dishwasher-or-washing-machine-finishes/254841</a><br>Source: notify.mobile_app_&lt;device_id&gt; — <a href="https://companion.home-assistant.io/docs/notifications/notifications-basic/" target="_blank" rel="noopener">https://companion.home-assistant.io/docs/notifications/notifications-basic/</a></p>
+    </section>
+    <section class="recipe" id="standby-power-reminder">
+      <h3>16. Reminder: the entertainment center has been idling for hours</h3>
+      <p class="what"><strong>What it does:</strong> If the entertainment center&#x27;s smart plug reports low standby power for 3 hours straight, sends a reminder that it&#x27;s probably been left on.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Energy (third layer). Only add this once the two energy automations above have each had their own week. Live with the 3-hour window and adjust it up if it fires during a normal binge-watching evening.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>sensor.entertainment_center_power</code>, <code>notify.mobile_app_your_phone</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-standby-power-reminder">Copy</button>
+        <pre><code id="yaml-standby-power-reminder">alias: &quot;Reminder: the entertainment center has been idling for hours&quot;
+id: standby_power_reminder
+description: &quot;Notifies you if the entertainment center draws standby power for 3 hours straight.&quot;
+mode: single
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.entertainment_center_power
+    above: 3
+    for:
+      hours: 3
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      message: &quot;The entertainment center has been drawing standby power for 3 hours. Still need it on?&quot;</code></pre>
+      </div>
+      <p class="sources">Source: Numeric state trigger above:+for: — <a href="https://www.home-assistant.io/triggers/numeric_state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/numeric_state/</a><br>Source: notify.mobile_app_&lt;device_id&gt; — <a href="https://companion.home-assistant.io/docs/notifications/notifications-basic/" target="_blank" rel="noopener">https://companion.home-assistant.io/docs/notifications/notifications-basic/</a></p>
+    </section>
+    <div class="layer-heading">
+      <h2>Notifications &amp; Voice layer</h2>
+      <p class="layer-count">5 automations</p>
+    </div>
+    <section class="recipe" id="actionable-garage-door-notification">
+      <h3>17. Garage door left open: notification with a Close button</h3>
+      <p class="what"><strong>What it does:</strong> If the garage door has been open for 15 minutes, sends a phone notification with a &#x27;Close Garage&#x27; button right on it — tapping the button closes the door without opening the app.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Notifications &amp; Voice. This is the most advanced recipe in this pack — it waits for your button tap and then acts on it. Do not attempt this as your first automation in this layer; build the plain phone-alert recipes first, live with them for a week, then come back to this one.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>binary_sensor.garage_door</code>, <code>notify.mobile_app_your_phone</code>, <code>cover.garage_door</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-actionable-garage-door-notification">Copy</button>
+        <pre><code id="yaml-actionable-garage-door-notification">alias: &quot;Garage door left open: notification with a Close button&quot;
+id: actionable_garage_door_notification
+description: &quot;Sends an actionable notification with a Close button if the garage stays open.&quot;
+mode: restart
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.garage_door
+    to: &quot;on&quot;
+    for:
+      minutes: 15
+    id: garage_open_too_long
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      message: &quot;The garage door has been open for 15 minutes.&quot;
+      data:
+        actions:
+          - action: &quot;CLOSE_GARAGE&quot;
+            title: &quot;Close Garage&quot;
+  - wait_for_trigger:
+      - trigger: event
+        event_type: mobile_app_notification_action
+        event_data:
+          action: &quot;CLOSE_GARAGE&quot;
+    timeout:
+      minutes: 10
+  - if:
+      - &quot;{{ wait.completed }}&quot;
+    then:
+      - action: cover.close_cover
+        target:
+          entity_id: cover.garage_door</code></pre>
+      </div>
+      <p class="sources">Source: State trigger to:+for: — <a href="https://www.home-assistant.io/triggers/state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/state/</a><br>Source: actionable notification data.actions + mobile_app_notification_action event — <a href="https://companion.home-assistant.io/docs/notifications/actionable-notifications/" target="_blank" rel="noopener">https://companion.home-assistant.io/docs/notifications/actionable-notifications/</a><br>Source: cover.open_cover / cover.close_cover consuming example — <a href="https://companion.home-assistant.io/docs/notifications/actionable-notifications/" target="_blank" rel="noopener">https://companion.home-assistant.io/docs/notifications/actionable-notifications/</a><br>Source: wait_for_trigger, timeout:, wait.completed, if/then — <a href="https://www.home-assistant.io/docs/scripts/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/</a></p>
+    </section>
+    <section class="recipe" id="evening-winddown-tts">
+      <h3>18. Evening wind-down announcement</h3>
+      <p class="what"><strong>What it does:</strong> At 9 PM, speaks a reminder on the living room speaker that lights and doors are about to lock down for the night.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Notifications &amp; Voice. A simple, single-purpose TTS recipe — a good first entry in this layer. Live with the 9 PM time and the wording for a week before adding a second spoken announcement.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>tts.home_speaker</code>, <code>media_player.living_room_speaker</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-evening-winddown-tts">Copy</button>
+        <pre><code id="yaml-evening-winddown-tts">alias: &quot;Evening wind-down announcement&quot;
+id: evening_winddown_tts
+description: &quot;Speaks a 9 PM reminder that lights and doors lock down for the night soon.&quot;
+mode: single
+triggers:
+  - trigger: time
+    at: &quot;21:00:00&quot;
+actions:
+  - action: tts.speak
+    target:
+      entity_id: tts.home_speaker
+    data:
+      media_player_entity_id: media_player.living_room_speaker
+      message: &quot;It&#x27;s 9 PM. Lights and doors lock down for the night in 15 minutes.&quot;</code></pre>
+      </div>
+      <p class="sources">Source: Time trigger — <a href="https://www.home-assistant.io/triggers/time/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/time/</a><br>Source: tts.speak with target: + data.media_player_entity_id + data.message — <a href="https://www.home-assistant.io/actions/tts.speak/" target="_blank" rel="noopener">https://www.home-assistant.io/actions/tts.speak/</a></p>
+    </section>
+    <section class="recipe" id="morning-briefing-weather-calendar">
+      <h3>19. Morning briefing: weather now, and calendar reminders as they start</h3>
+      <p class="what"><strong>What it does:</strong> At 7 AM, speaks the current outdoor temperature and conditions. Through the rest of the day, also speaks a reminder the moment any event starts on your shared calendar.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Notifications &amp; Voice. This combines two very different triggers in one automation — only attempt it once you&#x27;re comfortable with the choose/trigger-id pattern from the lighting layer. Live with it for a week and confirm both branches actually fire before adding more calendar automations.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>sensor.outdoor_temperature</code>, <code>weather.home</code>, <code>calendar.family</code>, <code>tts.home_speaker</code>, <code>media_player.kitchen_speaker</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-morning-briefing-weather-calendar">Copy</button>
+        <pre><code id="yaml-morning-briefing-weather-calendar">alias: &quot;Morning briefing: weather now, and calendar reminders as they start&quot;
+id: morning_briefing_weather_calendar
+description: &quot;Speaks the weather at 7 AM, and a reminder whenever a calendar event starts.&quot;
+mode: queued
+triggers:
+  - trigger: time
+    at: &quot;07:00:00&quot;
+    id: morning_time
+  - trigger: calendar.event_started
+    target:
+      entity_id: calendar.family
+    id: calendar_event
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: morning_time
+        sequence:
+          - action: tts.speak
+            target:
+              entity_id: tts.home_speaker
+            data:
+              media_player_entity_id: media_player.kitchen_speaker
+              message: &gt;
+                Good morning. It is currently {{ states(&#x27;sensor.outdoor_temperature&#x27;) }} degrees,
+                with {{ states(&#x27;weather.home&#x27;) }} conditions.
+      - conditions:
+          - condition: trigger
+            id: calendar_event
+        sequence:
+          - action: tts.speak
+            target:
+              entity_id: tts.home_speaker
+            data:
+              media_player_entity_id: media_player.kitchen_speaker
+              message: &quot;Reminder: {{ trigger.calendar_event.summary }} is starting now.&quot;</code></pre>
+      </div>
+      <p class="sources">Source: Time trigger; calendar.event_started trigger with target: (and the &quot;avoid mode: single for calendar triggers&quot; note, hence mode: queued here) — <a href="https://www.home-assistant.io/triggers/time/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/time/</a>, <a href="https://www.home-assistant.io/triggers/calendar.event_started/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/calendar.event_started/</a><br>Source: Triggered by condition — <a href="https://www.home-assistant.io/docs/scripts/conditions/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/conditions/</a><br>Source: choose; tts.speak — <a href="https://www.home-assistant.io/docs/scripts/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/</a>, <a href="https://www.home-assistant.io/actions/tts.speak/" target="_blank" rel="noopener">https://www.home-assistant.io/actions/tts.speak/</a><br>Source: states() function; trigger.calendar_event.summary — <a href="https://www.home-assistant.io/template-functions/states/" target="_blank" rel="noopener">https://www.home-assistant.io/template-functions/states/</a>, <a href="https://www.home-assistant.io/docs/automation/templating/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/automation/templating/</a></p>
+    </section>
+    <section class="recipe" id="sunrise-wakeup-light-blueprint">
+      <h3>20. Sunrise wake-up light (simple version) — or import the full blueprint</h3>
+      <p class="what"><strong>What it does:</strong> A hand-rollable approximation of Home Assistant&#x27;s popular community &#x27;Wake-up light alarm with sunrise effect&#x27; blueprint: gradually raises the bedroom light in 5 steps, 3 minutes apart, starting at your chosen wake time. For the full-featured version (color-temperature shift, alarm-sensor integration, more options) import the official blueprint instead — see the Source link below.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Lighting (blueprint bonus). Treat this as an alternative to the plain lighting recipes above, not an addition to them — live with either the hand-written version or the imported blueprint for a week before deciding which one you keep.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>input_datetime.wake_up_time</code>, <code>light.bedroom</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-sunrise-wakeup-light-blueprint">Copy</button>
+        <pre><code id="yaml-sunrise-wakeup-light-blueprint">alias: &quot;Sunrise wake-up light (simple version)&quot;
+id: sunrise_wakeup_light_simple
+description: &quot;Gradually raises the bedroom light in 5 steps starting at your chosen wake time.&quot;
+mode: restart
+triggers:
+  - trigger: time
+    at: input_datetime.wake_up_time
+actions:
+  - repeat:
+      count: 5
+      sequence:
+        - action: light.turn_on
+          target:
+            entity_id: light.bedroom
+          data:
+            brightness: &quot;{{ repeat.index * 51 }}&quot;
+        - delay:
+            minutes: 3</code></pre>
+      </div>
+      <p class="sources">Source: Time trigger, at: from an input_datetime helper — <a href="https://www.home-assistant.io/triggers/time/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/time/</a><br>Source: repeat (count:, repeat.index), delay, light.turn_on data.brightness — <a href="https://www.home-assistant.io/docs/scripts/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/</a><br>Source: Wake-up light alarm with sunrise effect — official forum page: <a href="https://community.home-assistant.io/t/wake-up-light-alarm-with-sunrise-effect/255193" target="_blank" rel="noopener">https://community.home-assistant.io/t/wake-up-light-alarm-with-sunrise-effect/255193</a> — official one-click import URL: <a href="https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fgist.github.com%2Fsbyx%2F96c43b13b90ae1c35b872313ba1d2d2d" target="_blank" rel="noopener">https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fgist.github.com%2Fsbyx%2F96c43b13b90ae1c35b872313ba1d2d2d</a></p>
+    </section>
+    <section class="recipe" id="voice-goodnight-command">
+      <h3>21. Voice command: &#x27;good night&#x27; turns off the lights</h3>
+      <p class="what"><strong>What it does:</strong> Say &#x27;good night&#x27; (or &#x27;goodnight everyone&#x27;) to your Assist voice assistant, and every light in the house turns off with one phrase — no app required.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Notifications &amp; Voice. A fun, low-risk way to close out this layer. Live with the two phrases for a week and add more phrasings only if Assist keeps missing you.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>notify.mobile_app_your_phone</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-voice-goodnight-command">Copy</button>
+        <pre><code id="yaml-voice-goodnight-command">alias: &quot;Voice command: &#x27;good night&#x27; turns off the lights&quot;
+id: voice_goodnight_command
+description: &quot;Saying &#x27;good night&#x27; to Assist turns off every light in the house.&quot;
+mode: single
+triggers:
+  - trigger: conversation
+    command:
+      - &quot;good night&quot;
+      - &quot;goodnight everyone&quot;
+actions:
+  - action: light.turn_off
+    target:
+      entity_id: all
+  - action: notify.mobile_app_your_phone
+    data:
+      message: &quot;Good night command received — all lights are off.&quot;</code></pre>
+      </div>
+      <p class="sources">Source: Conversation trigger (sentence triggers) — <a href="https://www.home-assistant.io/integrations/conversation/" target="_blank" rel="noopener">https://www.home-assistant.io/integrations/conversation/</a><br>Source: light.turn_off target: entity_id: all — <a href="https://www.home-assistant.io/docs/automation/yaml/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/automation/yaml/</a><br>Source: notify.mobile_app_&lt;device_id&gt; — <a href="https://companion.home-assistant.io/docs/notifications/notifications-basic/" target="_blank" rel="noopener">https://companion.home-assistant.io/docs/notifications/notifications-basic/</a></p>
+    </section>
+    <div class="layer-heading">
+      <h2>Reliability layer</h2>
+      <p class="layer-count">4 automations</p>
+    </div>
+    <section class="recipe" id="ha-restart-notice">
+      <h3>22. Notice when Home Assistant finishes starting up</h3>
+      <p class="what"><strong>What it does:</strong> Posts an in-app notification every time Home Assistant finishes starting, so you have a visible record if it restarted unexpectedly (for example, after a power blip).</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Reliability. Build this first among the reliability recipes — it&#x27;s the simplest and needs no sensors of your own. Live with it for a week before adding the other reliability automations.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <span class="none">None beyond entities already used above — this automation needs no new devices.</span></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-ha-restart-notice">Copy</button>
+        <pre><code id="yaml-ha-restart-notice">alias: &quot;Notice when Home Assistant finishes starting up&quot;
+id: ha_restart_notice
+description: &quot;Posts an in-app notice every time Home Assistant finishes starting up.&quot;
+mode: single
+triggers:
+  - trigger: homeassistant
+    event: start
+actions:
+  - action: persistent_notification.create
+    data:
+      title: &quot;Home Assistant restarted&quot;
+      message: &quot;Home Assistant finished starting up just now. If you didn&#x27;t restart it yourself, check for a power interruption.&quot;</code></pre>
+      </div>
+      <p class="sources">Source: Home Assistant trigger (event: start) — <a href="https://www.home-assistant.io/triggers/homeassistant/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/homeassistant/</a><br>Source: persistent_notification.create — <a href="https://www.home-assistant.io/actions/persistent_notification.create/" target="_blank" rel="noopener">https://www.home-assistant.io/actions/persistent_notification.create/</a></p>
+    </section>
+    <section class="recipe" id="low-battery-report">
+      <h3>23. Remind me when the door lock battery stays low</h3>
+      <p class="what"><strong>What it does:</strong> If the front door lock&#x27;s battery has read below 20% for a full 30 minutes (not just one shaky reading), posts an in-app notification so you remember to replace it.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Reliability. This recipe watches one sensor by hand. Once you&#x27;ve lived with it for a week and trust the pattern, the official &#x27;Low battery level detection&#x27; community blueprint (linked in the book&#x27;s blueprint chapter notes) does the same job across every battery sensor in your home at once — a natural next layer, not a day-one one.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>sensor.front_door_lock_battery</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-low-battery-report">Copy</button>
+        <pre><code id="yaml-low-battery-report">alias: &quot;Remind me when the door lock battery stays low&quot;
+id: low_battery_report
+description: &quot;Posts an in-app notice if the front door lock battery stays below 20% for 30 minutes.&quot;
+mode: single
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.front_door_lock_battery
+    below: 20
+    for:
+      minutes: 30
+actions:
+  - action: persistent_notification.create
+    data:
+      title: &quot;Low battery&quot;
+      message: &quot;The front door lock battery has been below 20% for 30 minutes.&quot;</code></pre>
+      </div>
+      <p class="sources">Source: Numeric state trigger below:+for: (verbatim &quot;Remind me when the door lock battery stays low&quot;) — <a href="https://www.home-assistant.io/triggers/numeric_state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/numeric_state/</a><br>Source: persistent_notification.create — <a href="https://www.home-assistant.io/actions/persistent_notification.create/" target="_blank" rel="noopener">https://www.home-assistant.io/actions/persistent_notification.create/</a></p>
+    </section>
+    <section class="recipe" id="goodnight-routine-failure-notice">
+      <h3>24. Goodnight routine: notice if a door is still open</h3>
+      <p class="what"><strong>What it does:</strong> Runs a goodnight check at 10:30 PM. If the back door is still open, posts an in-app failure notice explaining exactly what wasn&#x27;t ready, and marks the run as failed so it stands out in Logbook and traces.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Reliability. This is the pattern to copy any time you want an automation to tell you WHY it didn&#x27;t do what you expected, instead of failing silently. Live with it for a week, then reuse the same if / persistent_notification.create / stop shape for your own routines.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>binary_sensor.back_door</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-goodnight-routine-failure-notice">Copy</button>
+        <pre><code id="yaml-goodnight-routine-failure-notice">alias: &quot;Goodnight routine: notice if a door is still open&quot;
+id: goodnight_routine_failure_notice
+description: &quot;At 10:30 PM, posts a failure notice if the back door is still open.&quot;
+mode: single
+triggers:
+  - trigger: time
+    at: &quot;22:30:00&quot;
+actions:
+  - if:
+      - condition: state
+        entity_id: binary_sensor.back_door
+        state: &quot;on&quot;
+    then:
+      - action: persistent_notification.create
+        data:
+          title: &quot;Goodnight routine did not complete&quot;
+          message: &quot;The back door is still open, so the goodnight routine stopped early. Close it and run the routine again.&quot;
+      - stop: &quot;Back door still open&quot;
+        error: true
+    else:
+      - action: persistent_notification.create
+        data:
+          title: &quot;Goodnight routine complete&quot;
+          message: &quot;All checked doors were closed. Goodnight!&quot;</code></pre>
+      </div>
+      <p class="sources">Source: Time trigger — <a href="https://www.home-assistant.io/triggers/time/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/time/</a><br>Source: State condition — <a href="https://www.home-assistant.io/docs/scripts/conditions/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/conditions/</a><br>Source: if/then/else; stop with error: true; persistent_notification.create — <a href="https://www.home-assistant.io/docs/scripts/" target="_blank" rel="noopener">https://www.home-assistant.io/docs/scripts/</a>, <a href="https://www.home-assistant.io/actions/persistent_notification.create/" target="_blank" rel="noopener">https://www.home-assistant.io/actions/persistent_notification.create/</a></p>
+    </section>
+    <section class="recipe" id="sensor-stopped-updating-alert">
+      <h3>25. Notify me when the power sensor stops updating</h3>
+      <p class="what"><strong>What it does:</strong> If the whole-home power sensor&#x27;s value hasn&#x27;t changed at all for 30 minutes, posts an in-app notice — a stuck sensor can otherwise sit silently broken for days.</p>
+      <div class="method-note"><strong>The Layer Method note:</strong>Layer: Reliability (fourth recipe, a bonus beyond the book&#x27;s core three). Live with it for a week; if it never fires, that&#x27;s good news, not a sign it&#x27;s broken — it&#x27;s only supposed to speak up when something goes quiet.</div>
+      <p class="placeholders"><strong>Placeholders to replace:</strong> <code>sensor.home_power</code></p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" data-target="yaml-sensor-stopped-updating-alert">Copy</button>
+        <pre><code id="yaml-sensor-stopped-updating-alert">alias: &quot;Notify me when the power sensor stops updating&quot;
+id: sensor_stopped_updating_alert
+description: &quot;Posts an in-app notice if the whole-home power sensor hasn&#x27;t updated in 30 minutes.&quot;
+mode: single
+triggers:
+  - trigger: state
+    entity_id: sensor.home_power
+    to: null
+    for:
+      minutes: 30
+actions:
+  - action: persistent_notification.create
+    data:
+      title: &quot;Sensor may be stuck&quot;
+      message: &quot;The power sensor value has not changed for 30 minutes.&quot;</code></pre>
+      </div>
+      <p class="sources">Source: State trigger to: null + for: (verbatim &quot;Notify me when power stops updating&quot;) — <a href="https://www.home-assistant.io/triggers/state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/state/</a><br>Source: persistent_notification.create — <a href="https://www.home-assistant.io/actions/persistent_notification.create/" target="_blank" rel="noopener">https://www.home-assistant.io/actions/persistent_notification.create/</a></p>
+    </section>
+
+      <section class="soft-review">
+        <h2>Already Read the Book?</h2>
+        <p>If you have read Home Assistant Smart Home for Beginners, you are welcome to share your honest opinion on Amazon. Reviews - positive, mixed, or critical - help other readers decide whether the book is a good fit. There is no obligation.</p>
+        <a class="text-link" href="https://www.amazon.com/review/create-review?asin=B0GH15PC62">Share an honest Amazon review</a>
+      </section>
+
+    <!-- AMZN_DISCLOSURE -->
+    <p style="margin:1.25rem 0;padding:.75rem 1rem;border-top:1px solid rgba(128,128,128,.25);font-size:.85rem;line-height:1.5;opacity:.85">
+      As an Amazon Associate I earn from qualifying purchases. Certain content that appears on this
+      site comes from Amazon. This content is provided &quot;as is&quot; and is subject to change or
+      removal at any time.
+    </p>
+    <!-- /AMZN_DISCLOSURE -->
+    <footer class="footer">
+      <p>This companion resource is free and does not require a purchase or review.</p>
+      <p><a href="/">The Skill Mill Catalog</a> / <a href="/blog/">Blog</a> / <a href="../index.html">Smart Home Setup Audit Sheet</a></p>
+    </footer>
+  </main>
+
+  <script>
+    document.querySelectorAll('.copy-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var codeEl = document.getElementById(btn.getAttribute('data-target'));
+        if (!codeEl) return;
+        var text = codeEl.textContent;
+        function showCopied() {
+          var original = 'Copy';
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(function() { btn.textContent = original; btn.classList.remove('copied'); }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(showCopied, function() { fallbackCopy(text, showCopied); });
+        } else {
+          fallbackCopy(text, showCopied);
+        }
+      });
+    });
+    function fallbackCopy(text, done) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) { /* clipboard unavailable */ }
+      document.body.removeChild(ta);
+      done();
+    }
+  </script>
+</body>
+</html>

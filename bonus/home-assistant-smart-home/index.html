@@ -55,6 +55,16 @@
       .hero-inner, .container { padding: 0; max-width: none; }
       body { font-size: 12pt; }
     }
+    /* --- Added 2026-09-23: second resource block promoting the 25-automations bonus --- */
+    .automations-promo { background: #2f6b57; }
+    .automations-promo-inner { max-width: 980px; margin: 0 auto; padding: 22px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; }
+    .automations-promo-text .eyebrow { color: #cfe3da; margin-bottom: 4px; }
+    .automations-promo-text h2 { color: #fff; margin: 0 0 6px; font-size: 1.5rem; }
+    .automations-promo-text p { color: #e3efe9; margin: 0; max-width: 640px; font-size: 0.98rem; }
+    .automations-promo-btn { min-height: 46px; border-radius: 6px; padding: 12px 20px; background: #fff; color: #2f6b57; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
+    @media print {
+      .automations-promo { display: none !important; }
+    }
   </style>
   <script src="/analytics.js" defer></script>
 
@@ -135,6 +145,17 @@
       <nav class="nav"><a href="/">Catalog</a><a href="/blog/">Blog</a><a href="https://theskillmillbooks.com/home-assistant-smart-home/">Book Page</a></nav>
     </div>
   </header>
+
+  <section class="automations-promo">
+    <div class="automations-promo-inner">
+      <div class="automations-promo-text">
+        <p class="eyebrow">New Reader Bonus</p>
+        <h2>25 ready-to-import automations</h2>
+        <p>Full, copy-paste YAML for Home Assistant 2026.9, organized with the book's Layer Method: build one, live with it for about a week, then add the next.</p>
+      </div>
+      <a class="automations-promo-btn" href="automations/">Get the 25 automations</a>
+    </div>
+  </section>
 
   <section class="hero">
     <div class="hero-inner">

@@ -1,0 +1,738 @@
+# =============================================================================
+# 25 Ready-to-Import Home Assistant Automations
+# Companion pack for: Home Assistant Smart Home for Beginners (2nd Edition)
+# Publisher: Digital Basics Press  |  The Skill Mill reader bonus
+#
+# Targets Home Assistant Core 2026.9 (released 2026-09-02, patched through 2026.9.3).
+# Current schema throughout: plural triggers:/conditions:/actions:, trigger: <type>,
+# action: <domain>.<service>. No legacy platform:/service: keys anywhere in this file.
+#
+# THE LAYER METHOD (from the book, Chapter 12): build one complete automation
+# workflow, live with it for about a week, then add the next one. One layer at a
+# time, always. Each block below names its layer and what to watch for that week.
+#
+# HOW TO USE THIS FILE
+#   Do not paste the whole file into automations.yaml at once. Home Assistant's
+#   automations.yaml is a LIST, so you would need to add a leading "- " before each
+#   automation's "alias:" line and re-indent it one level. It is far simpler to:
+#     1) In the Home Assistant UI, go to Settings > Automations & Scenes > Automations.
+#     2) Select "Add Automation" > "Edit in YAML".
+#     3) Copy ONE automation block below (from "alias:" to the blank line after its
+#        last action) and paste it in, exactly as printed.
+#     4) Replace every placeholder entity id (listed above each block) with your own,
+#        then save.
+#   Repeat for the next automation only after living with this one for about a week.
+#
+# Every construct in this file traces to the official Home Assistant docs, fetched
+# verbatim on 2026-09-23. Full source references for each automation are printed in
+# bonus_automations/automations.json and on the reader bonus page.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 01. Hallway light follows motion, with a 2-minute off-delay
+# Layer: Lighting
+# What it does: Turns the hallway light on the instant motion is seen, and off automatically once the hallway has been clear of motion for 2 minutes.
+# Placeholders to replace: binary_sensor.hallway_motion, light.hallway
+# Layer Method note: Layer: Lighting. This is a good first automation to build, full stop. Live with it for about a week before you touch anything else — watch whether 2 minutes is too short (the light keeps snapping off while you're still in the hallway) or too long (it stays on a while after you've left), and adjust the for: value before you add the next lighting automation.
+# -----------------------------------------------------------------------------
+alias: "Hallway light follows motion, with a 2-minute off-delay"
+id: hallway_motion_light_off_delay
+description: "Turns the hallway light on for motion and off 2 minutes after motion clears."
+mode: restart
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.hallway_motion
+    to: "on"
+    id: motion_on
+  - trigger: state
+    entity_id: binary_sensor.hallway_motion
+    to: "off"
+    for:
+      minutes: 2
+    id: motion_off
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: motion_on
+        sequence:
+          - action: light.turn_on
+            target:
+              entity_id: light.hallway
+      - conditions:
+          - condition: trigger
+            id: motion_off
+        sequence:
+          - action: light.turn_off
+            target:
+              entity_id: light.hallway
+
+
+# -----------------------------------------------------------------------------
+# 02. Turn on the porch and living room lights at sunset
+# Layer: Lighting
+# What it does: Turns on two lights 30 minutes before sunset every day, using Home Assistant's own sunset calculation for your location — no fixed clock time to update with the seasons.
+# Placeholders to replace: light.porch, light.living_room
+# Layer Method note: Layer: Lighting. Add this only after the motion-light layer above has been running quietly for about a week. Live with the -30 minute offset for a week and see if it feels early or late before adding a third lighting automation.
+# -----------------------------------------------------------------------------
+alias: "Turn on the porch and living room lights at sunset"
+id: sunset_porch_living_room_lights
+description: "Turns on the porch and living room lights 30 minutes before sunset."
+mode: single
+triggers:
+  - trigger: sun
+    event: sunset
+    offset: "-00:30:00"
+actions:
+  - action: light.turn_on
+    target:
+      entity_id:
+        - light.porch
+        - light.living_room
+    data:
+      brightness: 180
+
+
+# -----------------------------------------------------------------------------
+# 03. Closet light turns off only after motion is truly gone
+# Layer: Lighting
+# What it does: Turns the closet light off 5 minutes after motion clears, instead of the instant the sensor blips clear — the fix for a light that flickers off while you're still standing there.
+# Placeholders to replace: binary_sensor.closet_motion, light.closet
+# Layer Method note: Layer: Lighting. This one exists to teach a single idea: for: is what stops a light from flickering off. Live with it for a week in one room, confirm the flicker is gone, then reuse the same for: pattern anywhere else you saw the same problem — don't add it everywhere on day one.
+# -----------------------------------------------------------------------------
+alias: "Closet light turns off only after motion is truly gone"
+id: closet_light_no_flicker_off_delay
+description: "Turns the closet light off 5 minutes after motion clears, to stop it flickering off."
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.closet_motion
+    to: "off"
+    for:
+      minutes: 5
+actions:
+  - action: light.turn_off
+    target:
+      entity_id: light.closet
+
+
+# -----------------------------------------------------------------------------
+# 04. Office motion light: bright by day, dim after dark
+# Layer: Lighting
+# What it does: One motion sensor, two behaviors: full brightness during the day, a low dim glow once the sun is down, so the light never blinds you at night.
+# Placeholders to replace: binary_sensor.office_motion, light.office
+# Layer Method note: Layer: Lighting. This is a step up from a plain motion light — it adds a condition branch. Only build this once you're completely comfortable with the simple motion-light pattern above; live with the two brightness levels for a week and adjust the dim value before adding more branches to any automation.
+# -----------------------------------------------------------------------------
+alias: "Office motion light: bright by day, dim after dark"
+id: office_motion_light_day_night_brightness
+description: "Motion turns the office light on at full brightness by day, dim after dark."
+mode: restart
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.office_motion
+    to: "on"
+actions:
+  - if:
+      - condition: sun
+        after: sunset
+        before: sunrise
+    then:
+      - action: light.turn_on
+        target:
+          entity_id: light.office
+        data:
+          brightness: 40
+    else:
+      - action: light.turn_on
+        target:
+          entity_id: light.office
+        data:
+          brightness: 255
+
+
+# -----------------------------------------------------------------------------
+# 05. Welcome-home lights, but only after dark
+# Layer: Presence
+# What it does: When a household member's presence changes to home, turns on the entryway and living room lights — but only if it's already dark outside, so it stays quiet on a summer evening.
+# Placeholders to replace: person.family_member, light.entryway, light.living_room
+# Layer Method note: Layer: Presence. Build this as its own single automation before adding any other presence-based automations. Live with it for a week and check it doesn't fire on a false presence blip (a phone reconnecting to Wi-Fi from the driveway, for example) before you add the next presence layer below.
+# -----------------------------------------------------------------------------
+alias: "Welcome-home lights, but only after dark"
+id: welcome_home_lights_after_dark
+description: "Turns on the entryway and living room lights when someone arrives home after dark."
+mode: single
+triggers:
+  - trigger: state
+    entity_id: person.family_member
+    to: "home"
+conditions:
+  - condition: sun
+    after: sunset
+    before: sunrise
+actions:
+  - action: light.turn_on
+    target:
+      entity_id:
+        - light.entryway
+        - light.living_room
+    data:
+      brightness: 200
+
+
+# -----------------------------------------------------------------------------
+# 06. Everyone left: lights off and Eco Mode on
+# Layer: Presence
+# What it does: When the home zone's tracked-person count drops to zero, turns off every light and flips on an Eco Mode helper that your own thermostat automation, or your thermostat's own schedule, can watch for.
+# Placeholders to replace: input_boolean.eco_mode
+# Layer Method note: Layer: Presence. Note on scope: this pack does not document a specific climate.* service call, so this recipe deliberately hands off to an Eco Mode helper rather than guessing your thermostat integration's exact action — wire that helper into your own thermostat automation once this layer has run cleanly for about a week.
+# -----------------------------------------------------------------------------
+alias: "Everyone left: lights off and Eco Mode on"
+id: everyone_left_lights_off_eco_mode
+description: "When nobody is left in the home zone, turns off all lights and enables Eco Mode."
+mode: single
+triggers:
+  - trigger: numeric_state
+    entity_id: zone.home
+    below: 1
+actions:
+  - action: light.turn_off
+    target:
+      entity_id: all
+  - action: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.eco_mode
+
+
+# -----------------------------------------------------------------------------
+# 07. Notify if a door is still open after everyone leaves
+# Layer: Presence
+# What it does: A second, independent layer on top of the 'everyone left' automation above: if the front door is still reading open once the home is empty, sends a phone notification.
+# Placeholders to replace: binary_sensor.front_door, notify.mobile_app_your_phone
+# Layer Method note: Layer: Presence (second layer). This is the book's method in miniature: it reacts to the exact same trigger as 'Everyone left: lights off and Eco Mode on', but is its own automation, added only after that first one had a clean week. Keep them separate rather than merging them into one automation.
+# -----------------------------------------------------------------------------
+alias: "Notify if a door is still open after everyone leaves"
+id: door_open_when_everyone_left
+description: "Notifies you if the front door is still open once the home zone is empty."
+mode: single
+triggers:
+  - trigger: numeric_state
+    entity_id: zone.home
+    below: 1
+conditions:
+  - condition: state
+    entity_id: binary_sensor.front_door
+    state: "on"
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      message: "Everyone left, but the front door is still open."
+
+
+# -----------------------------------------------------------------------------
+# 08. Remind me when the back door stays open
+# Layer: Security
+# What it does: Sends a phone notification if the back door has been open for 5 minutes straight.
+# Placeholders to replace: binary_sensor.back_door, notify.my_device
+# Layer Method note: Layer: Security. A clean, single-purpose starter for this layer. Live with the 5-minute window for about a week — if you get notified every time you take the trash out, lengthen it — before adding the next security automation.
+# -----------------------------------------------------------------------------
+alias: "Remind me when the back door stays open"
+id: back_door_open_too_long
+description: "Notifies you if the back door has been open for 5 minutes."
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.back_door
+    to: "on"
+    for: "00:05:00"
+actions:
+  - action: notify.send_message
+    target:
+      entity_id: notify.my_device
+    data:
+      message: "The back door has been open for 5 minutes."
+
+
+# -----------------------------------------------------------------------------
+# 09. Leak sensor sends an urgent phone alert
+# Layer: Security
+# What it does: The instant a water leak sensor trips, sends a phone notification so you can shut off the water before it spreads.
+# Placeholders to replace: binary_sensor.basement_leak, notify.mobile_app_your_phone
+# Layer Method note: Layer: Security. Build this alone first. Live with it for a week to confirm the sensor doesn't false-trigger on condensation or a damp mop, before you add any more leak sensors or automations in this layer.
+# -----------------------------------------------------------------------------
+alias: "Leak sensor sends an urgent phone alert"
+id: leak_sensor_phone_alert
+description: "Sends an urgent phone notification the instant the basement leak sensor trips."
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.basement_leak
+    to: "on"
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      title: "Water leak detected"
+      message: "The basement leak sensor just tripped. Check it now."
+
+
+# -----------------------------------------------------------------------------
+# 10. Night-time backyard motion sends a photo alert
+# Layer: Security
+# What it does: Between sunset and sunrise, if the backyard camera's motion sensor trips, sends a phone notification with a live snapshot attached.
+# Placeholders to replace: binary_sensor.backyard_camera_motion, camera.backyard, notify.mobile_app_your_phone
+# Layer Method note: Layer: Security. Cameras and motion alerts are exactly the kind of automation the book warns you not to stack all at once. Live with this one camera for a week, check the snapshot actually attaches on your phone, before wiring up a second camera the same way.
+# -----------------------------------------------------------------------------
+alias: "Night-time backyard motion sends a photo alert"
+id: night_camera_motion_alert
+description: "Sends a phone notification with a snapshot if backyard motion fires after dark."
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.backyard_camera_motion
+    to: "on"
+conditions:
+  - condition: sun
+    after: sunset
+    before: sunrise
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      message: "Motion detected in the backyard."
+      data:
+        image: "/api/camera_proxy/camera.backyard"
+
+
+# -----------------------------------------------------------------------------
+# 11. Nightly check: is any door still open at 11 PM
+# Layer: Security
+# What it does: Every night at 11 PM, checks the front, back, and garage door sensors together and sends one notification if any of them is still open.
+# Placeholders to replace: binary_sensor.front_door, binary_sensor.back_door, binary_sensor.garage_door, notify.mobile_app_your_phone
+# Layer Method note: Layer: Security. This is a scheduled audit rather than a real-time alert — a different skill from the trigger-based ones above. Live with it for a week before combining it with any other nightly checks into the same automation.
+# -----------------------------------------------------------------------------
+alias: "Nightly check: is any door still open at 11 PM"
+id: nightly_open_door_check
+description: "At 11 PM, checks the main doors and notifies you if any is still open."
+mode: single
+triggers:
+  - trigger: time
+    at: "23:00:00"
+conditions:
+  - condition: state
+    entity_id:
+      - binary_sensor.front_door
+      - binary_sensor.back_door
+      - binary_sensor.garage_door
+    match: any
+    state: "on"
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      message: "At least one door is still open at 11 PM. Check the app for which one."
+
+
+# -----------------------------------------------------------------------------
+# 12. Space heater follows a comfort schedule
+# Layer: Climate
+# What it does: Uses a Schedule helper to turn a smart-plug space heater on during your defined comfort hours and off outside them — handy if your heater isn't a built-in Home Assistant climate device.
+# Placeholders to replace: schedule.heating_comfort_hours, switch.living_room_heater
+# Layer Method note: Layer: Climate. Note on scope: this pack documents the switch.turn_on action verbatim and the on/off pairing by convention (the same pairing the pack shows for light and input_boolean); it does not document a climate.* service, so this recipe controls the heater as a smart-plug switch instead. Live with the schedule for a week before you add the window-open pause below.
+# -----------------------------------------------------------------------------
+alias: "Space heater follows a comfort schedule"
+id: comfort_schedule_space_heater
+description: "Turns the living room heater switch on and off with a Schedule helper."
+mode: single
+triggers:
+  - trigger: state
+    entity_id: schedule.heating_comfort_hours
+    to: "on"
+    id: schedule_on
+  - trigger: state
+    entity_id: schedule.heating_comfort_hours
+    to: "off"
+    id: schedule_off
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: schedule_on
+        sequence:
+          - action: switch.turn_on
+            target:
+              entity_id: switch.living_room_heater
+      - conditions:
+          - condition: trigger
+            id: schedule_off
+        sequence:
+          - action: switch.turn_off
+            target:
+              entity_id: switch.living_room_heater
+
+
+# -----------------------------------------------------------------------------
+# 13. Pause the heater while a window is open
+# Layer: Climate
+# What it does: If the living room window opens while the heater is running, switches it off; switches it back on when the window closes. Saves energy and avoids heating the outdoors.
+# Placeholders to replace: binary_sensor.living_room_window, switch.living_room_heater
+# Layer Method note: Layer: Climate (second layer). Add this only after the comfort-schedule automation above has run for about a week. Known simplification: this always turns the heater back on when the window shuts, even if it had been off for another reason — live with that for a week and decide if you need a guard for it before adding more climate layers.
+# -----------------------------------------------------------------------------
+alias: "Pause the heater while a window is open"
+id: window_open_heater_pause
+description: "Turns the heater off while the living room window is open, back on when it shuts."
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.living_room_window
+    to: "on"
+    for:
+      minutes: 1
+    id: window_open
+  - trigger: state
+    entity_id: binary_sensor.living_room_window
+    to: "off"
+    id: window_closed
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: window_open
+        sequence:
+          - action: switch.turn_off
+            target:
+              entity_id: switch.living_room_heater
+      - conditions:
+          - condition: trigger
+            id: window_closed
+        sequence:
+          - action: switch.turn_on
+            target:
+              entity_id: switch.living_room_heater
+
+
+# -----------------------------------------------------------------------------
+# 14. Alert me when whole-home power draw spikes
+# Layer: Energy
+# What it does: Sends a notification the moment your home's total power draw crosses a high threshold — useful for catching a stuck appliance or an unexpected space heater.
+# Placeholders to replace: sensor.home_power, notify.mobile_app_your_phone
+# Layer Method note: Layer: Energy. Live with this threshold for a week before tightening or loosening it — a 5000 W trip point is a starting guess, not a measured fact about your home.
+# -----------------------------------------------------------------------------
+alias: "Alert me when whole-home power draw spikes"
+id: high_power_usage_alert
+description: "Notifies you when whole-home power draw crosses 5000 W."
+mode: single
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.home_power
+    above: 5000
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      message: >
+        Whole-home power draw just crossed 5000 W ({{ states('sensor.home_power') }} W now).
+
+
+# -----------------------------------------------------------------------------
+# 15. Notify when the washer (or EV charger) finishes
+# Layer: Energy
+# What it does: Watches a plug's power sensor for the classic 'running, then stopped' pattern and notifies you once the appliance has been idle for 2 minutes — the same pattern works for an EV charger's power sensor, just point it at a different entity.
+# Placeholders to replace: sensor.washer_power, notify.mobile_app_your_phone
+# Layer Method note: Layer: Energy. This hand-written recipe mirrors the idea behind the community "appliance finished" blueprint (see the blueprint-based recipe later in this pack) but keeps to one sensor. Live with the 2-minute window for a week; a washer's rinse-cycle pause can be longer than that on some machines.
+# -----------------------------------------------------------------------------
+alias: "Notify when the washer (or EV charger) finishes"
+id: appliance_finished_notification
+description: "Notifies you once the washer's power draw has stayed low for 2 minutes."
+mode: single
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.washer_power
+    below: 5
+    for:
+      minutes: 2
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      message: "The washer has finished its cycle."
+
+
+# -----------------------------------------------------------------------------
+# 16. Reminder: the entertainment center has been idling for hours
+# Layer: Energy
+# What it does: If the entertainment center's smart plug reports low standby power for 3 hours straight, sends a reminder that it's probably been left on.
+# Placeholders to replace: sensor.entertainment_center_power, notify.mobile_app_your_phone
+# Layer Method note: Layer: Energy (third layer). Only add this once the two energy automations above have each had their own week. Live with the 3-hour window and adjust it up if it fires during a normal binge-watching evening.
+# -----------------------------------------------------------------------------
+alias: "Reminder: the entertainment center has been idling for hours"
+id: standby_power_reminder
+description: "Notifies you if the entertainment center draws standby power for 3 hours straight."
+mode: single
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.entertainment_center_power
+    above: 3
+    for:
+      hours: 3
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      message: "The entertainment center has been drawing standby power for 3 hours. Still need it on?"
+
+
+# -----------------------------------------------------------------------------
+# 17. Garage door left open: notification with a Close button
+# Layer: Notifications & Voice
+# What it does: If the garage door has been open for 15 minutes, sends a phone notification with a 'Close Garage' button right on it — tapping the button closes the door without opening the app.
+# Placeholders to replace: binary_sensor.garage_door, notify.mobile_app_your_phone, cover.garage_door
+# Layer Method note: Layer: Notifications & Voice. This is the most advanced recipe in this pack — it waits for your button tap and then acts on it. Do not attempt this as your first automation in this layer; build the plain phone-alert recipes first, live with them for a week, then come back to this one.
+# -----------------------------------------------------------------------------
+alias: "Garage door left open: notification with a Close button"
+id: actionable_garage_door_notification
+description: "Sends an actionable notification with a Close button if the garage stays open."
+mode: restart
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.garage_door
+    to: "on"
+    for:
+      minutes: 15
+    id: garage_open_too_long
+actions:
+  - action: notify.mobile_app_your_phone
+    data:
+      message: "The garage door has been open for 15 minutes."
+      data:
+        actions:
+          - action: "CLOSE_GARAGE"
+            title: "Close Garage"
+  - wait_for_trigger:
+      - trigger: event
+        event_type: mobile_app_notification_action
+        event_data:
+          action: "CLOSE_GARAGE"
+    timeout:
+      minutes: 10
+  - if:
+      - "{{ wait.completed }}"
+    then:
+      - action: cover.close_cover
+        target:
+          entity_id: cover.garage_door
+
+
+# -----------------------------------------------------------------------------
+# 18. Evening wind-down announcement
+# Layer: Notifications & Voice
+# What it does: At 9 PM, speaks a reminder on the living room speaker that lights and doors are about to lock down for the night.
+# Placeholders to replace: tts.home_speaker, media_player.living_room_speaker
+# Layer Method note: Layer: Notifications & Voice. A simple, single-purpose TTS recipe — a good first entry in this layer. Live with the 9 PM time and the wording for a week before adding a second spoken announcement.
+# -----------------------------------------------------------------------------
+alias: "Evening wind-down announcement"
+id: evening_winddown_tts
+description: "Speaks a 9 PM reminder that lights and doors lock down for the night soon."
+mode: single
+triggers:
+  - trigger: time
+    at: "21:00:00"
+actions:
+  - action: tts.speak
+    target:
+      entity_id: tts.home_speaker
+    data:
+      media_player_entity_id: media_player.living_room_speaker
+      message: "It's 9 PM. Lights and doors lock down for the night in 15 minutes."
+
+
+# -----------------------------------------------------------------------------
+# 19. Morning briefing: weather now, and calendar reminders as they start
+# Layer: Notifications & Voice
+# What it does: At 7 AM, speaks the current outdoor temperature and conditions. Through the rest of the day, also speaks a reminder the moment any event starts on your shared calendar.
+# Placeholders to replace: sensor.outdoor_temperature, weather.home, calendar.family, tts.home_speaker, media_player.kitchen_speaker
+# Layer Method note: Layer: Notifications & Voice. This combines two very different triggers in one automation — only attempt it once you're comfortable with the choose/trigger-id pattern from the lighting layer. Live with it for a week and confirm both branches actually fire before adding more calendar automations.
+# -----------------------------------------------------------------------------
+alias: "Morning briefing: weather now, and calendar reminders as they start"
+id: morning_briefing_weather_calendar
+description: "Speaks the weather at 7 AM, and a reminder whenever a calendar event starts."
+mode: queued
+triggers:
+  - trigger: time
+    at: "07:00:00"
+    id: morning_time
+  - trigger: calendar.event_started
+    target:
+      entity_id: calendar.family
+    id: calendar_event
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: morning_time
+        sequence:
+          - action: tts.speak
+            target:
+              entity_id: tts.home_speaker
+            data:
+              media_player_entity_id: media_player.kitchen_speaker
+              message: >
+                Good morning. It is currently {{ states('sensor.outdoor_temperature') }} degrees,
+                with {{ states('weather.home') }} conditions.
+      - conditions:
+          - condition: trigger
+            id: calendar_event
+        sequence:
+          - action: tts.speak
+            target:
+              entity_id: tts.home_speaker
+            data:
+              media_player_entity_id: media_player.kitchen_speaker
+              message: "Reminder: {{ trigger.calendar_event.summary }} is starting now."
+
+
+# -----------------------------------------------------------------------------
+# 20. Sunrise wake-up light (simple version) — or import the full blueprint
+# Layer: Notifications & Voice
+# What it does: A hand-rollable approximation of Home Assistant's popular community 'Wake-up light alarm with sunrise effect' blueprint: gradually raises the bedroom light in 5 steps, 3 minutes apart, starting at your chosen wake time. For the full-featured version (color-temperature shift, alarm-sensor integration, more options) import the official blueprint instead — see the Source link below.
+# Placeholders to replace: input_datetime.wake_up_time, light.bedroom
+# Layer Method note: Layer: Lighting (blueprint bonus). Treat this as an alternative to the plain lighting recipes above, not an addition to them — live with either the hand-written version or the imported blueprint for a week before deciding which one you keep.
+# -----------------------------------------------------------------------------
+alias: "Sunrise wake-up light (simple version)"
+id: sunrise_wakeup_light_simple
+description: "Gradually raises the bedroom light in 5 steps starting at your chosen wake time."
+mode: restart
+triggers:
+  - trigger: time
+    at: input_datetime.wake_up_time
+actions:
+  - repeat:
+      count: 5
+      sequence:
+        - action: light.turn_on
+          target:
+            entity_id: light.bedroom
+          data:
+            brightness: "{{ repeat.index * 51 }}"
+        - delay:
+            minutes: 3
+
+
+# -----------------------------------------------------------------------------
+# 21. Voice command: 'good night' turns off the lights
+# Layer: Notifications & Voice
+# What it does: Say 'good night' (or 'goodnight everyone') to your Assist voice assistant, and every light in the house turns off with one phrase — no app required.
+# Placeholders to replace: notify.mobile_app_your_phone
+# Layer Method note: Layer: Notifications & Voice. A fun, low-risk way to close out this layer. Live with the two phrases for a week and add more phrasings only if Assist keeps missing you.
+# -----------------------------------------------------------------------------
+alias: "Voice command: 'good night' turns off the lights"
+id: voice_goodnight_command
+description: "Saying 'good night' to Assist turns off every light in the house."
+mode: single
+triggers:
+  - trigger: conversation
+    command:
+      - "good night"
+      - "goodnight everyone"
+actions:
+  - action: light.turn_off
+    target:
+      entity_id: all
+  - action: notify.mobile_app_your_phone
+    data:
+      message: "Good night command received — all lights are off."
+
+
+# -----------------------------------------------------------------------------
+# 22. Notice when Home Assistant finishes starting up
+# Layer: Reliability
+# What it does: Posts an in-app notification every time Home Assistant finishes starting, so you have a visible record if it restarted unexpectedly (for example, after a power blip).
+# Placeholders to replace: none — this one only needs your own devices already used above.
+# Layer Method note: Layer: Reliability. Build this first among the reliability recipes — it's the simplest and needs no sensors of your own. Live with it for a week before adding the other reliability automations.
+# -----------------------------------------------------------------------------
+alias: "Notice when Home Assistant finishes starting up"
+id: ha_restart_notice
+description: "Posts an in-app notice every time Home Assistant finishes starting up."
+mode: single
+triggers:
+  - trigger: homeassistant
+    event: start
+actions:
+  - action: persistent_notification.create
+    data:
+      title: "Home Assistant restarted"
+      message: "Home Assistant finished starting up just now. If you didn't restart it yourself, check for a power interruption."
+
+
+# -----------------------------------------------------------------------------
+# 23. Remind me when the door lock battery stays low
+# Layer: Reliability
+# What it does: If the front door lock's battery has read below 20% for a full 30 minutes (not just one shaky reading), posts an in-app notification so you remember to replace it.
+# Placeholders to replace: sensor.front_door_lock_battery
+# Layer Method note: Layer: Reliability. This recipe watches one sensor by hand. Once you've lived with it for a week and trust the pattern, the official 'Low battery level detection' community blueprint (linked in the book's blueprint chapter notes) does the same job across every battery sensor in your home at once — a natural next layer, not a day-one one.
+# -----------------------------------------------------------------------------
+alias: "Remind me when the door lock battery stays low"
+id: low_battery_report
+description: "Posts an in-app notice if the front door lock battery stays below 20% for 30 minutes."
+mode: single
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.front_door_lock_battery
+    below: 20
+    for:
+      minutes: 30
+actions:
+  - action: persistent_notification.create
+    data:
+      title: "Low battery"
+      message: "The front door lock battery has been below 20% for 30 minutes."
+
+
+# -----------------------------------------------------------------------------
+# 24. Goodnight routine: notice if a door is still open
+# Layer: Reliability
+# What it does: Runs a goodnight check at 10:30 PM. If the back door is still open, posts an in-app failure notice explaining exactly what wasn't ready, and marks the run as failed so it stands out in Logbook and traces.
+# Placeholders to replace: binary_sensor.back_door
+# Layer Method note: Layer: Reliability. This is the pattern to copy any time you want an automation to tell you WHY it didn't do what you expected, instead of failing silently. Live with it for a week, then reuse the same if / persistent_notification.create / stop shape for your own routines.
+# -----------------------------------------------------------------------------
+alias: "Goodnight routine: notice if a door is still open"
+id: goodnight_routine_failure_notice
+description: "At 10:30 PM, posts a failure notice if the back door is still open."
+mode: single
+triggers:
+  - trigger: time
+    at: "22:30:00"
+actions:
+  - if:
+      - condition: state
+        entity_id: binary_sensor.back_door
+        state: "on"
+    then:
+      - action: persistent_notification.create
+        data:
+          title: "Goodnight routine did not complete"
+          message: "The back door is still open, so the goodnight routine stopped early. Close it and run the routine again."
+      - stop: "Back door still open"
+        error: true
+    else:
+      - action: persistent_notification.create
+        data:
+          title: "Goodnight routine complete"
+          message: "All checked doors were closed. Goodnight!"
+
+
+# -----------------------------------------------------------------------------
+# 25. Notify me when the power sensor stops updating
+# Layer: Reliability
+# What it does: If the whole-home power sensor's value hasn't changed at all for 30 minutes, posts an in-app notice — a stuck sensor can otherwise sit silently broken for days.
+# Placeholders to replace: sensor.home_power
+# Layer Method note: Layer: Reliability (fourth recipe, a bonus beyond the book's core three). Live with it for a week; if it never fires, that's good news, not a sign it's broken — it's only supposed to speak up when something goes quiet.
+# -----------------------------------------------------------------------------
+alias: "Notify me when the power sensor stops updating"
+id: sensor_stopped_updating_alert
+description: "Posts an in-app notice if the whole-home power sensor hasn't updated in 30 minutes."
+mode: single
+triggers:
+  - trigger: state
+    entity_id: sensor.home_power
+    to: null
+    for:
+      minutes: 30
+actions:
+  - action: persistent_notification.create
+    data:
+      title: "Sensor may be stuck"
+      message: "The power sensor value has not changed for 30 minutes."
