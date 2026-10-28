@@ -1,0 +1,59 @@
+blueprint:
+  name: Fan that follows humidity
+  description: Fan on when humid, off when dry again.
+  domain: automation
+  input:
+    sensor:
+      name: Humidity sensor
+      selector:
+        entity:
+          filter:
+            - domain: sensor
+              device_class: humidity
+    fan:
+      name: Fan switch
+      selector:
+        target:
+          entity:
+            domain: switch
+    high:
+      name: Switch on above
+      default: 70
+      selector:
+        number:
+          min: 40
+          max: 100
+          unit_of_measurement: "%"
+    low:
+      name: Switch off below
+      default: 60
+      selector:
+        number:
+          min: 30
+          max: 90
+          unit_of_measurement: "%"
+triggers:
+  - trigger: numeric_state
+    entity_id: !input sensor
+    above: !input high
+    id: humid
+  - trigger: numeric_state
+    entity_id: !input sensor
+    below: !input low
+    for:
+      minutes: 5
+    id: dry
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: humid
+        sequence:
+          - action: switch.turn_on
+            target: !input fan
+      - conditions:
+          - condition: trigger
+            id: dry
+        sequence:
+          - action: switch.turn_off
+            target: !input fan

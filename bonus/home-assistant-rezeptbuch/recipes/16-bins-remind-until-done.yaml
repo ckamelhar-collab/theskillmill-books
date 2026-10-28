@@ -1,0 +1,50 @@
+# Rezept 16: Eine Erinnerung, die so lange nachfragt, bis du abhakst
+# Am Dienstagabend fragt dein Handy nach den Mülltonnen. „Erledigt“ beendet es. „In 30 Minuten“ (oder Ignorieren) lässt es erneut fragen, höchstens viermal.
+alias: Mülltonnen - erinnern bis erledigt
+triggers:
+  - trigger: time
+    at: "19:30:00"
+conditions:
+  - condition: time
+    weekday:
+      - tue
+actions:
+  - repeat:
+      count: 4
+      sequence:
+        - action: notify.mobile_app_anna_phone
+          data:
+            title: Mülltonnen
+            message: Tonnen rausgestellt?
+            data:
+              tag: bins
+              actions:
+                - action: BINS_DONE
+                  title: Erledigt
+                - action: BINS_LATER
+                  title: In 30 Minuten
+        - wait_for_trigger:
+            - trigger: event
+              event_type: mobile_app_notification_action
+              event_data:
+                action: BINS_DONE
+            - trigger: event
+              event_type: mobile_app_notification_action
+              event_data:
+                action: BINS_LATER
+          timeout: "00:30:00"
+        - if:
+            - condition: template
+              value_template: >
+                {{ wait.trigger is not none
+                   and wait.trigger.event.data.action
+                       == 'BINS_DONE' }}
+          then:
+            - stop: Tonnen erledigt
+        - if:
+            - condition: template
+              value_template: >
+                {{ wait.trigger is not none }}
+          then:
+            - delay:
+                minutes: 30

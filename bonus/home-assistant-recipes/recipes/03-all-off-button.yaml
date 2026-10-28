@@ -1,0 +1,14 @@
+# Recipe 3: One button switches the evening lights off
+# A press on a wall button or remote switches off every light that carries the label "Goodnight lights".
+alias: Hall button - evening lights off
+triggers:
+  - trigger: event.received
+    target:
+      entity_id: event.hall_button
+    options:
+      event_type:
+        - single_press
+actions:
+  - action: light.turn_off
+    target:
+      label_id: goodnight_lights

@@ -1,0 +1,18 @@
+# Rezept 33: Frag dein Haus: „Ist jemand zu Hause?“
+# Du sagst Assist (am Handy, am Tablet oder an einem Sprach-Satelliten) einen Satz, und das Haus antwortet in Worten, gebaut aus Live-Daten.
+alias: Assist - ist jemand zu Hause?
+triggers:
+  - trigger: conversation
+    command:
+      - Ist jemand zu Hause
+      - Ist jemand zuhause
+actions:
+  - set_conversation_response: >
+      {% set home = states.person
+         | selectattr('state', 'eq', 'home')
+         | map(attribute='name') | list %}
+      {% if home %}
+        Gerade zu Hause: {{ home | join(' und ') }}.
+      {% else %}
+        Niemand ist zu Hause.
+      {% endif %}

@@ -1,0 +1,286 @@
+{
+ "lang": "de",
+ "count": 40,
+ "recipes": [
+  {
+   "n": 1,
+   "id": "night-path",
+   "title": "Ein gedimmtes Wegelicht zum Bad bei Nacht",
+   "file": "01-night-path.yaml",
+   "yaml": "alias: Nachtlicht zum Bad\nmode: restart\ntriggers:\n  - trigger: state\n    entity_id: binary_sensor.hallway_motion\n    to: \"on\"\nconditions:\n  - condition: time\n    after: \"23:00:00\"\n    before: \"06:00:00\"\nactions:\n  - action: light.turn_on\n    target:\n      entity_id: light.bathroom_path\n    data:\n      brightness_pct: 8\n      color_temp_kelvin: 2200\n  - wait_for_trigger:\n      - trigger: state\n        entity_id: binary_sensor.hallway_motion\n        to: \"off\"\n        for:\n          seconds: 90\n    timeout: \"00:10:00\"\n  - action: light.turn_off\n    target:\n      entity_id: light.bathroom_path"
+  },
+  {
+   "n": 2,
+   "id": "lux-lamp",
+   "title": "Die Lampe geht an, wenn es im Raum dunkel wird",
+   "file": "02-lux-lamp.yaml",
+   "yaml": "alias: Wohnzimmerlampe bei Dunkelheit\ntriggers:\n  - trigger: numeric_state\n    entity_id: sensor.living_room_illuminance\n    below: 40\n    for:\n      minutes: 5\nconditions:\n  - condition: state\n    entity_id: binary_sensor.living_room_presence\n    state: \"on\"\n  - condition: time\n    after: \"08:00:00\"\n    before: \"22:00:00\"\nactions:\n  - action: light.turn_on\n    target:\n      entity_id: light.living_room_lamp\n    data:\n      brightness_pct: 60"
+  },
+  {
+   "n": 3,
+   "id": "all-off-button",
+   "title": "Ein Knopf schaltet die Abendlichter aus",
+   "file": "03-all-off-button.yaml",
+   "yaml": "alias: Flur-Taster - Abendlichter aus\ntriggers:\n  - trigger: event.received\n    target:\n      entity_id: event.hall_button\n    options:\n      event_type:\n        - single_press\nactions:\n  - action: light.turn_off\n    target:\n      label_id: goodnight_lights"
+  },
+  {
+   "n": 4,
+   "id": "pantry-door-light",
+   "title": "Das Vorratslicht folgt der Tür",
+   "file": "04-pantry-door-light.yaml",
+   "yaml": "alias: Vorratslicht folgt der Tür\nmode: restart\ntriggers:\n  - trigger: state\n    entity_id: binary_sensor.pantry_door\n    to: \"on\"\n    id: opened\n  - trigger: state\n    entity_id: binary_sensor.pantry_door\n    to: \"off\"\n    id: closed\n  - trigger: state\n    entity_id: binary_sensor.pantry_door\n    to: \"on\"\n    for:\n      minutes: 15\n    id: forgotten\nactions:\n  - choose:\n      - conditions:\n          - condition: trigger\n            id: opened\n        sequence:\n          - action: light.turn_on\n            target:\n              entity_id: light.pantry\n      - conditions:\n          - condition: trigger\n            id:\n              - closed\n              - forgotten\n        sequence:\n          - action: light.turn_off\n            target:\n              entity_id: light.pantry"
+  },
+  {
+   "n": 5,
+   "id": "warm-light-by-hour",
+   "title": "Das Licht wird im Tagesverlauf wärmer",
+   "file": "05-warm-light-by-hour.yaml",
+   "yaml": "alias: Wärmeres Licht im Tagesverlauf\ntriggers:\n  - trigger: time_pattern\n    minutes: \"/15\"\nconditions:\n  - condition: time\n    after: \"06:00:00\"\n    before: \"23:00:00\"\nactions:\n  - variables:\n      kelvin: >\n        {% set h = now().hour %}\n        {{ 3000 if h < 9 else 4000 if h < 17\n           else 3000 if h < 20 else 2400 }}\n  - repeat:\n      for_each:\n        - light.living_room\n        - light.kitchen\n        - light.hallway\n      sequence:\n        - if:\n            - condition: template\n              value_template: >\n                {{ is_state(repeat.item, 'on') }}\n          then:\n            - action: light.turn_on\n              target:\n                entity_id: \"{{ repeat.item }}\"\n              data:\n                color_temp_kelvin: \"{{ kelvin | int }}\"\n                transition: 20"
+  },
+  {
+   "n": 6,
+   "id": "bedtime-fade",
+   "title": "Ein Einschlaf-Licht, das langsam ausgeht",
+   "file": "06-bedtime-fade.yaml",
+   "yaml": "alias: Schlafzimmerlicht zum Einschlafen\ntriggers:\n  - trigger: state\n    entity_id: input_button.bedtime\nactions:\n  - action: light.turn_on\n    target:\n      entity_id: light.bedroom\n    data:\n      brightness_pct: 5\n      transition: 120\n  - delay:\n      minutes: 3\n  - action: light.turn_off\n    target:\n      entity_id: light.bedroom"
+  },
+  {
+   "n": 7,
+   "id": "blinds-sunrise",
+   "title": "Rollläden hoch bei Sonnenaufgang, aber nie vor 07:00 Uhr",
+   "file": "07-blinds-sunrise.yaml",
+   "yaml": "alias: Rollladen hoch - Sonnenaufgang, nicht vor 07:00\ntriggers:\n  - trigger: sun.sunrise\n  - trigger: time\n    at: \"07:00:00\"\nconditions:\n  - condition: sun.is_up\n  - condition: time\n    after: \"07:00:00\"\n    weekday:\n      - mon\n      - tue\n      - wed\n      - thu\n      - fri\nactions:\n  - action: cover.open_cover\n    target:\n      entity_id: cover.bedroom_blinds"
+  },
+  {
+   "n": 8,
+   "id": "house-mode",
+   "title": "Ein Hausmodus, der sich selbst aktualisiert",
+   "file": "08-house-mode.yaml",
+   "yaml": "alias: Hausmodus folgt den Personen\ntriggers:\n  - trigger: state\n    entity_id:\n      - person.anna\n      - person.ben\nconditions:\n  - condition: state\n    entity_id: input_select.house_mode\n    state:\n      - Home\n      - Away\nactions:\n  - action: input_select.select_option\n    target:\n      entity_id: input_select.house_mode\n    data:\n      option: >\n        {{ 'Home' if states.person\n           | selectattr('state', 'eq', 'home')\n           | list | count > 0 else 'Away' }}"
+  },
+  {
+   "n": 9,
+   "id": "guest-mode",
+   "title": "Ein Gästemodus, der die „Niemand zu Hause“-Regeln pausiert",
+   "file": "09-guest-mode.yaml",
+   "yaml": "alias: Gästemodus ein und aus\ntriggers:\n  - trigger: state\n    entity_id: input_boolean.guest_mode\nactions:\n  - choose:\n      - conditions:\n          - condition: state\n            entity_id: input_boolean.guest_mode\n            state: \"on\"\n        sequence:\n          - action: input_select.select_option\n            target:\n              entity_id: input_select.house_mode\n            data:\n              option: Guests\n    default:\n      - action: input_select.select_option\n        target:\n          entity_id: input_select.house_mode\n        data:\n          option: Home"
+  },
+  {
+   "n": 10,
+   "id": "near-home-heating",
+   "title": "Das Haus anwärmen, wenn du fast da bist",
+   "file": "10-near-home-heating.yaml",
+   "yaml": "alias: Heizung an, wenn jemand in der Nähe ist\ntriggers:\n  - trigger: zone.entered\n    target:\n      entity_id:\n        - person.anna\n        - person.ben\n    options:\n      zone: zone.near_home\nconditions:\n  - condition: state\n    entity_id: input_select.house_mode\n    state: Away\n  - condition: numeric_state\n    entity_id: sensor.living_room_temperature\n    below: 19\nactions:\n  - action: climate.set_temperature\n    target:\n      entity_id: climate.living_room\n    data:\n      temperature: 21\n      hvac_mode: heat"
+  },
+  {
+   "n": 11,
+   "id": "first-motion-morning",
+   "title": "Eine Morgenroutine, die einmal am Tag läuft",
+   "file": "11-first-motion-morning.yaml",
+   "yaml": "alias: Guten Morgen - erste Bewegung des Tages\ntriggers:\n  - trigger: state\n    entity_id: binary_sensor.kitchen_motion\n    to: \"on\"\nconditions:\n  - condition: time\n    after: \"06:00:00\"\n    before: \"10:00:00\"\n  - condition: template\n    value_template: >\n      {{ this.attributes.last_triggered is none\n         or as_local(this.attributes.last_triggered)\n            .date() != now().date() }}\nactions:\n  - action: light.turn_on\n    target:\n      entity_id: light.kitchen\n    data:\n      brightness_pct: 70\n  - action: cover.open_cover\n    target:\n      entity_id: cover.kitchen_blinds"
+  },
+  {
+   "n": 12,
+   "id": "workday-wakeup",
+   "title": "Ein anderes Aufwachen an Arbeitstagen und Feiertagen",
+   "file": "12-workday-wakeup.yaml",
+   "yaml": "alias: Weck-Licht nur an Arbeitstagen\ntriggers:\n  - trigger: time\n    at: \"06:45:00\"\nconditions:\n  - condition: state\n    entity_id: binary_sensor.workday_sensor\n    state: \"on\"\nactions:\n  - action: light.turn_on\n    target:\n      entity_id: light.bedroom\n    data:\n      brightness_pct: 25\n      color_temp_kelvin: 2700\n      transition: 300"
+  },
+  {
+   "n": 13,
+   "id": "movie-mode",
+   "title": "Ein Filmmodus, der alles wieder zurückstellt",
+   "file": "13-movie-mode.yaml",
+   "yaml": "alias: Filmmodus ein\nsequence:\n  - action: scene.create\n    data:\n      scene_id: before_movie\n      snapshot_entities:\n        - light.living_room\n        - light.kitchen\n        - cover.living_room_blinds\n  - action: light.turn_off\n    target:\n      entity_id: light.kitchen\n  - action: light.turn_on\n    target:\n      entity_id: light.living_room\n    data:\n      brightness_pct: 10\n  - action: cover.close_cover\n    target:\n      entity_id: cover.living_room_blinds\n---\nalias: Filmmodus aus\nsequence:\n  - action: scene.turn_on\n    target:\n      entity_id: scene.before_movie"
+  },
+  {
+   "n": 14,
+   "id": "leaving-script",
+   "title": "Ein „Ich gehe“-Skript für Knöpfe, Sprache und Automationen",
+   "file": "14-leaving-script.yaml",
+   "yaml": "alias: Haus verlassen\nfields:\n  lock_door:\n    name: Haustür abschließen\n    default: true\n    selector:\n      boolean: {}\nsequence:\n  - action: light.turn_off\n    target:\n      entity_id: all\n  - if:\n      - condition: template\n        value_template: \"{{ lock_door }}\"\n    then:\n      - action: lock.lock\n        target:\n          entity_id: lock.front_door\n  - action: climate.set_preset_mode\n    target:\n      entity_id: climate.living_room\n    data:\n      preset_mode: eco\n  - action: input_select.select_option\n    target:\n      entity_id: input_select.house_mode\n    data:\n      option: Away"
+  },
+  {
+   "n": 15,
+   "id": "mailbox-whoever-home",
+   "title": "Nur die Leute informieren, die zu Hause sind",
+   "file": "15-mailbox-whoever-home.yaml",
+   "yaml": "alias: Briefkasten geöffnet - Info an alle zu Hause\ntriggers:\n  - trigger: state\n    entity_id: binary_sensor.mailbox\n    to: \"on\"\nconditions:\n  - condition: time\n    after: \"08:00:00\"\n    before: \"20:00:00\"\nactions:\n  - repeat:\n      for_each:\n        - person: person.anna\n          notify: notify.mobile_app_anna_phone\n        - person: person.ben\n          notify: notify.mobile_app_ben_phone\n      sequence:\n        - if:\n            - condition: template\n              value_template: >\n                {{ is_state(repeat.item.person, 'home') }}\n          then:\n            - action: \"{{ repeat.item.notify }}\"\n              data:\n                title: Briefkasten\n                message: Der Briefkasten wurde geöffnet."
+  },
+  {
+   "n": 16,
+   "id": "bins-remind-until-done",
+   "title": "Eine Erinnerung, die so lange nachfragt, bis du abhakst",
+   "file": "16-bins-remind-until-done.yaml",
+   "yaml": "alias: Mülltonnen - erinnern bis erledigt\ntriggers:\n  - trigger: time\n    at: \"19:30:00\"\nconditions:\n  - condition: time\n    weekday:\n      - tue\nactions:\n  - repeat:\n      count: 4\n      sequence:\n        - action: notify.mobile_app_anna_phone\n          data:\n            title: Mülltonnen\n            message: Tonnen rausgestellt?\n            data:\n              tag: bins\n              actions:\n                - action: BINS_DONE\n                  title: Erledigt\n                - action: BINS_LATER\n                  title: In 30 Minuten\n        - wait_for_trigger:\n            - trigger: event\n              event_type: mobile_app_notification_action\n              event_data:\n                action: BINS_DONE\n            - trigger: event\n              event_type: mobile_app_notification_action\n              event_data:\n                action: BINS_LATER\n          timeout: \"00:30:00\"\n        - if:\n            - condition: template\n              value_template: >\n                {{ wait.trigger is not none\n                   and wait.trigger.event.data.action\n                       == 'BINS_DONE' }}\n          then:\n            - stop: Tonnen erledigt\n        - if:\n            - condition: template\n              value_template: >\n                {{ wait.trigger is not none }}\n          then:\n            - delay:\n                minutes: 30"
+  },
+  {
+   "n": 17,
+   "id": "self-cleaning-notification",
+   "title": "Eine Benachrichtigung, die sich selbst entfernt, wenn das Problem weg ist",
+   "file": "17-self-cleaning-notification.yaml",
+   "yaml": "alias: Gartentor - warnen, dann löschen\ntriggers:\n  - trigger: state\n    entity_id: binary_sensor.garden_gate\n    to: \"on\"\n    for:\n      minutes: 10\n    id: open_long\n  - trigger: state\n    entity_id: binary_sensor.garden_gate\n    to: \"off\"\n    id: closed\nactions:\n  - choose:\n      - conditions:\n          - condition: trigger\n            id: open_long\n        sequence:\n          - action: notify.mobile_app_anna_phone\n            data:\n              title: Gartentor\n              message: Gartentor seit 10 Minuten offen.\n              data:\n                tag: garden_gate\n      - conditions:\n          - condition: trigger\n            id: closed\n        sequence:\n          - action: notify.mobile_app_anna_phone\n            data:\n              message: clear_notification\n              data:\n                tag: garden_gate"
+  },
+  {
+   "n": 18,
+   "id": "battery-digest",
+   "title": "Eine Batterie-Nachricht am Sonntag statt zehn Warnungen",
+   "file": "18-battery-digest.yaml",
+   "yaml": "alias: Batterie-Übersicht am Sonntag\ntriggers:\n  - trigger: time\n    at: \"10:00:00\"\nconditions:\n  - condition: time\n    weekday:\n      - sun\nactions:\n  - variables:\n      low: >\n        {% set ns = namespace(items=[]) %}\n        {% for s in states.sensor\n           if s.attributes.device_class | default('')\n              == 'battery'\n           and s.state | float(100) < 20 %}\n          {% set ns.items = ns.items\n             + [s.name ~ ' ' ~ s.state ~ '%'] %}\n        {% endfor %}\n        {{ ns.items | join(', ') }}\n  - if:\n      - condition: template\n        value_template: \"{{ low != '' }}\"\n    then:\n      - action: notify.mobile_app_anna_phone\n        data:\n          title: Batterien unter 20 %\n          message: \"{{ low }}\""
+  },
+  {
+   "n": 19,
+   "id": "plant-water-bell",
+   "title": "Das Unwichtige gehört in die Glocke",
+   "file": "19-plant-water-bell.yaml",
+   "yaml": "alias: Farn braucht Wasser\ntriggers:\n  - trigger: time\n    at: \"09:00:00\"\n    id: check\n  - trigger: numeric_state\n    entity_id: sensor.fern_moisture\n    above: 40\n    id: wet\nactions:\n  - choose:\n      - conditions:\n          - condition: trigger\n            id: check\n          - condition: numeric_state\n            entity_id: sensor.fern_moisture\n            below: 25\n        sequence:\n          - action: persistent_notification.create\n            data:\n              notification_id: fern_dry\n              title: Farn\n              message: Der Farn ist trocken. Heute gießen.\n      - conditions:\n          - condition: trigger\n            id: wet\n        sequence:\n          - action: persistent_notification.dismiss\n            data:\n              notification_id: fern_dry"
+  },
+  {
+   "n": 20,
+   "id": "freezer-warm",
+   "title": "Der eine Alarm, der dich wecken darf: eine zu warme Tiefkühltruhe",
+   "file": "20-freezer-warm.yaml",
+   "yaml": "alias: Tiefkühler zu warm\ntriggers:\n  - trigger: numeric_state\n    entity_id: sensor.freezer_temperature\n    above: -12\n    for:\n      minutes: 30\nactions:\n  - action: notify.mobile_app_anna_phone\n    data:\n      title: Tiefkühler\n      message: >\n        Tiefkühler seit 30 Minuten wärmer\n        als -12 Grad. Prüfe Tür und Stecker.\n      data:\n        push:\n          sound:\n            name: default\n            critical: 1\n            volume: 1.0\n        ttl: 0\n        priority: high"
+  },
+  {
+   "n": 21,
+   "id": "bathroom-fan-humidity",
+   "title": "Der Badlüfter folgt der Luftfeuchtigkeit",
+   "file": "21-bathroom-fan-humidity.yaml",
+   "yaml": "alias: Badlüfter folgt der Luftfeuchte\ntriggers:\n  - trigger: numeric_state\n    entity_id: sensor.bathroom_humidity\n    above: 70\n    id: humid\n  - trigger: numeric_state\n    entity_id: sensor.bathroom_humidity\n    below: 60\n    for:\n      minutes: 5\n    id: dry\nactions:\n  - choose:\n      - conditions:\n          - condition: trigger\n            id: humid\n        sequence:\n          - action: switch.turn_on\n            target:\n              entity_id: switch.bathroom_fan\n      - conditions:\n          - condition: trigger\n            id: dry\n        sequence:\n          - action: switch.turn_off\n            target:\n              entity_id: switch.bathroom_fan"
+  },
+  {
+   "n": 22,
+   "id": "cold-morning-preheat",
+   "title": "Das Bad vorheizen, aber nur an kalten Morgen",
+   "file": "22-cold-morning-preheat.yaml",
+   "yaml": "alias: Vorheizen an kalten Morgen\ntriggers:\n  - trigger: time\n    at: \"05:30:00\"\nconditions:\n  - condition: numeric_state\n    entity_id: weather.home\n    attribute: temperature\n    below: 8\n  - condition: state\n    entity_id: input_select.house_mode\n    state: Home\nactions:\n  - action: climate.set_temperature\n    target:\n      entity_id: climate.bathroom\n    data:\n      temperature: 22\n      hvac_mode: heat"
+  },
+  {
+   "n": 23,
+   "id": "night-setback",
+   "title": "Nachts die Heizung absenken, morgens wieder hochfahren",
+   "file": "23-night-setback.yaml",
+   "yaml": "alias: Heizung - Nachtabsenkung\ntriggers:\n  - trigger: time\n    at: \"22:30:00\"\n    id: night\n  - trigger: time\n    at: \"06:00:00\"\n    id: morning\nactions:\n  - choose:\n      - conditions:\n          - condition: trigger\n            id: night\n        sequence:\n          - action: climate.set_preset_mode\n            target:\n              entity_id: climate.living_room\n            data:\n              preset_mode: eco\n      - conditions:\n          - condition: trigger\n            id: morning\n        sequence:\n          - action: climate.set_preset_mode\n            target:\n              entity_id: climate.living_room\n            data:\n              preset_mode: home"
+  },
+  {
+   "n": 24,
+   "id": "charger-off",
+   "title": "Das Ladegerät schaltet sich ab, wenn der Akku voll ist",
+   "file": "24-charger-off.yaml",
+   "yaml": "alias: Ladegerät aus, wenn der Akku voll ist\ntriggers:\n  - trigger: numeric_state\n    entity_id: sensor.ebike_charger_power\n    below: 3\n    for:\n      minutes: 10\nconditions:\n  - condition: state\n    entity_id: switch.ebike_charger\n    state: \"on\"\nactions:\n  - action: switch.turn_off\n    target:\n      entity_id: switch.ebike_charger\n  - action: notify.mobile_app_anna_phone\n    data:\n      message: Das E-Bike ist geladen. Der Stecker ist aus."
+  },
+  {
+   "n": 25,
+   "id": "energy-summary",
+   "title": "Jeden Abend eine Zeile zum Stromverbrauch",
+   "file": "25-energy-summary.yaml",
+   "yaml": "alias: Strom-Zusammenfassung am Abend\ntriggers:\n  - trigger: time\n    at: \"21:00:00\"\nactions:\n  - variables:\n      kwh: >\n        {{ states('sensor.daily_energy')\n           | float(0) | round(1) }}\n      cost: >\n        {{ (states('sensor.daily_energy') | float(0)\n            * states('input_number.price_per_kwh')\n              | float(0)) | round(2) }}\n  - action: notify.mobile_app_anna_phone\n    data:\n      title: Strom heute\n      message: >\n        {{ kwh }} kWh heute, etwa {{ cost }}\n        zu deinem Preis."
+  },
+  {
+   "n": 26,
+   "id": "cheap-hours-dishwasher",
+   "title": "Die Spülmaschine laufen lassen, wenn Strom billig ist",
+   "file": "26-cheap-hours-dishwasher.yaml",
+   "yaml": "alias: Spülmaschine startet bei günstigem Strom\ntriggers:\n  - trigger: numeric_state\n    entity_id: sensor.electricity_price\n    below: input_number.cheap_price_limit\n    id: cheap\n  - trigger: time\n    at: \"05:00:00\"\n    id: deadline\n  - trigger: state\n    entity_id: input_boolean.dishwasher_ready\n    to: \"on\"\n    id: ready\nconditions:\n  - condition: state\n    entity_id: input_boolean.dishwasher_ready\n    state: \"on\"\n  - condition: template\n    value_template: >\n      {{ trigger.id == 'deadline'\n         or states('sensor.electricity_price')\n            | float(99)\n            < states('input_number.cheap_price_limit')\n              | float(0) }}\nactions:\n  - action: switch.turn_on\n    target:\n      entity_id: switch.dishwasher_plug\n  - action: input_boolean.turn_off\n    target:\n      entity_id: input_boolean.dishwasher_ready"
+  },
+  {
+   "n": 27,
+   "id": "pv-surplus-boiler",
+   "title": "Solar-Überschuss für Warmwasser nutzen",
+   "file": "27-pv-surplus-boiler.yaml",
+   "yaml": "alias: Solar-Überschuss heizt den Boiler\ntriggers:\n  - trigger: numeric_state\n    entity_id: sensor.grid_power\n    below: -1500\n    for:\n      minutes: 5\n    id: surplus\n  - trigger: numeric_state\n    entity_id: sensor.grid_power\n    above: 100\n    for:\n      minutes: 5\n    id: end\nconditions:\n  - condition: time\n    after: \"10:00:00\"\n    before: \"17:00:00\"\nactions:\n  - choose:\n      - conditions:\n          - condition: trigger\n            id: surplus\n          - condition: numeric_state\n            entity_id: sensor.boiler_temperature\n            below: 55\n        sequence:\n          - action: switch.turn_on\n            target:\n              entity_id: switch.boiler_plug\n      - conditions:\n          - condition: trigger\n            id: end\n        sequence:\n          - action: switch.turn_off\n            target:\n              entity_id: switch.boiler_plug"
+  },
+  {
+   "n": 28,
+   "id": "away-simulation",
+   "title": "Ein leeres Haus bewohnt aussehen lassen",
+   "file": "28-away-simulation.yaml",
+   "yaml": "alias: Anwesenheitssimulation - Abendlampe\ntriggers:\n  - trigger: sun.sunset\n    options:\n      offset:\n        minutes: 20\n      offset_type: after\nconditions:\n  - condition: state\n    entity_id: input_boolean.holiday_mode\n    state: \"on\"\nactions:\n  - delay:\n      minutes: \"{{ range(0, 25) | random }}\"\n  - action: light.turn_on\n    target:\n      entity_id: light.living_room_lamp\n    data:\n      brightness_pct: 50\n  - delay:\n      minutes: \"{{ range(90, 150) | random }}\"\n  - action: light.turn_off\n    target:\n      entity_id: light.living_room_lamp"
+  },
+  {
+   "n": 29,
+   "id": "siren-with-cancel",
+   "title": "Eine Sirene mit Eintrittsverzögerung und Abbrechen-Knopf",
+   "file": "29-siren-with-cancel.yaml",
+   "yaml": "alias: Eingangsalarm mit Abbruchfenster\nmode: single\ntriggers:\n  - trigger: state\n    entity_id: binary_sensor.front_door\n    to: \"on\"\nconditions:\n  - condition: state\n    entity_id: input_boolean.alarm_armed\n    state: \"on\"\nactions:\n  - action: notify.mobile_app_anna_phone\n    data:\n      title: Haustür\n      message: Haustür geöffnet. Sirene in 30 Sekunden.\n      data:\n        actions:\n          - action: ALARM_CANCEL\n            title: Das war ich\n  - wait_for_trigger:\n      - trigger: event\n        event_type: mobile_app_notification_action\n        event_data:\n          action: ALARM_CANCEL\n      - trigger: state\n        entity_id: input_boolean.alarm_armed\n        to: \"off\"\n    timeout: \"00:00:30\"\n  - if:\n      - condition: template\n        value_template: \"{{ wait.trigger is none }}\"\n    then:\n      - action: siren.turn_on\n        target:\n          entity_id: siren.hallway\n      - delay:\n          minutes: 3\n      - action: siren.turn_off\n        target:\n          entity_id: siren.hallway"
+  },
+  {
+   "n": 30,
+   "id": "doorbell-picture",
+   "title": "Vom Sperrbildschirm aus sehen, wer vor der Tür steht",
+   "file": "30-doorbell-picture.yaml",
+   "yaml": "alias: Klingel - Bild aufs Handy\ntriggers:\n  - trigger: state\n    entity_id: binary_sensor.doorbell\n    to: \"on\"\nactions:\n  - delay:\n      seconds: 2\n  - repeat:\n      for_each:\n        - notify.mobile_app_anna_phone\n        - notify.mobile_app_ben_phone\n      sequence:\n        - action: \"{{ repeat.item }}\"\n          data:\n            title: Klingel\n            message: Jemand hat geklingelt.\n            data:\n              image: /api/camera_proxy/camera.front_door\n              entity_id: camera.front_door"
+  },
+  {
+   "n": 31,
+   "id": "leak-close-valve",
+   "title": "Ein Leck schließt das Hauptwasserventil",
+   "file": "31-leak-close-valve.yaml",
+   "yaml": "alias: Leck - Hauptventil schließen\ntriggers:\n  - trigger: state\n    entity_id:\n      - binary_sensor.kitchen_leak\n      - binary_sensor.laundry_leak\n      - binary_sensor.bathroom_leak\n    to: \"on\"\nactions:\n  - action: valve.close_valve\n    target:\n      entity_id: valve.main_water\n  - action: notify.mobile_app_anna_phone\n    data:\n      title: Wasserschaden\n      message: Wasser erkannt. Hauptventil geschlossen.\n      data:\n        tag: leak\n        ttl: 0\n        priority: high"
+  },
+  {
+   "n": 32,
+   "id": "smoke-lights-on",
+   "title": "Rauch erkannt: alle Lichter an und eine laute Nachricht",
+   "file": "32-smoke-lights-on.yaml",
+   "yaml": "alias: Rauch - alle Lichter an, Handy-Alarm\ntriggers:\n  - trigger: state\n    entity_id:\n      - binary_sensor.smoke_hallway\n      - binary_sensor.smoke_kitchen\n    to: \"on\"\nactions:\n  - action: light.turn_on\n    target:\n      entity_id: all\n    data:\n      brightness_pct: 100\n  - action: notify.mobile_app_anna_phone\n    data:\n      title: Rauch\n      message: Rauch im Haus erkannt. Prüfe das Haus.\n      data:\n        push:\n          sound:\n            name: default\n            critical: 1\n            volume: 1.0\n        ttl: 0\n        priority: high"
+  },
+  {
+   "n": 33,
+   "id": "voice-anyone-home",
+   "title": "Frag dein Haus: „Ist jemand zu Hause?“",
+   "file": "33-voice-anyone-home.yaml",
+   "yaml": "alias: Assist - ist jemand zu Hause?\ntriggers:\n  - trigger: conversation\n    command:\n      - Ist jemand zu Hause\n      - Ist jemand zuhause\nactions:\n  - set_conversation_response: >\n      {% set home = states.person\n         | selectattr('state', 'eq', 'home')\n         | map(attribute='name') | list %}\n      {% if home %}\n        Gerade zu Hause: {{ home | join(' und ') }}.\n      {% else %}\n        Niemand ist zu Hause.\n      {% endif %}"
+  },
+  {
+   "n": 34,
+   "id": "voice-timer-slot",
+   "title": "Ein Sprachbefehl mit einer Zahl darin",
+   "file": "34-voice-timer-slot.yaml",
+   "yaml": "alias: Assist - Lerntimer in Minuten\ntriggers:\n  - trigger: conversation\n    command:\n      - stelle den Lerntimer auf {minutes} Minuten\nactions:\n  - action: timer.start\n    target:\n      entity_id: timer.study_timer\n    data:\n      duration: \"{{ trigger.slots.minutes | int * 60 }}\"\n  - set_conversation_response: >\n      Lerntimer auf\n      {{ trigger.slots.minutes }} Minuten gestellt."
+  },
+  {
+   "n": 35,
+   "id": "dinner-call",
+   "title": "Ein „Essen ist fertig“-Knopf für jeden Lautsprecher",
+   "file": "35-dinner-call.yaml",
+   "yaml": "alias: Essensruf\ntriggers:\n  - trigger: state\n    entity_id: input_button.dinner_call\nactions:\n  - action: assist_satellite.announce\n    target:\n      entity_id:\n        - assist_satellite.kitchen\n        - assist_satellite.living_room\n    data:\n      message: Das Essen ist fertig.\n      preannounce: true"
+  },
+  {
+   "n": 36,
+   "id": "unavailable-report",
+   "title": "Eine Montagsliste von allem, was verstummt ist",
+   "file": "36-unavailable-report.yaml",
+   "yaml": "alias: Montagsliste nicht verfügbarer Entitäten\ntriggers:\n  - trigger: time\n    at: \"09:00:00\"\nconditions:\n  - condition: time\n    weekday:\n      - mon\nactions:\n  - variables:\n      gone: >\n        {{ states\n           | selectattr('state', 'eq', 'unavailable')\n           | map(attribute='entity_id')\n           | list }}\n  - if:\n      - condition: template\n        value_template: \"{{ gone | count > 0 }}\"\n    then:\n      - action: persistent_notification.create\n        data:\n          notification_id: unavailable_report\n          title: Nicht verfügbare Entitäten\n          message: >\n            {{ gone | count }} Entitäten nicht verfügbar:\n            {{ gone[:15] | join(', ') }}"
+  },
+  {
+   "n": 37,
+   "id": "backup-problem",
+   "title": "Von einem fehlgeschlagenen oder fehlenden Backup erfahren",
+   "file": "37-backup-problem.yaml",
+   "yaml": "alias: Backup-Problem\ntriggers:\n  - trigger: state\n    entity_id: event.backup_automatic_backup\n    id: event\n  - trigger: time\n    at: \"09:30:00\"\n    id: age\nconditions:\n  - condition: template\n    value_template: >\n      {% if trigger.id == 'event' %}\n        {{ trigger.to_state.attributes.event_type\n           == 'failed' }}\n      {% else %}\n        {% set id = 'sensor.backup_last_' ~\n                    'successful_automatic_backup' %}\n        {{ (now() - states(id) | as_datetime(\n              now() - timedelta(days=99))).days\n           >= 2 }}\n      {% endif %}\nactions:\n  - action: notify.mobile_app_anna_phone\n    data:\n      title: Backup\n      message: >\n        Das letzte automatische Backup ist fehlgeschlagen\n        oder älter als zwei Tage.\n        Siehe Einstellungen > System > Backups."
+  },
+  {
+   "n": 38,
+   "id": "updates-digest",
+   "title": "Eine Samstagsnotiz über wartende Updates, ohne automatisches Installieren",
+   "file": "38-updates-digest.yaml",
+   "yaml": "alias: Update-Übersicht am Samstag\ntriggers:\n  - trigger: time\n    at: \"10:00:00\"\nconditions:\n  - condition: time\n    weekday:\n      - sat\nactions:\n  - variables:\n      waiting: >\n        {{ states.update\n           | selectattr('state', 'eq', 'on')\n           | map(attribute='name') | list }}\n  - if:\n      - condition: template\n        value_template: \"{{ waiting | count > 0 }}\"\n    then:\n      - action: notify.mobile_app_anna_phone\n        data:\n          title: Updates warten\n          message: >\n            {{ waiting | join(', ') }}.\n            Erst ein Backup machen, dann unter\n            Einstellungen > System > Updates aktualisieren."
+  },
+  {
+   "n": 39,
+   "id": "internet-outage-log",
+   "title": "Notiz führen, wie lange das Internet weg war",
+   "file": "39-internet-outage-log.yaml",
+   "yaml": "alias: Internetausfall-Bericht\nmode: single\ntriggers:\n  - trigger: state\n    entity_id: binary_sensor.router_ping\n    to: \"off\"\n    for:\n      minutes: 3\nactions:\n  - variables:\n      since: \"{{ trigger.to_state.last_changed }}\"\n  - wait_for_trigger:\n      - trigger: state\n        entity_id: binary_sensor.router_ping\n        to: \"on\"\n    timeout: \"12:00:00\"\n  - action: persistent_notification.create\n    data:\n      title: Internet war weg\n      message: >\n        Ausfall ab\n        {{ as_local(as_datetime(since))\n           .strftime('%H:%M') }},\n        für etwa\n        {{ ((now() - as_datetime(since))\n            .total_seconds() / 60)\n           | round(0) | int }} Minuten."
+  },
+  {
+   "n": 40,
+   "id": "error-watcher",
+   "title": "Von einem neuen Fehler im Protokoll erfahren, höchstens einmal pro Stunde",
+   "file": "40-error-watcher.yaml",
+   "yaml": "alias: Home Assistant hat einen Fehler protokolliert\nmode: single\ntriggers:\n  - trigger: event\n    event_type: system_log_event\n    event_data:\n      level: ERROR\nactions:\n  - action: notify.mobile_app_anna_phone\n    data:\n      title: Home-Assistant-Fehler\n      message: >\n        {{ trigger.event.data.name }}:\n        {{ (trigger.event.data.message | first)\n           | string | truncate(150) }}\n  - delay:\n      hours: 1"
+  }
+ ]
+}

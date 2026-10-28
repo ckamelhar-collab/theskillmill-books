@@ -1,0 +1,35 @@
+# Rezept 17: Eine Benachrichtigung, die sich selbst entfernt, wenn das Problem weg ist
+# Die Warnung erscheint, wenn das Tor zehn Minuten offen war, und verschwindet von selbst vom Handy, sobald das Tor zugeht.
+alias: Gartentor - warnen, dann löschen
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.garden_gate
+    to: "on"
+    for:
+      minutes: 10
+    id: open_long
+  - trigger: state
+    entity_id: binary_sensor.garden_gate
+    to: "off"
+    id: closed
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: open_long
+        sequence:
+          - action: notify.mobile_app_anna_phone
+            data:
+              title: Gartentor
+              message: Gartentor seit 10 Minuten offen.
+              data:
+                tag: garden_gate
+      - conditions:
+          - condition: trigger
+            id: closed
+        sequence:
+          - action: notify.mobile_app_anna_phone
+            data:
+              message: clear_notification
+              data:
+                tag: garden_gate

@@ -1,0 +1,21 @@
+# Recipe 7: Blinds up at sunrise, but never before 07:00
+# On weekdays the bedroom blinds open at whichever comes later: sunrise or 07:00.
+alias: Blinds up - sunrise, not before 07:00
+triggers:
+  - trigger: sun.sunrise
+  - trigger: time
+    at: "07:00:00"
+conditions:
+  - condition: sun.is_up
+  - condition: time
+    after: "07:00:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+actions:
+  - action: cover.open_cover
+    target:
+      entity_id: cover.bedroom_blinds

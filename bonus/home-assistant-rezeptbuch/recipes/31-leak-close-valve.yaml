@@ -1,0 +1,22 @@
+# Rezept 31: Ein Leck schließt das Hauptwasserventil
+# Wird irgendein Lecksensor nass, schließt das motorisierte Wasserventil und dein Handy sagt dir Bescheid. (Die einfache Warnung steht im kostenlosen Paket; dieses Rezept ergänzt die Aktion.)
+alias: Leck - Hauptventil schließen
+triggers:
+  - trigger: state
+    entity_id:
+      - binary_sensor.kitchen_leak
+      - binary_sensor.laundry_leak
+      - binary_sensor.bathroom_leak
+    to: "on"
+actions:
+  - action: valve.close_valve
+    target:
+      entity_id: valve.main_water
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Wasserschaden
+      message: Wasser erkannt. Hauptventil geschlossen.
+      data:
+        tag: leak
+        ttl: 0
+        priority: high

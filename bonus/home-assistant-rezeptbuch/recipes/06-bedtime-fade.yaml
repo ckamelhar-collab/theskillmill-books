@@ -1,0 +1,18 @@
+# Rezept 6: Ein Einschlaf-Licht, das langsam ausgeht
+# Du drückst einen Knopf im Dashboard, das Schlafzimmerlicht dimmt in zwei Minuten herunter und geht dann aus, sodass du bis zur Dunkelheit lesen kannst.
+alias: Schlafzimmerlicht zum Einschlafen
+triggers:
+  - trigger: state
+    entity_id: input_button.bedtime
+actions:
+  - action: light.turn_on
+    target:
+      entity_id: light.bedroom
+    data:
+      brightness_pct: 5
+      transition: 120
+  - delay:
+      minutes: 3
+  - action: light.turn_off
+    target:
+      entity_id: light.bedroom

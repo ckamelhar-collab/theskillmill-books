@@ -1,0 +1,31 @@
+# Rezept 37: Von einem fehlgeschlagenen oder fehlenden Backup erfahren
+# Du bekommst eine Nachricht, wenn das automatische Backup fehlschlägt, und eine weitere, wenn seit zwei Tagen kein Backup gelungen ist.
+alias: Backup-Problem
+triggers:
+  - trigger: state
+    entity_id: event.backup_automatic_backup
+    id: event
+  - trigger: time
+    at: "09:30:00"
+    id: age
+conditions:
+  - condition: template
+    value_template: >
+      {% if trigger.id == 'event' %}
+        {{ trigger.to_state.attributes.event_type
+           == 'failed' }}
+      {% else %}
+        {% set id = 'sensor.backup_last_' ~
+                    'successful_automatic_backup' %}
+        {{ (now() - states(id) | as_datetime(
+              now() - timedelta(days=99))).days
+           >= 2 }}
+      {% endif %}
+actions:
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Backup
+      message: >
+        Das letzte automatische Backup ist fehlgeschlagen
+        oder älter als zwei Tage.
+        Siehe Einstellungen > System > Backups.

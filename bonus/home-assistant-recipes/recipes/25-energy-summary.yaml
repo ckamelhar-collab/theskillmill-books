@@ -1,0 +1,21 @@
+# Recipe 25: A one-line energy summary every evening
+# At 21:00 your phone shows how many kilowatt-hours the house used today and roughly what that cost.
+alias: Evening energy summary
+triggers:
+  - trigger: time
+    at: "21:00:00"
+actions:
+  - variables:
+      kwh: >
+        {{ states('sensor.daily_energy')
+           | float(0) | round(1) }}
+      cost: >
+        {{ (states('sensor.daily_energy') | float(0)
+            * states('input_number.price_per_kwh')
+              | float(0)) | round(2) }}
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Today's electricity
+      message: >
+        {{ kwh }} kWh today, about {{ cost }}
+        at your price.

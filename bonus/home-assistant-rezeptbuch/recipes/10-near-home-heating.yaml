@@ -1,0 +1,25 @@
+# Rezept 10: Das Haus anwärmen, wenn du fast da bist
+# Wenn die erste Person einen Kreis um deine Nachbarschaft überschreitet und das Haus kühl ist, beginnt das Wohnzimmer zu heizen.
+alias: Heizung an, wenn jemand in der Nähe ist
+triggers:
+  - trigger: zone.entered
+    target:
+      entity_id:
+        - person.anna
+        - person.ben
+    options:
+      zone: zone.near_home
+conditions:
+  - condition: state
+    entity_id: input_select.house_mode
+    state: Away
+  - condition: numeric_state
+    entity_id: sensor.living_room_temperature
+    below: 19
+actions:
+  - action: climate.set_temperature
+    target:
+      entity_id: climate.living_room
+    data:
+      temperature: 21
+      hvac_mode: heat

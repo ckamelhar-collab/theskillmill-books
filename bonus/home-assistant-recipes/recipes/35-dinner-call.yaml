@@ -1,0 +1,15 @@
+# Recipe 35: A "dinner is ready" button for every speaker
+# One press on a dashboard button makes your voice satellites say "Dinner is ready" in every room you list.
+alias: Dinner call
+triggers:
+  - trigger: state
+    entity_id: input_button.dinner_call
+actions:
+  - action: assist_satellite.announce
+    target:
+      entity_id:
+        - assist_satellite.kitchen
+        - assist_satellite.living_room
+    data:
+      message: Dinner is ready.
+      preannounce: true

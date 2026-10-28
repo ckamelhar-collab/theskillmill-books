@@ -1,0 +1,35 @@
+# Recipe 17: A notification that removes itself when the problem is gone
+# The warning appears when the gate has been open ten minutes and disappears from your phone by itself when the gate closes.
+alias: Garden gate - warn, then clear
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.garden_gate
+    to: "on"
+    for:
+      minutes: 10
+    id: open_long
+  - trigger: state
+    entity_id: binary_sensor.garden_gate
+    to: "off"
+    id: closed
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: open_long
+        sequence:
+          - action: notify.mobile_app_anna_phone
+            data:
+              title: Garden gate
+              message: Gate open for 10 minutes.
+              data:
+                tag: garden_gate
+      - conditions:
+          - condition: trigger
+            id: closed
+        sequence:
+          - action: notify.mobile_app_anna_phone
+            data:
+              message: clear_notification
+              data:
+                tag: garden_gate

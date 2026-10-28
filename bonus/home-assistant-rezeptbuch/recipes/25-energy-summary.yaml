@@ -1,0 +1,21 @@
+# Rezept 25: Jeden Abend eine Zeile zum Stromverbrauch
+# Um 21:00 Uhr zeigt dein Handy, wie viele Kilowattstunden das Haus heute verbraucht hat und was das ungefähr gekostet hat.
+alias: Strom-Zusammenfassung am Abend
+triggers:
+  - trigger: time
+    at: "21:00:00"
+actions:
+  - variables:
+      kwh: >
+        {{ states('sensor.daily_energy')
+           | float(0) | round(1) }}
+      cost: >
+        {{ (states('sensor.daily_energy') | float(0)
+            * states('input_number.price_per_kwh')
+              | float(0)) | round(2) }}
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Strom heute
+      message: >
+        {{ kwh }} kWh heute, etwa {{ cost }}
+        zu deinem Preis.

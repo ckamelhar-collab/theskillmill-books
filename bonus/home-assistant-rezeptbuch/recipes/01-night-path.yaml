@@ -1,0 +1,29 @@
+# Rezept 1: Ein gedimmtes Wegelicht zum Bad bei Nacht
+# Zwischen 23:00 und 06:00 Uhr leuchtet das Licht zum Bad bei Bewegung im Flur mit 8 Prozent und geht von selbst wieder aus.
+alias: Nachtlicht zum Bad
+mode: restart
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.hallway_motion
+    to: "on"
+conditions:
+  - condition: time
+    after: "23:00:00"
+    before: "06:00:00"
+actions:
+  - action: light.turn_on
+    target:
+      entity_id: light.bathroom_path
+    data:
+      brightness_pct: 8
+      color_temp_kelvin: 2200
+  - wait_for_trigger:
+      - trigger: state
+        entity_id: binary_sensor.hallway_motion
+        to: "off"
+        for:
+          seconds: 90
+    timeout: "00:10:00"
+  - action: light.turn_off
+    target:
+      entity_id: light.bathroom_path

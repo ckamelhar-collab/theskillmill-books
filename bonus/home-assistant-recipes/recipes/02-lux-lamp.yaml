@@ -1,0 +1,22 @@
+# Recipe 2: The lamp comes on when the room gets dark
+# On a grey afternoon, the living room lamp turns on once the room has been dark for five minutes and someone is there.
+alias: Living room lamp when it gets dark
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.living_room_illuminance
+    below: 40
+    for:
+      minutes: 5
+conditions:
+  - condition: state
+    entity_id: binary_sensor.living_room_presence
+    state: "on"
+  - condition: time
+    after: "08:00:00"
+    before: "22:00:00"
+actions:
+  - action: light.turn_on
+    target:
+      entity_id: light.living_room_lamp
+    data:
+      brightness_pct: 60

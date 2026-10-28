@@ -1,0 +1,18 @@
+# Recipe 33: Ask your house: "Is anyone home?"
+# You say a sentence to Assist (on your phone, a tablet or a voice satellite), and the house answers in words, built from live data.
+alias: Assist - is anyone home?
+triggers:
+  - trigger: conversation
+    command:
+      - Is anyone home
+      - Is somebody home
+actions:
+  - set_conversation_response: >
+      {% set home = states.person
+         | selectattr('state', 'eq', 'home')
+         | map(attribute='name') | list %}
+      {% if home %}
+        Home right now: {{ home | join(' and ') }}.
+      {% else %}
+        Nobody is home.
+      {% endif %}

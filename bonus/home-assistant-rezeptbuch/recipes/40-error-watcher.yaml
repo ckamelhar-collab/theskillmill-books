@@ -1,0 +1,19 @@
+# Rezept 40: Von einem neuen Fehler im Protokoll erfahren, höchstens einmal pro Stunde
+# Schreibt Home Assistant einen ERROR ins Protokoll, bekommst du eine Nachricht mit Quelle und den ersten Zeilen. Die nächste kann eine Stunde später kommen.
+alias: Home Assistant hat einen Fehler protokolliert
+mode: single
+triggers:
+  - trigger: event
+    event_type: system_log_event
+    event_data:
+      level: ERROR
+actions:
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Home-Assistant-Fehler
+      message: >
+        {{ trigger.event.data.name }}:
+        {{ (trigger.event.data.message | first)
+           | string | truncate(150) }}
+  - delay:
+      hours: 1

@@ -1,0 +1,32 @@
+# Rezept 19: Das Unwichtige gehört in die Glocke
+# Eine tägliche Prüfung um 09:00 Uhr legt eine Notiz in die Benachrichtigungsglocke von Home Assistant, wenn der Farn trocken ist. Sie verschwindet, wenn die Erde wieder feucht ist.
+alias: Farn braucht Wasser
+triggers:
+  - trigger: time
+    at: "09:00:00"
+    id: check
+  - trigger: numeric_state
+    entity_id: sensor.fern_moisture
+    above: 40
+    id: wet
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: check
+          - condition: numeric_state
+            entity_id: sensor.fern_moisture
+            below: 25
+        sequence:
+          - action: persistent_notification.create
+            data:
+              notification_id: fern_dry
+              title: Farn
+              message: Der Farn ist trocken. Heute gießen.
+      - conditions:
+          - condition: trigger
+            id: wet
+        sequence:
+          - action: persistent_notification.dismiss
+            data:
+              notification_id: fern_dry

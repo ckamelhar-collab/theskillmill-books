@@ -1,0 +1,23 @@
+# Recipe 8: A house mode that updates itself
+# One helper always says Home or Away (and later Night or Guests), so every other automation can ask one simple question.
+alias: House mode follows the people
+triggers:
+  - trigger: state
+    entity_id:
+      - person.anna
+      - person.ben
+conditions:
+  - condition: state
+    entity_id: input_select.house_mode
+    state:
+      - Home
+      - Away
+actions:
+  - action: input_select.select_option
+    target:
+      entity_id: input_select.house_mode
+    data:
+      option: >
+        {{ 'Home' if states.person
+           | selectattr('state', 'eq', 'home')
+           | list | count > 0 else 'Away' }}

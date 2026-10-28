@@ -1,0 +1,24 @@
+# Rezept 20: Der eine Alarm, der dich wecken darf: eine zu warme Tiefkühltruhe
+# Ist der Tiefkühler eine halbe Stunde wärmer als -12 Grad, schlägt dein Handy Alarm, auch wenn es auf lautlos steht.
+alias: Tiefkühler zu warm
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.freezer_temperature
+    above: -12
+    for:
+      minutes: 30
+actions:
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Tiefkühler
+      message: >
+        Tiefkühler seit 30 Minuten wärmer
+        als -12 Grad. Prüfe Tür und Stecker.
+      data:
+        push:
+          sound:
+            name: default
+            critical: 1
+            volume: 1.0
+        ttl: 0
+        priority: high

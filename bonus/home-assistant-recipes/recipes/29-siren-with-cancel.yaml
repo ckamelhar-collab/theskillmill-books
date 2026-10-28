@@ -1,0 +1,42 @@
+# Recipe 29: A siren with an entry delay and a cancel button
+# If the front door opens while the alarm switch is on, your phone shows a 30-second warning with an "It was me" button. If you do not cancel, the siren sounds for three minutes.
+alias: Entry alarm with a cancel window
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.front_door
+    to: "on"
+conditions:
+  - condition: state
+    entity_id: input_boolean.alarm_armed
+    state: "on"
+actions:
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Front door
+      message: Front door opened. Siren in 30 seconds.
+      data:
+        actions:
+          - action: ALARM_CANCEL
+            title: It was me
+  - wait_for_trigger:
+      - trigger: event
+        event_type: mobile_app_notification_action
+        event_data:
+          action: ALARM_CANCEL
+      - trigger: state
+        entity_id: input_boolean.alarm_armed
+        to: "off"
+    timeout: "00:00:30"
+  - if:
+      - condition: template
+        value_template: "{{ wait.trigger is none }}"
+    then:
+      - action: siren.turn_on
+        target:
+          entity_id: siren.hallway
+      - delay:
+          minutes: 3
+      - action: siren.turn_off
+        target:
+          entity_id: siren.hallway

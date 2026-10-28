@@ -1,0 +1,27 @@
+# Recipe 38: A Saturday note about waiting updates, with no automatic installing
+# Once a week you get the names of everything that has an update, and you decide when to install. Nothing updates itself.
+alias: Saturday update digest
+triggers:
+  - trigger: time
+    at: "10:00:00"
+conditions:
+  - condition: time
+    weekday:
+      - sat
+actions:
+  - variables:
+      waiting: >
+        {{ states.update
+           | selectattr('state', 'eq', 'on')
+           | map(attribute='name') | list }}
+  - if:
+      - condition: template
+        value_template: "{{ waiting | count > 0 }}"
+    then:
+      - action: notify.mobile_app_anna_phone
+        data:
+          title: Updates are waiting
+          message: >
+            {{ waiting | join(', ') }}.
+            Make a backup first, then update in
+            Settings > System > Updates.

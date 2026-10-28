@@ -1,0 +1,29 @@
+# Recipe 1: A dim path light to the bathroom at night
+# Between 23:00 and 06:00, a motion in the hallway lights the way to the bathroom at 8 percent and switches it off again by itself.
+alias: Night path light to the bathroom
+mode: restart
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.hallway_motion
+    to: "on"
+conditions:
+  - condition: time
+    after: "23:00:00"
+    before: "06:00:00"
+actions:
+  - action: light.turn_on
+    target:
+      entity_id: light.bathroom_path
+    data:
+      brightness_pct: 8
+      color_temp_kelvin: 2200
+  - wait_for_trigger:
+      - trigger: state
+        entity_id: binary_sensor.hallway_motion
+        to: "off"
+        for:
+          seconds: 90
+    timeout: "00:10:00"
+  - action: light.turn_off
+    target:
+      entity_id: light.bathroom_path

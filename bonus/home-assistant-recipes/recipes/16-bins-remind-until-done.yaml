@@ -1,0 +1,50 @@
+# Recipe 16: A reminder that asks again until you tick it off
+# On Tuesday evening your phone asks about the bins. "Done" stops it. "In 30 minutes" (or ignoring it) makes it ask again, at most four times.
+alias: Bins - remind until done
+triggers:
+  - trigger: time
+    at: "19:30:00"
+conditions:
+  - condition: time
+    weekday:
+      - tue
+actions:
+  - repeat:
+      count: 4
+      sequence:
+        - action: notify.mobile_app_anna_phone
+          data:
+            title: Bins
+            message: Bins out tonight?
+            data:
+              tag: bins
+              actions:
+                - action: BINS_DONE
+                  title: Done
+                - action: BINS_LATER
+                  title: In 30 minutes
+        - wait_for_trigger:
+            - trigger: event
+              event_type: mobile_app_notification_action
+              event_data:
+                action: BINS_DONE
+            - trigger: event
+              event_type: mobile_app_notification_action
+              event_data:
+                action: BINS_LATER
+          timeout: "00:30:00"
+        - if:
+            - condition: template
+              value_template: >
+                {{ wait.trigger is not none
+                   and wait.trigger.event.data.action
+                       == 'BINS_DONE' }}
+          then:
+            - stop: Bins done
+        - if:
+            - condition: template
+              value_template: >
+                {{ wait.trigger is not none }}
+          then:
+            - delay:
+                minutes: 30

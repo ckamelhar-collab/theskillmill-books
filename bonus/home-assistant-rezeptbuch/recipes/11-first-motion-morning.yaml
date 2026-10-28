@@ -1,0 +1,25 @@
+# Rezept 11: Eine Morgenroutine, die einmal am Tag läuft
+# Bei der ersten Bewegung in der Küche zwischen 06:00 und 10:00 Uhr geht das Licht an und der Rollladen fährt hoch. Weitere Bewegung tut bis morgen nichts.
+alias: Guten Morgen - erste Bewegung des Tages
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.kitchen_motion
+    to: "on"
+conditions:
+  - condition: time
+    after: "06:00:00"
+    before: "10:00:00"
+  - condition: template
+    value_template: >
+      {{ this.attributes.last_triggered is none
+         or as_local(this.attributes.last_triggered)
+            .date() != now().date() }}
+actions:
+  - action: light.turn_on
+    target:
+      entity_id: light.kitchen
+    data:
+      brightness_pct: 70
+  - action: cover.open_cover
+    target:
+      entity_id: cover.kitchen_blinds

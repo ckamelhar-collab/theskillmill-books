@@ -1,0 +1,24 @@
+# Recipe 20: The one alert that should wake you: a freezer that is too warm
+# If the freezer is warmer than -12 degrees for half an hour, your phone sounds an alert even when it is on silent.
+alias: Freezer too warm
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.freezer_temperature
+    above: -12
+    for:
+      minutes: 30
+actions:
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Freezer
+      message: >
+        Freezer warmer than -12 for 30
+        minutes. Check the door and the plug.
+      data:
+        push:
+          sound:
+            name: default
+            critical: 1
+            volume: 1.0
+        ttl: 0
+        priority: high

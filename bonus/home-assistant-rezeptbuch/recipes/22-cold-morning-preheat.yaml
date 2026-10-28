@@ -1,0 +1,21 @@
+# Rezept 22: Das Bad vorheizen, aber nur an kalten Morgen
+# Um 05:30 Uhr heizt das Bad auf, aber nur wenn es draußen unter 8 Grad hat und jemand zu Hause ist.
+alias: Vorheizen an kalten Morgen
+triggers:
+  - trigger: time
+    at: "05:30:00"
+conditions:
+  - condition: numeric_state
+    entity_id: weather.home
+    attribute: temperature
+    below: 8
+  - condition: state
+    entity_id: input_select.house_mode
+    state: Home
+actions:
+  - action: climate.set_temperature
+    target:
+      entity_id: climate.bathroom
+    data:
+      temperature: 22
+      hvac_mode: heat

@@ -1,0 +1,22 @@
+# Rezept 2: Die Lampe geht an, wenn es im Raum dunkel wird
+# An einem grauen Nachmittag schaltet sich die Wohnzimmerlampe ein, wenn es fünf Minuten lang dunkel war und jemand im Raum ist.
+alias: Wohnzimmerlampe bei Dunkelheit
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.living_room_illuminance
+    below: 40
+    for:
+      minutes: 5
+conditions:
+  - condition: state
+    entity_id: binary_sensor.living_room_presence
+    state: "on"
+  - condition: time
+    after: "08:00:00"
+    before: "22:00:00"
+actions:
+  - action: light.turn_on
+    target:
+      entity_id: light.living_room_lamp
+    data:
+      brightness_pct: 60

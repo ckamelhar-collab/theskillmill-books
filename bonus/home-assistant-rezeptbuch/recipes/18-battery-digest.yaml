@@ -1,0 +1,30 @@
+# Rezept 18: Eine Batterie-Nachricht am Sonntag statt zehn Warnungen
+# Jeden Sonntagmorgen listet eine einzige Nachricht alle Batteriesensoren unter 20 Prozent auf. Sind alle in Ordnung, hörst du nichts.
+alias: Batterie-Übersicht am Sonntag
+triggers:
+  - trigger: time
+    at: "10:00:00"
+conditions:
+  - condition: time
+    weekday:
+      - sun
+actions:
+  - variables:
+      low: >
+        {% set ns = namespace(items=[]) %}
+        {% for s in states.sensor
+           if s.attributes.device_class | default('')
+              == 'battery'
+           and s.state | float(100) < 20 %}
+          {% set ns.items = ns.items
+             + [s.name ~ ' ' ~ s.state ~ '%'] %}
+        {% endfor %}
+        {{ ns.items | join(', ') }}
+  - if:
+      - condition: template
+        value_template: "{{ low != '' }}"
+    then:
+      - action: notify.mobile_app_anna_phone
+        data:
+          title: Batterien unter 20 %
+          message: "{{ low }}"

@@ -1,0 +1,30 @@
+# Recipe 37: Hear about a failed or missing backup
+# You get one message when the automatic backup fails, and another if no backup has succeeded in two days.
+alias: Backup problem
+triggers:
+  - trigger: state
+    entity_id: event.backup_automatic_backup
+    id: event
+  - trigger: time
+    at: "09:30:00"
+    id: age
+conditions:
+  - condition: template
+    value_template: >
+      {% if trigger.id == 'event' %}
+        {{ trigger.to_state.attributes.event_type
+           == 'failed' }}
+      {% else %}
+        {% set id = 'sensor.backup_last_' ~
+                    'successful_automatic_backup' %}
+        {{ (now() - states(id) | as_datetime(
+              now() - timedelta(days=99))).days
+           >= 2 }}
+      {% endif %}
+actions:
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Backup
+      message: >
+        The last automatic backup failed or is over
+        two days old. Open Settings > System > Backups.

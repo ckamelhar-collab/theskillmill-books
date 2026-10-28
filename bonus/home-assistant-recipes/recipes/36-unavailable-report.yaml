@@ -1,0 +1,28 @@
+# Recipe 36: A Monday list of everything that has gone quiet
+# Every Monday morning Home Assistant puts the list of unavailable entities into the notification bell, so a dead sensor does not stay unnoticed for weeks.
+alias: Monday list of unavailable entities
+triggers:
+  - trigger: time
+    at: "09:00:00"
+conditions:
+  - condition: time
+    weekday:
+      - mon
+actions:
+  - variables:
+      gone: >
+        {{ states
+           | selectattr('state', 'eq', 'unavailable')
+           | map(attribute='entity_id')
+           | list }}
+  - if:
+      - condition: template
+        value_template: "{{ gone | count > 0 }}"
+    then:
+      - action: persistent_notification.create
+        data:
+          notification_id: unavailable_report
+          title: Unavailable entities
+          message: >
+            {{ gone | count }} entities unavailable:
+            {{ gone[:15] | join(', ') }}

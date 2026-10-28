@@ -1,0 +1,30 @@
+# Rezept 14: Ein „Ich gehe“-Skript für Knöpfe, Sprache und Automationen
+# Ein Skript erledigt alles, was zum Weggehen gehört: Licht aus, Tür abschließen, Heizung in den Eco-Modus, Hausmodus auf Away. Ein Knopf, ein Sprachbefehl oder eine andere Automation kann es starten.
+alias: Haus verlassen
+fields:
+  lock_door:
+    name: Haustür abschließen
+    default: true
+    selector:
+      boolean: {}
+sequence:
+  - action: light.turn_off
+    target:
+      entity_id: all
+  - if:
+      - condition: template
+        value_template: "{{ lock_door }}"
+    then:
+      - action: lock.lock
+        target:
+          entity_id: lock.front_door
+  - action: climate.set_preset_mode
+    target:
+      entity_id: climate.living_room
+    data:
+      preset_mode: eco
+  - action: input_select.select_option
+    target:
+      entity_id: input_select.house_mode
+    data:
+      option: Away

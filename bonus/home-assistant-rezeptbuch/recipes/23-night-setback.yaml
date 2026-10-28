@@ -1,0 +1,30 @@
+# Rezept 23: Nachts die Heizung absenken, morgens wieder hochfahren
+# Das Thermostat wechselt um 22:30 Uhr in die Eco-Voreinstellung und um 06:00 Uhr zurück. Eine Automation, zwei Auslöser.
+alias: Heizung - Nachtabsenkung
+triggers:
+  - trigger: time
+    at: "22:30:00"
+    id: night
+  - trigger: time
+    at: "06:00:00"
+    id: morning
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: night
+        sequence:
+          - action: climate.set_preset_mode
+            target:
+              entity_id: climate.living_room
+            data:
+              preset_mode: eco
+      - conditions:
+          - condition: trigger
+            id: morning
+        sequence:
+          - action: climate.set_preset_mode
+            target:
+              entity_id: climate.living_room
+            data:
+              preset_mode: home

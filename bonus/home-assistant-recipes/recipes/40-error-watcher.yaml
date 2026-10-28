@@ -1,0 +1,19 @@
+# Recipe 40: Hear about a new error in the log, at most once an hour
+# When Home Assistant writes an ERROR to its log, you get one message with its source and the first lines. The next one can arrive an hour later.
+alias: Home Assistant logged an error
+mode: single
+triggers:
+  - trigger: event
+    event_type: system_log_event
+    event_data:
+      level: ERROR
+actions:
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Home Assistant error
+      message: >
+        {{ trigger.event.data.name }}:
+        {{ (trigger.event.data.message | first)
+           | string | truncate(150) }}
+  - delay:
+      hours: 1

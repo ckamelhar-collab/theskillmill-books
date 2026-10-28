@@ -1,0 +1,27 @@
+# Rezept 32: Rauch erkannt: alle Lichter an und eine laute Nachricht
+# Meldet ein Rauchmelder, den Home Assistant sehen kann, Rauch, gehen alle Lichter im Haus voll an und dein Handy alarmiert dich laut.
+alias: Rauch - alle Lichter an, Handy-Alarm
+triggers:
+  - trigger: state
+    entity_id:
+      - binary_sensor.smoke_hallway
+      - binary_sensor.smoke_kitchen
+    to: "on"
+actions:
+  - action: light.turn_on
+    target:
+      entity_id: all
+    data:
+      brightness_pct: 100
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Rauch
+      message: Rauch im Haus erkannt. Prüfe das Haus.
+      data:
+        push:
+          sound:
+            name: default
+            critical: 1
+            volume: 1.0
+        ttl: 0
+        priority: high

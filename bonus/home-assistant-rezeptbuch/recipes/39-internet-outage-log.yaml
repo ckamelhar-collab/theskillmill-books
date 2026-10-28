@@ -1,0 +1,29 @@
+# Rezept 39: Notiz führen, wie lange das Internet weg war
+# War das Internet drei Minuten lang nicht erreichbar, wartet Home Assistant auf seine Rückkehr und hinterlässt dann eine Notiz mit Beginn und Dauer.
+alias: Internetausfall-Bericht
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.router_ping
+    to: "off"
+    for:
+      minutes: 3
+actions:
+  - variables:
+      since: "{{ trigger.to_state.last_changed }}"
+  - wait_for_trigger:
+      - trigger: state
+        entity_id: binary_sensor.router_ping
+        to: "on"
+    timeout: "12:00:00"
+  - action: persistent_notification.create
+    data:
+      title: Internet war weg
+      message: >
+        Ausfall ab
+        {{ as_local(as_datetime(since))
+           .strftime('%H:%M') }},
+        für etwa
+        {{ ((now() - as_datetime(since))
+            .total_seconds() / 60)
+           | round(0) | int }} Minuten.

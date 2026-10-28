@@ -1,0 +1,33 @@
+# Rezept 26: Die Spülmaschine laufen lassen, wenn Strom billig ist
+# Du belädst die Spülmaschine, drückst am Handy „bereit“, und sie startet, sobald der Strompreis unter deine Grenze fällt, spätestens um 05:00 Uhr.
+alias: Spülmaschine startet bei günstigem Strom
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.electricity_price
+    below: input_number.cheap_price_limit
+    id: cheap
+  - trigger: time
+    at: "05:00:00"
+    id: deadline
+  - trigger: state
+    entity_id: input_boolean.dishwasher_ready
+    to: "on"
+    id: ready
+conditions:
+  - condition: state
+    entity_id: input_boolean.dishwasher_ready
+    state: "on"
+  - condition: template
+    value_template: >
+      {{ trigger.id == 'deadline'
+         or states('sensor.electricity_price')
+            | float(99)
+            < states('input_number.cheap_price_limit')
+              | float(0) }}
+actions:
+  - action: switch.turn_on
+    target:
+      entity_id: switch.dishwasher_plug
+  - action: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.dishwasher_ready

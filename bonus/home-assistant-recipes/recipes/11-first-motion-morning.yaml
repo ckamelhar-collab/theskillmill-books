@@ -1,0 +1,25 @@
+# Recipe 11: A morning routine that runs once a day
+# The first time the kitchen sees movement between 06:00 and 10:00, the light comes on and the blinds open. Later movement does nothing until tomorrow.
+alias: Good morning - first motion of the day
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.kitchen_motion
+    to: "on"
+conditions:
+  - condition: time
+    after: "06:00:00"
+    before: "10:00:00"
+  - condition: template
+    value_template: >
+      {{ this.attributes.last_triggered is none
+         or as_local(this.attributes.last_triggered)
+            .date() != now().date() }}
+actions:
+  - action: light.turn_on
+    target:
+      entity_id: light.kitchen
+    data:
+      brightness_pct: 70
+  - action: cover.open_cover
+    target:
+      entity_id: cover.kitchen_blinds

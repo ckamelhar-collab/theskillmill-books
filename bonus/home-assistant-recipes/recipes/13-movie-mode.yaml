@@ -1,0 +1,28 @@
+# Recipe 13: Movie mode that puts everything back
+# One script dims the room and closes the blinds, and a second one returns every light and blind to exactly how it was.
+alias: Movie mode on
+sequence:
+  - action: scene.create
+    data:
+      scene_id: before_movie
+      snapshot_entities:
+        - light.living_room
+        - light.kitchen
+        - cover.living_room_blinds
+  - action: light.turn_off
+    target:
+      entity_id: light.kitchen
+  - action: light.turn_on
+    target:
+      entity_id: light.living_room
+    data:
+      brightness_pct: 10
+  - action: cover.close_cover
+    target:
+      entity_id: cover.living_room_blinds
+---
+alias: Movie mode off
+sequence:
+  - action: scene.turn_on
+    target:
+      entity_id: scene.before_movie

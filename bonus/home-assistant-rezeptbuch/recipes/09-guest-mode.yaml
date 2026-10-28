@@ -1,0 +1,24 @@
+# Rezept 9: Ein Gästemodus, der die „Niemand zu Hause“-Regeln pausiert
+# Ein Schalter im Dashboard sagt dem Haus, dass Besuch da ist, sodass es ein leer wirkendes Haus nicht mehr für ein leeres Haus hält.
+alias: Gästemodus ein und aus
+triggers:
+  - trigger: state
+    entity_id: input_boolean.guest_mode
+actions:
+  - choose:
+      - conditions:
+          - condition: state
+            entity_id: input_boolean.guest_mode
+            state: "on"
+        sequence:
+          - action: input_select.select_option
+            target:
+              entity_id: input_select.house_mode
+            data:
+              option: Guests
+    default:
+      - action: input_select.select_option
+        target:
+          entity_id: input_select.house_mode
+        data:
+          option: Home

@@ -1,0 +1,22 @@
+# Rezept 30: Vom Sperrbildschirm aus sehen, wer vor der Tür steht
+# Wenn es klingelt, bekommen beide Handys eine Nachricht mit einem Bild der Haustürkamera.
+alias: Klingel - Bild aufs Handy
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.doorbell
+    to: "on"
+actions:
+  - delay:
+      seconds: 2
+  - repeat:
+      for_each:
+        - notify.mobile_app_anna_phone
+        - notify.mobile_app_ben_phone
+      sequence:
+        - action: "{{ repeat.item }}"
+          data:
+            title: Klingel
+            message: Jemand hat geklingelt.
+            data:
+              image: /api/camera_proxy/camera.front_door
+              entity_id: camera.front_door

@@ -1,0 +1,15 @@
+# Rezept 35: Ein „Essen ist fertig“-Knopf für jeden Lautsprecher
+# Ein Druck auf einen Dashboard-Knopf lässt deine Sprach-Satelliten in jedem aufgeführten Raum „Das Essen ist fertig“ sagen.
+alias: Essensruf
+triggers:
+  - trigger: state
+    entity_id: input_button.dinner_call
+actions:
+  - action: assist_satellite.announce
+    target:
+      entity_id:
+        - assist_satellite.kitchen
+        - assist_satellite.living_room
+    data:
+      message: Das Essen ist fertig.
+      preannounce: true

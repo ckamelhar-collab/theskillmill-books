@@ -1,0 +1,18 @@
+# Rezept 12: Ein anderes Aufwachen an Arbeitstagen und Feiertagen
+# Das Schlafzimmerlicht blendet um 06:45 Uhr auf, aber nur an Tagen, die weder Wochenende noch gesetzlicher Feiertag in deinem Bundesland sind.
+alias: Weck-Licht nur an Arbeitstagen
+triggers:
+  - trigger: time
+    at: "06:45:00"
+conditions:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: "on"
+actions:
+  - action: light.turn_on
+    target:
+      entity_id: light.bedroom
+    data:
+      brightness_pct: 25
+      color_temp_kelvin: 2700
+      transition: 300

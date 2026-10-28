@@ -1,0 +1,22 @@
+# Recipe 30: See who is at the door from the lock screen
+# When the doorbell rings, both phones get a message with a picture from the front door camera.
+alias: Doorbell - picture on the phone
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.doorbell
+    to: "on"
+actions:
+  - delay:
+      seconds: 2
+  - repeat:
+      for_each:
+        - notify.mobile_app_anna_phone
+        - notify.mobile_app_ben_phone
+      sequence:
+        - action: "{{ repeat.item }}"
+          data:
+            title: Doorbell
+            message: Somebody rang the bell.
+            data:
+              image: /api/camera_proxy/camera.front_door
+              entity_id: camera.front_door

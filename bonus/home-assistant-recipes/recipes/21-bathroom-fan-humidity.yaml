@@ -1,0 +1,30 @@
+# Recipe 21: The bathroom fan follows the humidity
+# The fan starts when the air gets damp after a shower and stops five minutes after it has dried out.
+alias: Bathroom fan follows humidity
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.bathroom_humidity
+    above: 70
+    id: humid
+  - trigger: numeric_state
+    entity_id: sensor.bathroom_humidity
+    below: 60
+    for:
+      minutes: 5
+    id: dry
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: humid
+        sequence:
+          - action: switch.turn_on
+            target:
+              entity_id: switch.bathroom_fan
+      - conditions:
+          - condition: trigger
+            id: dry
+        sequence:
+          - action: switch.turn_off
+            target:
+              entity_id: switch.bathroom_fan

@@ -1,0 +1,32 @@
+# Recipe 19: Put the non-urgent things in the bell
+# A daily 09:00 check puts a note in Home Assistant's notification bell when the fern is dry. It disappears when the soil is wet again.
+alias: Fern needs water
+triggers:
+  - trigger: time
+    at: "09:00:00"
+    id: check
+  - trigger: numeric_state
+    entity_id: sensor.fern_moisture
+    above: 40
+    id: wet
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: check
+          - condition: numeric_state
+            entity_id: sensor.fern_moisture
+            below: 25
+        sequence:
+          - action: persistent_notification.create
+            data:
+              notification_id: fern_dry
+              title: Fern
+              message: The fern is dry. Water it today.
+      - conditions:
+          - condition: trigger
+            id: wet
+        sequence:
+          - action: persistent_notification.dismiss
+            data:
+              notification_id: fern_dry

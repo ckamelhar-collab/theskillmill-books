@@ -1,0 +1,22 @@
+# Recipe 31: A leak closes the main water valve
+# When any leak sensor gets wet, the motorised water valve closes and your phone tells you. (The basic alert is in the free pack; this recipe adds the action.)
+alias: Leak - close the main valve
+triggers:
+  - trigger: state
+    entity_id:
+      - binary_sensor.kitchen_leak
+      - binary_sensor.laundry_leak
+      - binary_sensor.bathroom_leak
+    to: "on"
+actions:
+  - action: valve.close_valve
+    target:
+      entity_id: valve.main_water
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Water leak
+      message: Water detected. The main valve is closed.
+      data:
+        tag: leak
+        ttl: 0
+        priority: high

@@ -1,0 +1,39 @@
+blueprint:
+  name: Warnen, wenn ein Wert zu hoch bleibt
+  description: Führt Aktionen aus, wenn ein Wert hoch ist.
+  domain: automation
+  input:
+    sensor:
+      name: Sensor
+      selector:
+        entity:
+          filter:
+            - domain: sensor
+    limit:
+      name: Grenzwert
+      selector:
+        number:
+          min: -50
+          max: 1000
+          mode: box
+    minutes:
+      name: Für wie viele Minuten
+      default: 30
+      selector:
+        number:
+          min: 1
+          max: 600
+          unit_of_measurement: Minuten
+    what_to_do:
+      name: Was soll geschehen
+      selector:
+        action: {}
+triggers:
+  - trigger: numeric_state
+    entity_id: !input sensor
+    above: !input limit
+    for:
+      minutes: !input minutes
+actions:
+  - alias: Gewählte Aktionen ausführen
+    sequence: !input what_to_do

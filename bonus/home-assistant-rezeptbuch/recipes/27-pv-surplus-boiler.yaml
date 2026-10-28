@@ -1,0 +1,39 @@
+# Rezept 27: Solar-Überschuss für Warmwasser nutzen
+# Speist das Haus fünf Minuten lang mindestens 1500 W ins Netz ein, schaltet sich der elektrische Warmwasserbereiter ein. Bezieht das Haus wieder Strom aus dem Netz, schaltet er ab.
+alias: Solar-Überschuss heizt den Boiler
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.grid_power
+    below: -1500
+    for:
+      minutes: 5
+    id: surplus
+  - trigger: numeric_state
+    entity_id: sensor.grid_power
+    above: 100
+    for:
+      minutes: 5
+    id: end
+conditions:
+  - condition: time
+    after: "10:00:00"
+    before: "17:00:00"
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: surplus
+          - condition: numeric_state
+            entity_id: sensor.boiler_temperature
+            below: 55
+        sequence:
+          - action: switch.turn_on
+            target:
+              entity_id: switch.boiler_plug
+      - conditions:
+          - condition: trigger
+            id: end
+        sequence:
+          - action: switch.turn_off
+            target:
+              entity_id: switch.boiler_plug

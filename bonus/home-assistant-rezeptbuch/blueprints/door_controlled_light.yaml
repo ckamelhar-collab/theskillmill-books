@@ -1,0 +1,59 @@
+blueprint:
+  name: Türgesteuertes Licht
+  description: >
+    Licht an, wenn die Tür aufgeht, aus, wenn sie
+    zugeht, und aus, wenn sie offen vergessen wird.
+  domain: automation
+  input:
+    door:
+      name: Türsensor
+      selector:
+        entity:
+          filter:
+            - domain: binary_sensor
+    lamp:
+      name: Licht
+      selector:
+        target:
+          entity:
+            domain: light
+    forget_minutes:
+      name: Ausschalten nach
+      default: 15
+      selector:
+        number:
+          min: 1
+          max: 120
+          unit_of_measurement: Minuten
+mode: restart
+triggers:
+  - trigger: state
+    entity_id: !input door
+    to: "on"
+    id: opened
+  - trigger: state
+    entity_id: !input door
+    to: "off"
+    id: closed
+  - trigger: state
+    entity_id: !input door
+    to: "on"
+    for:
+      minutes: !input forget_minutes
+    id: forgotten
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: opened
+        sequence:
+          - action: light.turn_on
+            target: !input lamp
+      - conditions:
+          - condition: trigger
+            id:
+              - closed
+              - forgotten
+        sequence:
+          - action: light.turn_off
+            target: !input lamp

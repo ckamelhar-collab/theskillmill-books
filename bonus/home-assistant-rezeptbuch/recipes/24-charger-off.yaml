@@ -1,0 +1,20 @@
+# Rezept 24: Das Ladegerät schaltet sich ab, wenn der Akku voll ist
+# Eine Steckdose mit Leistungsmessung unterbricht den Strom zehn Minuten, nachdem das Ladegerät nichts mehr zieht, und sagt dir Bescheid.
+alias: Ladegerät aus, wenn der Akku voll ist
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.ebike_charger_power
+    below: 3
+    for:
+      minutes: 10
+conditions:
+  - condition: state
+    entity_id: switch.ebike_charger
+    state: "on"
+actions:
+  - action: switch.turn_off
+    target:
+      entity_id: switch.ebike_charger
+  - action: notify.mobile_app_anna_phone
+    data:
+      message: Das E-Bike ist geladen. Der Stecker ist aus.

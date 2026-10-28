@@ -1,0 +1,20 @@
+# Recipe 24: The charger switches itself off when the battery is full
+# A smart plug that measures power cuts the supply ten minutes after the charger has stopped drawing power, and tells you.
+alias: Charger off when the battery is full
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.ebike_charger_power
+    below: 3
+    for:
+      minutes: 10
+conditions:
+  - condition: state
+    entity_id: switch.ebike_charger
+    state: "on"
+actions:
+  - action: switch.turn_off
+    target:
+      entity_id: switch.ebike_charger
+  - action: notify.mobile_app_anna_phone
+    data:
+      message: The e-bike is charged. The plug is off.

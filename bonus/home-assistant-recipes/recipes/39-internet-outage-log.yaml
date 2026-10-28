@@ -1,0 +1,29 @@
+# Recipe 39: Keep a note of how long the internet was down
+# When the internet has been unreachable for three minutes, Home Assistant waits for it to return and then leaves a note with the start time and the length.
+alias: Internet outage report
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.router_ping
+    to: "off"
+    for:
+      minutes: 3
+actions:
+  - variables:
+      since: "{{ trigger.to_state.last_changed }}"
+  - wait_for_trigger:
+      - trigger: state
+        entity_id: binary_sensor.router_ping
+        to: "on"
+    timeout: "12:00:00"
+  - action: persistent_notification.create
+    data:
+      title: Internet was down
+      message: >
+        Down from
+        {{ as_local(as_datetime(since))
+           .strftime('%H:%M') }},
+        for about
+        {{ ((now() - as_datetime(since))
+            .total_seconds() / 60)
+           | round(0) | int }} minutes.

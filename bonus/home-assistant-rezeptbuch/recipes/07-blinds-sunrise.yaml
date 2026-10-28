@@ -1,0 +1,21 @@
+# Rezept 7: Rollläden hoch bei Sonnenaufgang, aber nie vor 07:00 Uhr
+# An Werktagen öffnen sich die Schlafzimmerrollläden zu dem Zeitpunkt, der später kommt: Sonnenaufgang oder 07:00 Uhr.
+alias: Rollladen hoch - Sonnenaufgang, nicht vor 07:00
+triggers:
+  - trigger: sun.sunrise
+  - trigger: time
+    at: "07:00:00"
+conditions:
+  - condition: sun.is_up
+  - condition: time
+    after: "07:00:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+actions:
+  - action: cover.open_cover
+    target:
+      entity_id: cover.bedroom_blinds

@@ -1,0 +1,27 @@
+# Rezept 38: Eine Samstagsnotiz über wartende Updates, ohne automatisches Installieren
+# Einmal pro Woche bekommst du die Namen von allem, was ein Update hat, und entscheidest selbst, wann du installierst. Nichts aktualisiert sich selbst.
+alias: Update-Übersicht am Samstag
+triggers:
+  - trigger: time
+    at: "10:00:00"
+conditions:
+  - condition: time
+    weekday:
+      - sat
+actions:
+  - variables:
+      waiting: >
+        {{ states.update
+           | selectattr('state', 'eq', 'on')
+           | map(attribute='name') | list }}
+  - if:
+      - condition: template
+        value_template: "{{ waiting | count > 0 }}"
+    then:
+      - action: notify.mobile_app_anna_phone
+        data:
+          title: Updates warten
+          message: >
+            {{ waiting | join(', ') }}.
+            Erst ein Backup machen, dann unter
+            Einstellungen > System > Updates aktualisieren.

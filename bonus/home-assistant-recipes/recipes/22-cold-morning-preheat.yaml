@@ -1,0 +1,21 @@
+# Recipe 22: Pre-heat the bathroom, but only on cold mornings
+# At 05:30 the bathroom heats up, but only if it is under 8 degrees outside and somebody is home.
+alias: Pre-heat on cold mornings
+triggers:
+  - trigger: time
+    at: "05:30:00"
+conditions:
+  - condition: numeric_state
+    entity_id: weather.home
+    attribute: temperature
+    below: 8
+  - condition: state
+    entity_id: input_select.house_mode
+    state: Home
+actions:
+  - action: climate.set_temperature
+    target:
+      entity_id: climate.bathroom
+    data:
+      temperature: 22
+      hvac_mode: heat

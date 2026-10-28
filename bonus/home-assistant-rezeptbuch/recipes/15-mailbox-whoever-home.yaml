@@ -1,0 +1,28 @@
+# Rezept 15: Nur die Leute informieren, die zu Hause sind
+# Wenn der Briefkastensensor tagsüber öffnet, bekommt jede Person, die zu Hause ist, eine Nachricht. Wer unterwegs ist, wird nicht gestört.
+alias: Briefkasten geöffnet - Info an alle zu Hause
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.mailbox
+    to: "on"
+conditions:
+  - condition: time
+    after: "08:00:00"
+    before: "20:00:00"
+actions:
+  - repeat:
+      for_each:
+        - person: person.anna
+          notify: notify.mobile_app_anna_phone
+        - person: person.ben
+          notify: notify.mobile_app_ben_phone
+      sequence:
+        - if:
+            - condition: template
+              value_template: >
+                {{ is_state(repeat.item.person, 'home') }}
+          then:
+            - action: "{{ repeat.item.notify }}"
+              data:
+                title: Briefkasten
+                message: Der Briefkasten wurde geöffnet.

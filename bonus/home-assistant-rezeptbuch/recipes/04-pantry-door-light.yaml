@@ -1,0 +1,37 @@
+# Rezept 4: Das Vorratslicht folgt der Tür
+# Das Licht geht an, wenn die Speisekammertür aufgeht, aus, wenn sie zugeht, und nach 15 Minuten auch dann, wenn jemand die Tür offen lässt.
+alias: Vorratslicht folgt der Tür
+mode: restart
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.pantry_door
+    to: "on"
+    id: opened
+  - trigger: state
+    entity_id: binary_sensor.pantry_door
+    to: "off"
+    id: closed
+  - trigger: state
+    entity_id: binary_sensor.pantry_door
+    to: "on"
+    for:
+      minutes: 15
+    id: forgotten
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: opened
+        sequence:
+          - action: light.turn_on
+            target:
+              entity_id: light.pantry
+      - conditions:
+          - condition: trigger
+            id:
+              - closed
+              - forgotten
+        sequence:
+          - action: light.turn_off
+            target:
+              entity_id: light.pantry

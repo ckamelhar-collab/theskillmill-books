@@ -1,0 +1,42 @@
+# Rezept 29: Eine Sirene mit Eintrittsverzögerung und Abbrechen-Knopf
+# Öffnet sich die Haustür bei eingeschaltetem Alarmschalter, zeigt dein Handy eine 30-Sekunden-Warnung mit dem Knopf „Das war ich“. Brichst du nicht ab, ertönt die Sirene drei Minuten lang.
+alias: Eingangsalarm mit Abbruchfenster
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.front_door
+    to: "on"
+conditions:
+  - condition: state
+    entity_id: input_boolean.alarm_armed
+    state: "on"
+actions:
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Haustür
+      message: Haustür geöffnet. Sirene in 30 Sekunden.
+      data:
+        actions:
+          - action: ALARM_CANCEL
+            title: Das war ich
+  - wait_for_trigger:
+      - trigger: event
+        event_type: mobile_app_notification_action
+        event_data:
+          action: ALARM_CANCEL
+      - trigger: state
+        entity_id: input_boolean.alarm_armed
+        to: "off"
+    timeout: "00:00:30"
+  - if:
+      - condition: template
+        value_template: "{{ wait.trigger is none }}"
+    then:
+      - action: siren.turn_on
+        target:
+          entity_id: siren.hallway
+      - delay:
+          minutes: 3
+      - action: siren.turn_off
+        target:
+          entity_id: siren.hallway

@@ -1,0 +1,33 @@
+# Rezept 5: Das Licht wird im Tagesverlauf wärmer
+# Alle 15 Minuten wechseln Lampen, die schon an sind, auf eine zur Tageszeit passende Farbtemperatur. Ausgeschaltete Lampen bleiben aus.
+alias: Wärmeres Licht im Tagesverlauf
+triggers:
+  - trigger: time_pattern
+    minutes: "/15"
+conditions:
+  - condition: time
+    after: "06:00:00"
+    before: "23:00:00"
+actions:
+  - variables:
+      kelvin: >
+        {% set h = now().hour %}
+        {{ 3000 if h < 9 else 4000 if h < 17
+           else 3000 if h < 20 else 2400 }}
+  - repeat:
+      for_each:
+        - light.living_room
+        - light.kitchen
+        - light.hallway
+      sequence:
+        - if:
+            - condition: template
+              value_template: >
+                {{ is_state(repeat.item, 'on') }}
+          then:
+            - action: light.turn_on
+              target:
+                entity_id: "{{ repeat.item }}"
+              data:
+                color_temp_kelvin: "{{ kelvin | int }}"
+                transition: 20

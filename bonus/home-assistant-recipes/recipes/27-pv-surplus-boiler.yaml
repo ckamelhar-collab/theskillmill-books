@@ -1,0 +1,39 @@
+# Recipe 27: Use solar surplus for hot water
+# When the house feeds at least 1500 W into the grid for five minutes, the electric water heater switches on. When the house draws from the grid again, it switches off.
+alias: Solar surplus heats the boiler
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.grid_power
+    below: -1500
+    for:
+      minutes: 5
+    id: surplus
+  - trigger: numeric_state
+    entity_id: sensor.grid_power
+    above: 100
+    for:
+      minutes: 5
+    id: end
+conditions:
+  - condition: time
+    after: "10:00:00"
+    before: "17:00:00"
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: surplus
+          - condition: numeric_state
+            entity_id: sensor.boiler_temperature
+            below: 55
+        sequence:
+          - action: switch.turn_on
+            target:
+              entity_id: switch.boiler_plug
+      - conditions:
+          - condition: trigger
+            id: end
+        sequence:
+          - action: switch.turn_off
+            target:
+              entity_id: switch.boiler_plug

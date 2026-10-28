@@ -1,0 +1,16 @@
+# Recipe 34: A voice command with a number in it
+# You say "set the study timer to 25 minutes" and a timer starts, with whatever number you said.
+alias: Assist - study timer in minutes
+triggers:
+  - trigger: conversation
+    command:
+      - set the study timer to {minutes} minutes
+actions:
+  - action: timer.start
+    target:
+      entity_id: timer.study_timer
+    data:
+      duration: "{{ trigger.slots.minutes | int * 60 }}"
+  - set_conversation_response: >
+      Study timer set to
+      {{ trigger.slots.minutes }} minutes.

@@ -1,0 +1,30 @@
+# Rezept 21: Der Badlüfter folgt der Luftfeuchtigkeit
+# Der Lüfter startet, wenn die Luft nach dem Duschen feucht wird, und hört fünf Minuten nach dem Abtrocknen wieder auf.
+alias: Badlüfter folgt der Luftfeuchte
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.bathroom_humidity
+    above: 70
+    id: humid
+  - trigger: numeric_state
+    entity_id: sensor.bathroom_humidity
+    below: 60
+    for:
+      minutes: 5
+    id: dry
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: humid
+        sequence:
+          - action: switch.turn_on
+            target:
+              entity_id: switch.bathroom_fan
+      - conditions:
+          - condition: trigger
+            id: dry
+        sequence:
+          - action: switch.turn_off
+            target:
+              entity_id: switch.bathroom_fan

@@ -1,0 +1,16 @@
+# Rezept 34: Ein Sprachbefehl mit einer Zahl darin
+# Du sagst „stelle den Lerntimer auf 25 Minuten“, und ein Timer startet mit der Zahl, die du genannt hast.
+alias: Assist - Lerntimer in Minuten
+triggers:
+  - trigger: conversation
+    command:
+      - stelle den Lerntimer auf {minutes} Minuten
+actions:
+  - action: timer.start
+    target:
+      entity_id: timer.study_timer
+    data:
+      duration: "{{ trigger.slots.minutes | int * 60 }}"
+  - set_conversation_response: >
+      Lerntimer auf
+      {{ trigger.slots.minutes }} Minuten gestellt.
