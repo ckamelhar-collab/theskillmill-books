@@ -13,7 +13,7 @@ sequence:
       entity_id: all
   - if:
       - condition: template
-        value_template: "{{ lock_door }}"
+        value_template: "{{ lock_door | default(true) }}"
     then:
       - action: lock.lock
         target:

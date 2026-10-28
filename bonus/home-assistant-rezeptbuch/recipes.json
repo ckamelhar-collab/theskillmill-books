@@ -98,7 +98,7 @@
    "id": "leaving-script",
    "title": "Ein „Ich gehe“-Skript für Knöpfe, Sprache und Automationen",
    "file": "14-leaving-script.yaml",
-   "yaml": "alias: Haus verlassen\nfields:\n  lock_door:\n    name: Haustür abschließen\n    default: true\n    selector:\n      boolean: {}\nsequence:\n  - action: light.turn_off\n    target:\n      entity_id: all\n  - if:\n      - condition: template\n        value_template: \"{{ lock_door }}\"\n    then:\n      - action: lock.lock\n        target:\n          entity_id: lock.front_door\n  - action: climate.set_preset_mode\n    target:\n      entity_id: climate.living_room\n    data:\n      preset_mode: eco\n  - action: input_select.select_option\n    target:\n      entity_id: input_select.house_mode\n    data:\n      option: Away"
+   "yaml": "alias: Haus verlassen\nfields:\n  lock_door:\n    name: Haustür abschließen\n    default: true\n    selector:\n      boolean: {}\nsequence:\n  - action: light.turn_off\n    target:\n      entity_id: all\n  - if:\n      - condition: template\n        value_template: \"{{ lock_door | default(true) }}\"\n    then:\n      - action: lock.lock\n        target:\n          entity_id: lock.front_door\n  - action: climate.set_preset_mode\n    target:\n      entity_id: climate.living_room\n    data:\n      preset_mode: eco\n  - action: input_select.select_option\n    target:\n      entity_id: input_select.house_mode\n    data:\n      option: Away"
   },
   {
    "n": 15,
