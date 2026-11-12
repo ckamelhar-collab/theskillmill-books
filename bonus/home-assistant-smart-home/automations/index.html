@@ -103,7 +103,7 @@
   </header>
 
   <section class="hero">
-    <div class="hero-inner single">
+    <div class="hero-inner">
       <div>
         <p class="eyebrow">Reader Bonus</p>
         <h1>25 Ready-to-Import Home Assistant Automations</h1>
@@ -111,6 +111,26 @@
         <p class="bookline">Companion resource for <strong>Home Assistant Smart Home for Beginners (2nd Edition)</strong> by Digital Basics Press.</p>
         <div class="method-callout"><strong>The Layer Method:</strong> build one automation, live with it for about a week, then add the next one — one layer at a time, always. That's the book's own rule (Chapter 12), and it's how the 25 automations below are grouped and ordered.</div>
       </div>
+      <aside class="capture" id="updates">
+        <h2>Your book was printed before Home Assistant 2026.11</h2>
+        <p>Release 2026.11 replaced HACS with a built-in Marketplace and changed how names are shown. Get the free update notes for your book by email, and a short note whenever a later release changes something the book teaches.</p>
+        <form class="ml-capture-form" data-ml-account="2290040" data-ml-form="192547579934803638" action="https://assets.mailerlite.com/jsonp/2290040/forms/192547579934803638/subscribe" method="POST" novalidate>
+          <input type="hidden" name="fields[utm_source]" value="book">
+          <input type="hidden" name="fields[utm_medium]" value="automations_page_top">
+          <input type="hidden" name="fields[utm_campaign]" value="ha-reader-updates">
+          <input type="hidden" name="fields[utm_content]" value="10_HomeAssistant_SmartHome">
+          <input type="hidden" name="fields[utm_term]" value="B0GH15PC62">
+          <label for="email-top" style="font-weight:700">Email address</label>
+          <input id="email-top" type="email" name="fields[email]" placeholder="you@example.com" autocomplete="email" required>
+          <label class="consent">
+            <input type="checkbox" required>
+            <span>I agree to receive emails from The Skill Mill and can unsubscribe anytime.</span>
+          </label>
+          <button type="submit">Send Me the Update Notes</button>
+          <p class="msg" role="status" aria-live="polite"></p>
+        </form>
+        <p style="margin:12px 0 0;font-size:0.85rem"><a href="../updates/">Read the 2026.11 notes now, no email needed</a></p>
+      </aside>
     </div>
   </section>
 
@@ -950,6 +970,28 @@ actions:
       <p class="sources">Source: State trigger to: null + for: (verbatim &quot;Notify me when power stops updating&quot;) — <a href="https://www.home-assistant.io/triggers/state/" target="_blank" rel="noopener">https://www.home-assistant.io/triggers/state/</a><br>Source: persistent_notification.create — <a href="https://www.home-assistant.io/actions/persistent_notification.create/" target="_blank" rel="noopener">https://www.home-assistant.io/actions/persistent_notification.create/</a></p>
     </section>
 
+      <section class="resource-section" style="margin-top:34px">
+        <aside class="capture">
+          <h2>Keep these automations current</h2>
+          <p>Home Assistant ships a new release every month. When one changes something in the book or in this pack, we send one short email with the fix. No other mail.</p>
+          <form class="ml-capture-form" data-ml-account="2290040" data-ml-form="192547579934803638" action="https://assets.mailerlite.com/jsonp/2290040/forms/192547579934803638/subscribe" method="POST" novalidate>
+            <input type="hidden" name="fields[utm_source]" value="book">
+            <input type="hidden" name="fields[utm_medium]" value="automations_page_bottom">
+            <input type="hidden" name="fields[utm_campaign]" value="ha-reader-updates">
+            <input type="hidden" name="fields[utm_content]" value="10_HomeAssistant_SmartHome">
+            <input type="hidden" name="fields[utm_term]" value="B0GH15PC62">
+            <label for="email-bottom" style="font-weight:700">Email address</label>
+            <input id="email-bottom" type="email" name="fields[email]" placeholder="you@example.com" autocomplete="email" required>
+            <label class="consent">
+              <input type="checkbox" required>
+              <span>I agree to receive emails from The Skill Mill and can unsubscribe anytime.</span>
+            </label>
+            <button type="submit">Send Me the Update Notes</button>
+            <p class="msg" role="status" aria-live="polite"></p>
+          </form>
+        </aside>
+      </section>
+
       <section class="soft-review">
         <h2>Already Read the Book?</h2>
         <p>If you have read Home Assistant Smart Home for Beginners, you are welcome to share your honest opinion on Amazon. Reviews - positive, mixed, or critical - help other readers decide whether the book is a good fit. There is no obligation.</p>
@@ -1000,6 +1042,25 @@ actions:
       document.body.removeChild(ta);
       done();
     }
+  </script>
+  <script>
+    document.querySelectorAll('form.ml-capture-form').forEach(function(form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var msg = form.querySelector('.msg');
+        var btn = form.querySelector('button[type="submit"]');
+        var email = form.querySelector('input[type="email"]').value.trim();
+        var consent = form.querySelector('input[type="checkbox"]').checked;
+        msg.textContent = ''; msg.className = 'msg';
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = 'Please enter a valid email.'; msg.className = 'msg error'; return; }
+        if (!consent) { msg.textContent = 'Please tick the consent box.'; msg.className = 'msg error'; return; }
+        btn.disabled = true;
+        fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' })
+          .then(function() { msg.textContent = 'You are on the list. The update notes are on their way.'; msg.className = 'msg success'; form.reset(); })
+          .catch(function() { msg.textContent = 'Something did not submit. Please try again.'; msg.className = 'msg error'; })
+          .finally(function() { btn.disabled = false; });
+      });
+    });
   </script>
 </body>
 </html>
