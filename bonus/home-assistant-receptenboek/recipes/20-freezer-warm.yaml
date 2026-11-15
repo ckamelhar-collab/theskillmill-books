@@ -1,0 +1,24 @@
+# Recept 20: Het ene alarm dat je mag wekken: een vriezer die te warm wordt
+# Is de vriezer een half uur warmer dan -12 graden, dan slaat je telefoon alarm, ook als hij op stil staat.
+alias: Vriezer te warm
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.freezer_temperature
+    above: -12
+    for:
+      minutes: 30
+actions:
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Vriezer
+      message: >
+        Vriezer al 30 minuten warmer dan -12
+        graden. Controleer deur en stekker.
+      data:
+        push:
+          sound:
+            name: default
+            critical: 1
+            volume: 1.0
+        ttl: 0
+        priority: high

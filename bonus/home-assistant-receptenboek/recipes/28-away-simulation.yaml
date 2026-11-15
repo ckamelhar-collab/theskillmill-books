@@ -1,0 +1,26 @@
+# Recept 28: Laat een leeg huis bewoond lijken
+# Zolang je op vakantie bent, gaat er elke avond kort na zonsondergang op een net iets andere tijd een lamp aan, en 90 tot 150 minuten later gaat hij willekeurig weer uit.
+alias: Aanwezigheidssimulatie - avondlamp
+triggers:
+  - trigger: sun.sunset
+    options:
+      offset:
+        minutes: 20
+      offset_type: after
+conditions:
+  - condition: state
+    entity_id: input_boolean.holiday_mode
+    state: "on"
+actions:
+  - delay:
+      minutes: "{{ range(0, 25) | random }}"
+  - action: light.turn_on
+    target:
+      entity_id: light.living_room_lamp
+    data:
+      brightness_pct: 50
+  - delay:
+      minutes: "{{ range(90, 150) | random }}"
+  - action: light.turn_off
+    target:
+      entity_id: light.living_room_lamp

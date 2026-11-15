@@ -1,0 +1,30 @@
+# Recept 18: Op zondag één batterijbericht in plaats van tien waarschuwingen
+# Elke zondagochtend somt één bericht alle batterijsensoren onder 20 procent op. Is alles in orde, dan hoor je niets.
+alias: Batterijoverzicht op zondag
+triggers:
+  - trigger: time
+    at: "10:00:00"
+conditions:
+  - condition: time
+    weekday:
+      - sun
+actions:
+  - variables:
+      low: >
+        {% set ns = namespace(items=[]) %}
+        {% for s in states.sensor
+           if s.attributes.device_class | default('')
+              == 'battery'
+           and s.state | float(100) < 20 %}
+          {% set ns.items = ns.items
+             + [s.name ~ ' ' ~ s.state ~ '%'] %}
+        {% endfor %}
+        {{ ns.items | join(', ') }}
+  - if:
+      - condition: template
+        value_template: "{{ low != '' }}"
+    then:
+      - action: notify.mobile_app_anna_phone
+        data:
+          title: Batterijen onder 20 %
+          message: "{{ low }}"

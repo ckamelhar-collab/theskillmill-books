@@ -1,0 +1,39 @@
+# Recept 27: Overschot van je zonnepanelen gebruiken voor warm water
+# Levert het huis vijf minuten lang minstens 1500 W terug aan het net, dan gaat de elektrische boiler aan. Neemt het huis weer stroom van het net af, dan gaat hij uit.
+alias: Zonne-overschot verwarmt de boiler
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.grid_power
+    below: -1500
+    for:
+      minutes: 5
+    id: surplus
+  - trigger: numeric_state
+    entity_id: sensor.grid_power
+    above: 100
+    for:
+      minutes: 5
+    id: end
+conditions:
+  - condition: time
+    after: "10:00:00"
+    before: "17:00:00"
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: surplus
+          - condition: numeric_state
+            entity_id: sensor.boiler_temperature
+            below: 55
+        sequence:
+          - action: switch.turn_on
+            target:
+              entity_id: switch.boiler_plug
+      - conditions:
+          - condition: trigger
+            id: end
+        sequence:
+          - action: switch.turn_off
+            target:
+              entity_id: switch.boiler_plug

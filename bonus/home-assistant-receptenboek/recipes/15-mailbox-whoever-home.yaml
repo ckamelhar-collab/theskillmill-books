@@ -1,0 +1,28 @@
+# Recept 15: Alleen de mensen die thuis zijn op de hoogte brengen
+# Als de brievenbussensor overdag opengaat, krijgt iedereen die thuis is een bericht. Wie van huis is, wordt niet gestoord.
+alias: Brievenbus open - bericht aan wie thuis is
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.mailbox
+    to: "on"
+conditions:
+  - condition: time
+    after: "08:00:00"
+    before: "20:00:00"
+actions:
+  - repeat:
+      for_each:
+        - person: person.anna
+          notify: notify.mobile_app_anna_phone
+        - person: person.ben
+          notify: notify.mobile_app_ben_phone
+      sequence:
+        - if:
+            - condition: template
+              value_template: >
+                {{ is_state(repeat.item.person, 'home') }}
+          then:
+            - action: "{{ repeat.item.notify }}"
+              data:
+                title: Brievenbus
+                message: De brievenbus is geopend.

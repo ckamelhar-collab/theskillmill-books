@@ -1,0 +1,18 @@
+# Recept 33: Vraag je huis: “Is er iemand thuis?”
+# Je zegt een zin tegen Assist (op je telefoon, een tablet of een spraaksatelliet) en het huis antwoordt in woorden, opgebouwd uit live gegevens.
+alias: Assist - is er iemand thuis?
+triggers:
+  - trigger: conversation
+    command:
+      - Is er iemand thuis
+      - Is er iemand in huis
+actions:
+  - set_conversation_response: >
+      {% set home = states.person
+         | selectattr('state', 'eq', 'home')
+         | map(attribute='name') | list %}
+      {% if home %}
+        Nu thuis: {{ home | join(' en ') }}.
+      {% else %}
+        Er is niemand thuis.
+      {% endif %}

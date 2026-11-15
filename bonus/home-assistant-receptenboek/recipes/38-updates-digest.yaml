@@ -1,0 +1,27 @@
+# Recept 38: Een zaterdagnotitie over wachtende updates, zonder automatisch installeren
+# Eén keer per week krijg je de namen van alles waarvoor een update klaarstaat, en jij beslist zelf wanneer je installeert. Niets werkt zichzelf bij.
+alias: Updateoverzicht op zaterdag
+triggers:
+  - trigger: time
+    at: "10:00:00"
+conditions:
+  - condition: time
+    weekday:
+      - sat
+actions:
+  - variables:
+      waiting: >
+        {{ states.update
+           | selectattr('state', 'eq', 'on')
+           | map(attribute='name') | list }}
+  - if:
+      - condition: template
+        value_template: "{{ waiting | count > 0 }}"
+    then:
+      - action: notify.mobile_app_anna_phone
+        data:
+          title: Updates wachten
+          message: >
+            {{ waiting | join(', ') }}.
+            Maak eerst een back-up en update dan via
+            Instellingen > Systeem > Updates.

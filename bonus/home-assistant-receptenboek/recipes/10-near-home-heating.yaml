@@ -1,0 +1,25 @@
+# Recept 10: Het huis voorverwarmen als je bijna thuis bent
+# Als de eerste persoon een cirkel rond jouw buurt overschrijdt en het huis koel is, begint de woonkamer te verwarmen.
+alias: Verwarming aan als iemand bijna thuis is
+triggers:
+  - trigger: zone.entered
+    target:
+      entity_id:
+        - person.anna
+        - person.ben
+    options:
+      zone: zone.near_home
+conditions:
+  - condition: state
+    entity_id: input_select.house_mode
+    state: Away
+  - condition: numeric_state
+    entity_id: sensor.living_room_temperature
+    below: 19
+actions:
+  - action: climate.set_temperature
+    target:
+      entity_id: climate.living_room
+    data:
+      temperature: 21
+      hvac_mode: heat

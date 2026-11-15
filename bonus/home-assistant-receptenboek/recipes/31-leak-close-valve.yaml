@@ -1,0 +1,22 @@
+# Recept 31: Een lek sluit de hoofdkraan
+# Wordt een van de leksensoren nat, dan sluit de gemotoriseerde waterkraan en krijg je een bericht op je telefoon. (De eenvoudige waarschuwing staat in het gratis pakket; dit recept voegt de actie toe.)
+alias: Lek - hoofdkraan sluiten
+triggers:
+  - trigger: state
+    entity_id:
+      - binary_sensor.kitchen_leak
+      - binary_sensor.laundry_leak
+      - binary_sensor.bathroom_leak
+    to: "on"
+actions:
+  - action: valve.close_valve
+    target:
+      entity_id: valve.main_water
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Waterlek
+      message: Water gedetecteerd. Hoofdkraan gesloten.
+      data:
+        tag: leak
+        ttl: 0
+        priority: high

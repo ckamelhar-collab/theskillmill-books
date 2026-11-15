@@ -1,0 +1,42 @@
+# Recept 29: Een sirene met uitgestelde start en een annuleerknop
+# Gaat de voordeur open terwijl de alarmschakelaar aan staat, dan toont je telefoon een waarschuwing van 30 seconden met een knop “Ik was het”. Annuleer je niet, dan loeit de sirene drie minuten.
+alias: Inbraakalarm met annuleervenster
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.front_door
+    to: "on"
+conditions:
+  - condition: state
+    entity_id: input_boolean.alarm_armed
+    state: "on"
+actions:
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Voordeur
+      message: Voordeur geopend. Sirene over 30 seconden.
+      data:
+        actions:
+          - action: ALARM_CANCEL
+            title: Ik was het
+  - wait_for_trigger:
+      - trigger: event
+        event_type: mobile_app_notification_action
+        event_data:
+          action: ALARM_CANCEL
+      - trigger: state
+        entity_id: input_boolean.alarm_armed
+        to: "off"
+    timeout: "00:00:30"
+  - if:
+      - condition: template
+        value_template: "{{ wait.trigger is none }}"
+    then:
+      - action: siren.turn_on
+        target:
+          entity_id: siren.hallway
+      - delay:
+          minutes: 3
+      - action: siren.turn_off
+        target:
+          entity_id: siren.hallway

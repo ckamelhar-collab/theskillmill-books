@@ -1,0 +1,22 @@
+# Recept 30: Zie vanaf je vergrendelscherm wie er voor de deur staat
+# Als er wordt aangebeld, krijgen beide telefoons een bericht met een foto van de camera bij de voordeur.
+alias: Deurbel - foto op de telefoon
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.doorbell
+    to: "on"
+actions:
+  - delay:
+      seconds: 2
+  - repeat:
+      for_each:
+        - notify.mobile_app_anna_phone
+        - notify.mobile_app_ben_phone
+      sequence:
+        - action: "{{ repeat.item }}"
+          data:
+            title: Deurbel
+            message: Er heeft iemand aangebeld.
+            data:
+              image: /api/camera_proxy/camera.front_door
+              entity_id: camera.front_door

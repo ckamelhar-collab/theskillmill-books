@@ -1,0 +1,28 @@
+# Recept 36: Een maandaglijst van alles wat stil is gevallen
+# Elke maandagochtend zet Home Assistant de lijst met niet-beschikbare entiteiten in het meldingenbelletje, zodat een dode sensor niet wekenlang onopgemerkt blijft.
+alias: Maandaglijst van niet-beschikbare entiteiten
+triggers:
+  - trigger: time
+    at: "09:00:00"
+conditions:
+  - condition: time
+    weekday:
+      - mon
+actions:
+  - variables:
+      gone: >
+        {{ states
+           | selectattr('state', 'eq', 'unavailable')
+           | map(attribute='entity_id')
+           | list }}
+  - if:
+      - condition: template
+        value_template: "{{ gone | count > 0 }}"
+    then:
+      - action: persistent_notification.create
+        data:
+          notification_id: unavailable_report
+          title: Niet-beschikbare entiteiten
+          message: >
+            {{ gone | count }} entiteiten niet beschikbaar:
+            {{ gone[:15] | join(', ') }}

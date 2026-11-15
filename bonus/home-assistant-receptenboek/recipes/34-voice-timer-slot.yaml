@@ -1,0 +1,16 @@
+# Recept 34: Een spraakcommando met een getal erin
+# Je zegt “zet de studietimer op 25 minuten” en er start een timer met het getal dat je noemde.
+alias: Assist - studietimer in minuten
+triggers:
+  - trigger: conversation
+    command:
+      - zet de studietimer op {minutes} minuten
+actions:
+  - action: timer.start
+    target:
+      entity_id: timer.study_timer
+    data:
+      duration: "{{ trigger.slots.minutes | int * 60 }}"
+  - set_conversation_response: >
+      Studietimer ingesteld op
+      {{ trigger.slots.minutes }} minuten.

@@ -1,0 +1,30 @@
+# Recept 23: De verwarming ’s nachts verlagen en ’s ochtends weer opschroeven
+# De thermostaat gaat om 22:30 uur naar de eco-voorinstelling en om 06:00 uur terug naar normaal. Eén automatisering, twee triggers.
+alias: Verwarming - nachtverlaging
+triggers:
+  - trigger: time
+    at: "22:30:00"
+    id: night
+  - trigger: time
+    at: "06:00:00"
+    id: morning
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: night
+        sequence:
+          - action: climate.set_preset_mode
+            target:
+              entity_id: climate.living_room
+            data:
+              preset_mode: eco
+      - conditions:
+          - condition: trigger
+            id: morning
+        sequence:
+          - action: climate.set_preset_mode
+            target:
+              entity_id: climate.living_room
+            data:
+              preset_mode: home

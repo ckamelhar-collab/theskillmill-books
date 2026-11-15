@@ -1,0 +1,15 @@
+# Recept 35: Een knop “Het eten is klaar” voor elke speaker
+# Eén druk op een dashboardknop laat je spraaksatellieten in elke genoemde ruimte “Het eten is klaar” zeggen.
+alias: Etensoproep
+triggers:
+  - trigger: state
+    entity_id: input_button.dinner_call
+actions:
+  - action: assist_satellite.announce
+    target:
+      entity_id:
+        - assist_satellite.kitchen
+        - assist_satellite.living_room
+    data:
+      message: Het eten is klaar.
+      preannounce: true

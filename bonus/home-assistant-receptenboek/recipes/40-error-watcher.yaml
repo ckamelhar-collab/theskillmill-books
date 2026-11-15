@@ -1,0 +1,19 @@
+# Recept 40: Hoor het bij een nieuwe fout in het logboek, hooguit één keer per uur
+# Schrijft Home Assistant een ERROR in het logboek, dan krijg je één bericht met de bron en de eerste regels. Het volgende kan een uur later komen.
+alias: Home Assistant heeft een fout gelogd
+mode: single
+triggers:
+  - trigger: event
+    event_type: system_log_event
+    event_data:
+      level: ERROR
+actions:
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Home Assistant-fout
+      message: >
+        {{ trigger.event.data.name }}:
+        {{ (trigger.event.data.message | first)
+           | string | truncate(150) }}
+  - delay:
+      hours: 1

@@ -1,0 +1,21 @@
+# Recept 7: Rolluiken omhoog bij zonsopkomst, maar nooit voor 07:00 uur
+# Op werkdagen gaan de rolluiken in de slaapkamer open op het latere van twee tijdstippen: zonsopkomst of 07:00 uur.
+alias: Rolluiken omhoog - zonsopkomst, niet voor 07:00
+triggers:
+  - trigger: sun.sunrise
+  - trigger: time
+    at: "07:00:00"
+conditions:
+  - condition: sun.is_up
+  - condition: time
+    after: "07:00:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+actions:
+  - action: cover.open_cover
+    target:
+      entity_id: cover.bedroom_blinds

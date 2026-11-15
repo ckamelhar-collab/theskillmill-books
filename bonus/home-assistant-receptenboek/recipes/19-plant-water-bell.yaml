@@ -1,0 +1,32 @@
+# Recept 19: Wat niet urgent is, hoort in het belletje
+# Een dagelijkse controle om 09:00 uur zet een notitie in het meldingenbelletje van Home Assistant als de varen droog is. Zodra de aarde weer vochtig is, verdwijnt de notitie.
+alias: Varen heeft water nodig
+triggers:
+  - trigger: time
+    at: "09:00:00"
+    id: check
+  - trigger: numeric_state
+    entity_id: sensor.fern_moisture
+    above: 40
+    id: wet
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: check
+          - condition: numeric_state
+            entity_id: sensor.fern_moisture
+            below: 25
+        sequence:
+          - action: persistent_notification.create
+            data:
+              notification_id: fern_dry
+              title: Varen
+              message: De varen is droog. Water geven.
+      - conditions:
+          - condition: trigger
+            id: wet
+        sequence:
+          - action: persistent_notification.dismiss
+            data:
+              notification_id: fern_dry

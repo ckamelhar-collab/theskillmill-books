@@ -1,0 +1,21 @@
+# Recept 25: Elke avond één regel over je stroomverbruik
+# Om 21:00 uur toont je telefoon hoeveel kilowattuur het huis vandaag heeft verbruikt en ongeveer wat dat kostte.
+alias: Stroomoverzicht in de avond
+triggers:
+  - trigger: time
+    at: "21:00:00"
+actions:
+  - variables:
+      kwh: >
+        {{ states('sensor.daily_energy')
+           | float(0) | round(1) }}
+      cost: >
+        {{ (states('sensor.daily_energy') | float(0)
+            * states('input_number.price_per_kwh')
+              | float(0)) | round(2) }}
+  - action: notify.mobile_app_anna_phone
+    data:
+      title: Stroom vandaag
+      message: >
+        {{ kwh }} kWh vandaag, ongeveer {{ cost }}
+        tegen jouw prijs.

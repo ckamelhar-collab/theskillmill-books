@@ -1,0 +1,21 @@
+# Recept 22: De badkamer voorverwarmen, maar alleen op koude ochtenden
+# Om 05:30 uur warmt de badkamer op, maar alleen als het buiten onder de 8 graden is en er iemand thuis is.
+alias: Voorverwarmen op koude ochtenden
+triggers:
+  - trigger: time
+    at: "05:30:00"
+conditions:
+  - condition: numeric_state
+    entity_id: weather.home
+    attribute: temperature
+    below: 8
+  - condition: state
+    entity_id: input_select.house_mode
+    state: Home
+actions:
+  - action: climate.set_temperature
+    target:
+      entity_id: climate.bathroom
+    data:
+      temperature: 22
+      hvac_mode: heat

@@ -1,0 +1,35 @@
+# Recept 17: Een melding die zichzelf opruimt als het probleem weg is
+# De waarschuwing verschijnt als de poort tien minuten openstaat en verdwijnt vanzelf van je telefoon zodra de poort dichtgaat.
+alias: Tuinpoort - waarschuwen, dan wissen
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.garden_gate
+    to: "on"
+    for:
+      minutes: 10
+    id: open_long
+  - trigger: state
+    entity_id: binary_sensor.garden_gate
+    to: "off"
+    id: closed
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: open_long
+        sequence:
+          - action: notify.mobile_app_anna_phone
+            data:
+              title: Tuinpoort
+              message: Tuinpoort al 10 minuten open.
+              data:
+                tag: garden_gate
+      - conditions:
+          - condition: trigger
+            id: closed
+        sequence:
+          - action: notify.mobile_app_anna_phone
+            data:
+              message: clear_notification
+              data:
+                tag: garden_gate

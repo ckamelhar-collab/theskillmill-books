@@ -1,0 +1,33 @@
+# Recept 26: De vaatwasser laten draaien als stroom goedkoop is
+# Je vult de vaatwasser, tikt op je telefoon op “klaar”, en hij start zodra de stroomprijs onder jouw grens zakt, uiterlijk om 05:00 uur.
+alias: Vaatwasser start bij goedkope stroom
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.electricity_price
+    below: input_number.cheap_price_limit
+    id: cheap
+  - trigger: time
+    at: "05:00:00"
+    id: deadline
+  - trigger: state
+    entity_id: input_boolean.dishwasher_ready
+    to: "on"
+    id: ready
+conditions:
+  - condition: state
+    entity_id: input_boolean.dishwasher_ready
+    state: "on"
+  - condition: template
+    value_template: >
+      {{ trigger.id == 'deadline'
+         or states('sensor.electricity_price')
+            | float(99)
+            < states('input_number.cheap_price_limit')
+              | float(0) }}
+actions:
+  - action: switch.turn_on
+    target:
+      entity_id: switch.dishwasher_plug
+  - action: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.dishwasher_ready

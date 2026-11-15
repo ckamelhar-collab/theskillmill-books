@@ -1,0 +1,24 @@
+# Recept 9: Een gastenmodus die de regels voor “niemand thuis” pauzeert
+# Eén schakelaar in je dashboard vertelt het huis dat er bezoek logeert, zodat het een huis dat leeg lijkt niet meer voor een leeg huis aanziet.
+alias: Gastenmodus aan en uit
+triggers:
+  - trigger: state
+    entity_id: input_boolean.guest_mode
+actions:
+  - choose:
+      - conditions:
+          - condition: state
+            entity_id: input_boolean.guest_mode
+            state: "on"
+        sequence:
+          - action: input_select.select_option
+            target:
+              entity_id: input_select.house_mode
+            data:
+              option: Guests
+    default:
+      - action: input_select.select_option
+        target:
+          entity_id: input_select.house_mode
+        data:
+          option: Home

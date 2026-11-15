@@ -1,0 +1,29 @@
+# Recept 39: Hou bij hoe lang het internet eruit lag
+# Is het internet drie minuten lang onbereikbaar, dan wacht Home Assistant tot het terug is en laat dan een notitie achter met het begin en de duur.
+alias: Rapport internetstoring
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.router_ping
+    to: "off"
+    for:
+      minutes: 3
+actions:
+  - variables:
+      since: "{{ trigger.to_state.last_changed }}"
+  - wait_for_trigger:
+      - trigger: state
+        entity_id: binary_sensor.router_ping
+        to: "on"
+    timeout: "12:00:00"
+  - action: persistent_notification.create
+    data:
+      title: Internet lag eruit
+      message: >
+        Storing vanaf
+        {{ as_local(as_datetime(since))
+           .strftime('%H:%M') }},
+        gedurende ongeveer
+        {{ ((now() - as_datetime(since))
+            .total_seconds() / 60)
+           | round(0) | int }} minuten.
